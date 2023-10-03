@@ -11,7 +11,8 @@ class SubCategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.allsubcategory');
+        $allsubcategories = Subcategory::latest()->get();
+        return view('admin.allsubcategory', compact('allsubcategories'));
     }
     public function addSubCategory()
     {
@@ -34,5 +35,29 @@ class SubCategoryController extends Controller
         ]);
         Category::where('id', $category_id)->increment('subcategory_count', 1);
         return redirect()->route('allsubcategory')->with('message', 'Sub Category Added Successfully');
+    }
+    public function editSubCategory($id)
+    {
+        $subcateinfo = Subcategory::findOrFail($id);
+        return view('admin.editsubcategory', compact('subcateinfo'));
+    }
+    public function updateSubCategory(Request $request)
+    {
+        $request->validate(['subcategory_name' => 'required|unique:subcategories']);
+        $subcatid = $request->subcatid;
+        Subcategory::findOrFail($subcatid)->update([
+            'subcategory_name' => $request->subcategory_name,
+            'slug' => strtolower(str_replace('', '-', $request->subcategory_name))
+        ]);
+        return redirect()->route('allsubcategory')->with('message', 'Sub Category Updated Successfully');
+
+    }
+    public function deleteSubCategory($id)
+    {
+        $cat_id = Subcategory::where('id', $id)->value('category_id');
+        Subcategory::findOrFail($id)->delete();
+        Category::where('id', $cat_id)->decrement('subcategory_count', 1);
+        return redirect()->route('allsubcategory')->with('message', 'Sub Category Deleted Successfully');
+
     }
 }
