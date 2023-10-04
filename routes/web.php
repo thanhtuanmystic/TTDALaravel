@@ -47,14 +47,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/update-subcategory', 'updateSubCategory')->name('updatesubcategory');
         Route::get('/admin/delete-subcategory/{id}', 'deleteSubCategory')->name('deletesubcategory');
 
-
-
-
     });
     Route::controller(ProductController::class)->group(function () {
         Route::get('/admin/all-products', 'index')->name('allproducts');
         Route::get('/admin/add-product', 'addProduct')->name('addproduct');
         Route::post('/admin/store-product', 'storeProduct')->name('storeproduct');
+        Route::get('/admin/edit-product-img/{id}', 'editProductImg')->name('editproductimg');
+        Route::post('/admin/update-product-img', 'updateProductImg')->name('updateproductimg');
+        Route::get('/admin/edit-product/{id}', 'editProduct')->name('editproduct');
+        Route::post('/admin/update-product', 'updateProduct')->name('updateproduct');
+        Route::get('/admin/delete-product/{id}', 'deleteProduct')->name('deleteproduct');
+
+
+
     });
     Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending-order', 'index')->name('pendingorder');
