@@ -29,17 +29,14 @@ Route::controller(HomeController::class)->group(function () {
 Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'categoryPage')->name('category');
     Route::get('/product-details/{id}/{slug}', 'singleProduct')->name('singleproduct');
-    Route::get('/add-to-cart', 'addToCart')->name('addtocart');
-    Route::get('/checkout', 'checkout')->name('checkout');
-    Route::get('/user-profile', 'userProfile')->name('userprofile');
     Route::get('/new-release', 'newRelease')->name('newrelease');
-    Route::get('/todays-deal', 'todaysDeal')->name('todaysdeal');
-    Route::get('/custom-service', 'customService')->name('customservice');
+  
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::controller(ClientController::class)->group(function () {
         Route::get('/add-to-cart', 'addToCart')->name('addtocart');
+        Route::post('/add-product-to-cart', 'addProductToCart')->name('addproducttocart');
         Route::get('/checkout', 'checkout')->name('checkout');
         Route::get('/user-profile', 'userProfile')->name('userprofile');
         Route::get('/user-profile/pending-orders', 'pendingOrders')->name('pendingorders');
