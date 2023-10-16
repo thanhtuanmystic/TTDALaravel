@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
+
 
 
 class ClientController extends Controller
 {
-    public function categoryPage()
+    public function categoryPage($id)
     {
-        return view('user_template.category');
+        $category = Category::findOrFail($id);
+        $products = Product::where('product_category_id', $id)->latest() ->get();
+        return view('user_template.category', compact('category', 'products'));
     }
-    public function singleProduct()
+    public function singleProduct($id)
     {
-        return view('user_template.product');
+        $product = Product::findOrFail($id);
+        $subcat_id = Product::where('id', $id)->value('product_subcategory_id');
+        $related_product = Product::where('product_subcategory_id', $subcat_id)->latest()->get();
+        return view('user_template.product', compact('product','related_product'));
     }
     public function addToCart()
     {
@@ -26,6 +34,15 @@ class ClientController extends Controller
     {
         return view('user_template.userprofile');
     }
+    public function pendingOrders()
+    {
+        return view('user_template.pendingorders');
+    }
+    public function history()
+    {
+        return view('user_template.history');
+    }
+
     public function newRelease()
     {
         return view('user_template.newrelease');
