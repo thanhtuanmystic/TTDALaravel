@@ -38,7 +38,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/add-to-cart', 'addToCart')->name('addtocart');
         Route::post('/add-product-to-cart', 'addProductToCart')->name('addproducttocart');
         Route::get('/shipping-address', 'getShippingAddress')->name('shippingaddress');
-        Route::post('/add-shipping-address', 'addShippingAddress')->name('addshippingaddress');
+        Route::post('/add-shipping-address', 'goToCheckOut')->name('gotocheckout');
         Route::post('/place-order', 'placeOrder')->name('placeorder');
         Route::get('/checkout', 'checkout')->name('checkout');
         Route::get('/user-profile', 'userProfile')->name('userprofile');
