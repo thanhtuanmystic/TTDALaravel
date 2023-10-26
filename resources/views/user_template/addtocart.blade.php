@@ -51,7 +51,7 @@
                                     @endphp
                                     <tr>
                                         <td class="shoping__cart__item">
-                                            <img src="{{ asset('home/img/cart/cart-1.jpg') }}" alt="">
+                                            <img style="width: 4rem" src="{{ asset($img) }}" alt="">
                                             <h5>{{ $product_name }}</h5>
                                         </td>
                                         <td class="shoping__cart__price">
@@ -94,8 +94,8 @@
                         <div class="shoping__discount">
                             <h5>Discount Codes</h5>
                             <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                                <input type="text" placeholder="Nhập mã giảm giá">
+                                <button type="submit" class="site-btn">Áp dụng</button>
                             </form>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                             {{-- <li>Subtotal <span>$454.98</span></li> --}}
                             <li>Total <span>${{ $total }}</span></li>
                         </ul>
-                        <form action="{{route('gotocheckout')}}" method="POST">
+                        <form action="{{ route('gotocheckout') }}" method="POST">
                             @csrf
                             <input class="primary-btn" type="submit" value="Đặt hàng">
                         </form>
@@ -117,5 +117,4 @@
         </div>
     </section>
     <!-- Shoping Cart Section End -->
-
 @endsection

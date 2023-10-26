@@ -1,5 +1,7 @@
 @php
     $categories = App\Models\Category::latest()->get();
+    $totalPrice = App\Models\Cart::sum('price');
+    $productCount = App\Models\Cart::count();
 @endphp
 <!DOCTYPE html>
 <html lang="zxx">
@@ -25,7 +27,6 @@
     <link rel="stylesheet" href="{{ asset('home/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('home/css/style.css') }}" type="text/css">
 </head>
-
 <body>
     <!-- Page Preloder -->
     {{-- <div id="preloder">
@@ -61,8 +62,8 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
+                <li class="active"><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{route('showallproducts')}}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -113,7 +114,8 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img style="width: 25px" src="{{ asset('home/img/VN-Vietnam-Flag-icon.png') }}" alt="">
+                                <img style="width: 25px" src="{{ asset('home/img/VN-Vietnam-Flag-icon.png') }}"
+                                    alt="">
                                 <div>Tiếng việt</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
@@ -133,20 +135,19 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('home/img/logo-thanhtuan.png') }}" alt=""></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset('home/img/logo-thanhtuan.png') }}"
+                                alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Shop</a></li>
+                            <li class="active"><a href="{{ route('home') }}">Home</a></li>
+                            <li><a href="{{route('showallproducts')}}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="{{ route('addtocart') }}">Shoping Cart</a></li>
+                                    <li><a href="{{ route('checkout') }}">Check Out</a></li>
                                 </ul>
                             </li>
                             <li><a href="./blog.html">Blog</a></li>
@@ -158,9 +159,10 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="{{route('addtocart')}}"><i class="fa fa-shopping-bag"></i>
+                                    <span>{{ $productCount }}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">Tổng tiền: <span>{{ $totalPrice }}</span></div>
                     </div>
                 </div>
             </div>
@@ -194,8 +196,9 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">                               
-                                <input type="text" placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
+                            <form action="{{route('searchproduct')}}" method="POST">
+                                @csrf
+                                <input name="searchInput" type="text" placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
@@ -226,7 +229,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{{ asset('home/img/logo-thanhtuan.png') }}" alt=""></a>
+                            <a href="./index.html"><img src="{{ asset('home/img/logo-thanhtuan.png') }}"
+                                    alt=""></a>
                         </div>
                         <ul>
                             <li>Địa chỉ: Thị trấn Lập Thạch, huyện Lập Thạch, tỉnh Vĩnh Phúc</li>
@@ -243,12 +247,12 @@
                             <li><a href="#">Mua sắm an toàn</a></li>
                             <li><a href="#">Thông tin vận chuyển</a></li>
                             <li><a href="#">Chính sách bảo mật</a></li>
-                        </ul>                       
+                        </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
+                        <h6>Đăng ký nhận tin tức</h6>
                         <p>Để lại email để nhận những thông tin mới nhất từ Softdreams</p>
                         <form action="#">
                             <input type="text" placeholder="Nhập email của bạn">
@@ -293,8 +297,6 @@
     <script src="{{ asset('home/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('home/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('home/js/main.js') }}"></script>
-
-
 
 </body>
 

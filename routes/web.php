@@ -29,6 +29,8 @@ Route::controller(HomeController::class)->group(function () {
 Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'categoryPage')->name('category');
     Route::get('/product-details/{id}/{slug}', 'singleProduct')->name('singleproduct');
+    Route::get('/all-products', 'showAllProducts')->name('showallproducts');
+    Route::post('/search-products', 'searchProduct')->name('searchproduct');
     Route::get('/new-release', 'newRelease')->name('newrelease');
   
 });

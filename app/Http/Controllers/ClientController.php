@@ -27,6 +27,15 @@ class ClientController extends Controller
         $related_product = Product::where('product_subcategory_id', $subcat_id)->latest()->get();
         return view('user_template.product', compact('product', 'related_product'));
     }
+    public function showAllProducts()
+    {
+        $allproducts = Product::latest()->get();
+        $categories = Category::latest()->get();
+        $latestProducts = Product::orderBy('id', 'desc')->take(3)->get();
+        $productCount = Product::count();
+        return view('user_template.showallproducts', compact('allproducts', 'productCount', 'latestProducts', 'categories'));
+
+    }
     public function addToCart()
     {
         $userid = Auth::id();
@@ -88,6 +97,14 @@ class ClientController extends Controller
             Cart::findOrFail($id)->delete();
         }
         return redirect()->route('pendingorders')->with('message', 'Đơn hàng của bạn đã được đặt thành công');
+    }
+    public function searchProduct(Request $request)
+    {
+      
+        $searchTerm = $request->searchInput;
+        $searchProducts = Product::where('product_name', 'like', '%' . $searchTerm . '%')->get();
+        $searchProductCount = $searchProducts->count();
+        return view('user_template.search', compact('searchProducts', 'searchProductCount','searchProductCount'));
     }
     public function userProfile()
     {
