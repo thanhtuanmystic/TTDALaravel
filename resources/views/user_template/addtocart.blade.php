@@ -84,7 +84,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        <a href="{{ route('showallproducts') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                         <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             Upadate Cart</a>
                     </div>
@@ -93,19 +93,47 @@
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Nhập mã giảm giá">
-                                <button type="submit" class="site-btn">Áp dụng</button>
+                            <form id="coupon_form">
+                                @csrf
+                                <input name="coupon_code" type="text" placeholder="Nhập mã giảm giá">
+                                <button type="submit" name="coupon_code" id="coupon_code" class="site-btn">Áp dụng</button>
                             </form>
+                            <div id="discount_amount"></div>
                         </div>
                     </div>
                 </div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $('#coupon_form').on('submit', function(e) {
+                            e.preventDefault();
+                            var couponCode = $('#coupon_code').val();
+                            $.ajax({
+                                type: 'POST',
+                                url: "/apply-coupon", 
+                                data: {
+                                    coupon_code: couponCode,
+                                    _token: '{{csrf_token()}}'
+                                },
+                                dataType: 'json',
+                                success: function(data) {
+                                    if (data.success) {
+                                        $('#discount_amount').text('Discount: $' + data.discount);
+                                    } else {
+                                        $('#discount_amount').text('Invalid or expired coupon code.');
+                                    }
+                                }
+                            });
+                        });
+                    });
+                </script>
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
                             {{-- <li>Subtotal <span>$454.98</span></li> --}}
                             <li>Total <span>${{ $total }}</span></li>
+                            <li>Giảm giá <span>100</span></li>
                         </ul>
                         <form action="{{ route('gotocheckout') }}" method="POST">
                             @csrf

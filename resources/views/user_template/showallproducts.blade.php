@@ -28,7 +28,7 @@
                             <h4>Danh mục</h4>
                             <ul>
                                 @foreach ($categories as $category)
-                                    <li><a href="#">{{ $category->category_name }}</a></li>
+                                    <li><a href="{{ route('category', [$category->id, $category->slug]) }}">{{ $category->category_name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -165,9 +165,17 @@
                                                 data-setbg="{{ asset($product->product_img) }}">
                                                 <div class="product__discount__percent">-20%</div>
                                                 <ul class="product__item__pic__hover">
-                                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <form action="{{route('addproducttocart')}}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                                        <input type="hidden" value="{{ $product->price }}" name="price">
+                                                        <input type="hidden" value="1" name="quantity">
+                                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                        <button type="submit" class="btn">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </button>
+                                                       </form>
                                                 </ul>
                                             </div>
                                             <div class="product__discount__item__text">
@@ -214,9 +222,17 @@
                                     <div class="product__item__pic set-bg"
                                         data-setbg="{{ asset($product->product_img) }}">
                                         <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <form action="{{route('addproducttocart')}}" method="POST">
+                                                @csrf
+                                                <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                                <input type="hidden" value="{{ $product->price }}" name="price">
+                                                <input type="hidden" value="1" name="quantity">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </button>
+                                               </form>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">

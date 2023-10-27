@@ -15,13 +15,21 @@
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
                         <ul class="product__item__pic__hover">
+                           <form action="{{route('addproducttocart')}}" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{ $product->id }}" name="product_id">
+                            <input type="hidden" value="{{ $product->price }}" name="price">
+                            <input type="hidden" value="1" name="quantity">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <button type="submit" class="btn">
+                                <i class="fa fa-shopping-cart"></i>
+                            </button>
+                           </form>
                         </ul>
                     </div>
                     <div class="product__item__text">
-                        <h6><a href="#">{{ $product->product_name }}</a></h6>
+                        <h6><a href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a></h6>
                         <h5>{{ $product->price }}</h5>
                     </div>
                 </div>

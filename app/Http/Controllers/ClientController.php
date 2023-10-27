@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Coupons;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ShippingInfo;
@@ -51,7 +52,7 @@ class ClientController extends Controller
             'product_id' => $request->product_id,
             'user_id' => Auth::id(),
             'quantity' => $request->quantity,
-            'price' => $price
+            'price' => $price,
         ]);
         return redirect()->route('addtocart')->with('message', 'Thêm vào giỏ hàng thành công!');
     }
@@ -100,11 +101,38 @@ class ClientController extends Controller
     }
     public function searchProduct(Request $request)
     {
-      
+
         $searchTerm = $request->searchInput;
         $searchProducts = Product::where('product_name', 'like', '%' . $searchTerm . '%')->get();
         $searchProductCount = $searchProducts->count();
-        return view('user_template.search', compact('searchProducts', 'searchProductCount','searchProductCount'));
+        return view('user_template.search', compact('searchProducts', 'searchProductCount', 'searchProductCount'));
+    }
+    public function applyCoupon(Request $request)
+    {
+        // $couponCode = $request->coupon_code;
+
+        // $coupon = Coupons::where('code', $couponCode)
+        //     ->where('valid_until', '>=', now())
+        //     ->first();
+        // if (!$coupon) {
+        //     return redirect()->route('addtocart')->with('message', 'Mã giảm giá không tồn tại hoặc đã hết hạn!');
+        // }
+
+        // // Áp dụng giảm giá cho đơn hàng tại đây
+
+        // return redirect()->route('addtocart')->with('message', 'Áp dụng mã giảm giá thành công!');
+        $couponCode = $request->input('coupon_code');
+        $coupon = Coupons::where('code', $couponCode)
+            ->where('valid_until', '>=', now())
+            ->first();
+        if ($coupon) {
+            // Áp dụng giảm giá và tính toán số tiền giảm giá ở đây
+            $discountAmount = 10; // Thay bằng logic thực tế
+            return response()->json(['success' => true, 'discount' => $discountAmount]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+
     }
     public function userProfile()
     {

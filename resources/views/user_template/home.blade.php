@@ -60,16 +60,17 @@
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
                                 <ul class="featured__item__pic__hover">
-                                  <form action="{{route('addproducttocart')}}" method="POST">
-                                    @csrf
-                                    <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                    <input type="hidden" value="{{ $product->price }}" name="price">
-                                    <input type="hidden" value="1" name="quantity">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <input type="submit" value="submit">
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>                                   
-                                  </form>
+                                    <form action="{{route('addproducttocart')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                        <input type="hidden" value="{{ $product->price }}" name="price">
+                                        <input type="hidden" value="1" name="quantity">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <button type="submit" class="btn">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                       </form>
                                 </ul>
                             </div>
                             <div class="featured__item__text">

@@ -3466,3 +3466,30 @@ ol {
 		font-size: 24px;
 	}
 }
+
+
+
+/* Custom css */
+.btn {
+	background-color: #fff;
+	border-radius: 50%
+}
+
+.btn i {
+	position: relative;
+	transform: rotate(0);
+	-webkit-transition: all, 0.3s;
+	-moz-transition: all, 0.3s;
+	-ms-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+}
+
+.btn:hover {
+	background-color: #7fad39;
+}
+
+.btn:hover i {
+	color: #ffffff;
+	transform: rotate(360deg);
+}

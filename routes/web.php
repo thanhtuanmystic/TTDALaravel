@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/todays-deal', 'todaysDeal')->name('todaysdeal');
         Route::get('/custom-service', 'customService')->name('customservice');
         Route::get('/remove-cart-item/{id}', 'removeCartItem')->name('removecartitem');
+        Route::post('/apply-coupon', 'applyCoupon')->name('applycoupon');
     });
 });
 
