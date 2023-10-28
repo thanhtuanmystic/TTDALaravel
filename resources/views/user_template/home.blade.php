@@ -1,6 +1,5 @@
 @extends('user_template.layouts.template')
 @section('main-content')
-    <h2 class="py-5">Home Page</h2>
     <div class="fashion_section">
         <div id="main_slider">
             <div class="container">

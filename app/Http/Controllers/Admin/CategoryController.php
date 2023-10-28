@@ -26,7 +26,7 @@ class CategoryController extends Controller
             'category_name' => $request->category_name,
             'slug' => strtolower(str_replace('', '-', $request->category_name))
         ]);
-        return redirect()->route('allcategory')->with('message', 'Category Added Successfully');
+        return redirect()->route('allcategory')->with('message', 'Thêm danh mục sản phẩm thành công');
     }
     public function editCategory($id)
     {
@@ -43,12 +43,12 @@ class CategoryController extends Controller
             'category_name' => $request->category_name,
             'slug' => strtolower(str_replace('', '-', $request->category_name))
         ]);
-        return redirect()->route('allcategory')->with('message', 'Category Updated Successfully');
+        return redirect()->route('allcategory')->with('message', 'Sửa danh mục sản phẩm thành công');
     }
     public function deleteCategory($id)
     {
         Category::findOrFail($id)->delete();
-        return redirect()->route('allcategory')->with('message', 'Category Deleted Successfully');
+        return redirect()->route('allcategory')->with('message', 'Xóa danh mục sản phẩm thành công');
 
     }
 }

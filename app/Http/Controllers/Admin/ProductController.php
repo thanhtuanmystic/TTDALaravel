@@ -60,7 +60,7 @@ class ProductController extends Controller
 
         Category::where('id', $category_id)->increment('product_count', 1);
         Subcategory::where('id', $subcategory_id)->increment('product_count', 1);
-        return redirect()->route('allproducts')->with('message', 'Product Added Successfully');
+        return redirect()->route('allproducts')->with('message', 'Thêm sản phẩm thành công');
     }
     public function editProductImg($id)
     {
@@ -81,7 +81,7 @@ class ProductController extends Controller
         Product::findOrFail($id)->update([
             'product_img' => $img_url
         ]);
-        return redirect()->route('allproducts')->with('message', 'Product Image Updated Successfully');
+        return redirect()->route('allproducts')->with('message', 'Cập nhật ảnh sản phẩm thành công');
     }
     public function editProduct($id)
     {
@@ -108,7 +108,7 @@ class ProductController extends Controller
             'slug' => strtolower(str_replace(' ', '-', $request->product_name)),
         ]);
 
-        return redirect()->route('allproducts')->with('message', 'Product Updated Successfully');
+        return redirect()->route('allproducts')->with('message', 'Sửa sản phẩm thành công');
     }
     public function deleteProduct($id)
     {
@@ -118,7 +118,7 @@ class ProductController extends Controller
         Product::findOrFail($id)->delete();
         Category::where('id', $cat_id)->decrement('product_count', 1);
         Subcategory::where('id', $subcat_id)->decrement('product_count', 1);
-        return redirect()->route('allproducts')->with('message', 'Product Deleted Successfully');
+        return redirect()->route('allproducts')->with('message', 'Xóa sản phẩm thành công');
 
     }
 }

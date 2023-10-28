@@ -34,7 +34,7 @@ class SubCategoryController extends Controller
             'category_name' => $category_name
         ]);
         Category::where('id', $category_id)->increment('subcategory_count', 1);
-        return redirect()->route('allsubcategory')->with('message', 'Sub Category Added Successfully');
+        return redirect()->route('allsubcategory')->with('message', 'Thêm danh mục con thành công');
     }
     public function editSubCategory($id)
     {
@@ -49,7 +49,7 @@ class SubCategoryController extends Controller
             'subcategory_name' => $request->subcategory_name,
             'slug' => strtolower(str_replace('', '-', $request->subcategory_name))
         ]);
-        return redirect()->route('allsubcategory')->with('message', 'Sub Category Updated Successfully');
+        return redirect()->route('allsubcategory')->with('message', 'Sửa danh mục con thành công');
 
     }
     public function deleteSubCategory($id)
@@ -57,7 +57,7 @@ class SubCategoryController extends Controller
         $cat_id = Subcategory::where('id', $id)->value('category_id');
         Subcategory::findOrFail($id)->delete();
         Category::where('id', $cat_id)->decrement('subcategory_count', 1);
-        return redirect()->route('allsubcategory')->with('message', 'Sub Category Deleted Successfully');
+        return redirect()->route('allsubcategory')->with('message', 'Xóa danh mục con thành công');
 
     }
 }
