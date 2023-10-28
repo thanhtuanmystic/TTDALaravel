@@ -12,11 +12,11 @@
                 <table class="table">
                     <tr>
                         <th>User Id</th>
-                        <th>Shipping Information</th>
+                        <th>Thông tin giao hàng</th>
                         <th>Product Id</th>
-                        <th>Quantity</th>
-                        <th>Total will pay</th>
-                        <th>Status</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
                         <th>Action</th>
                     </tr>
                     @foreach ($pending_orders as $order)
@@ -24,14 +24,18 @@
                             <td>{{ $order->userid }}</td>
                             <td>
                                 <ul>
-                                    <li>Phone Number: {{ $order->shipping_phoneNumber }}</li>
-                                    <li>City: {{ $order->shipping_city }}</li>
-                                    <li>Postal Code: {{ $order->shipping_postalcode }}</li>
+                                    <li>Họ tên: {{ $order->shipping_fullname }}</li>
+                                    <li>Email: {{ $order->shipping_email }}</li>
+                                    <li>SĐT: {{ $order->shipping_phoneNumber }}</li>
+                                    <li>Địa chỉ: {{ $order->shipping_address }}</li>
+                                    <li>Quận/Huyện: {{ $order->shipping_district }}</li>
+                                    <li>Tỉnh/Thành phố: {{ $order->shipping_city }}</li>
                                 </ul>
                             </td>
                             <td>{{ $order->product_id }}</td>
                             <td>{{ $order->quantity }}</td>
                             <td>{{ $order->total_price }}</td>
+                            <td>{{ $order->status }}</td>
                             <td>
                                 <a href="" class="btn btn-success">Approve Now</a>
                             </td>
