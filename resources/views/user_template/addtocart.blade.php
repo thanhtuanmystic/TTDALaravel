@@ -43,6 +43,7 @@
                             <tbody>
                                 @php
                                     $total = 0;
+                                    $toal_pay = 0;
                                 @endphp
                                 @foreach ($cart_items as $item)
                                     @php
@@ -92,36 +93,46 @@
                 <div class="col-lg-6">
                     <div class="shoping__continue">
                         <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
+                            <h5>Mã giảm giá</h5>
                             <form id="coupon_form">
                                 @csrf
-                                <input name="coupon_code" type="text" placeholder="Nhập mã giảm giá">
+                                <input name="coupon_code" id="coupon_code" type="text" placeholder="Nhập mã giảm giá">
                                 <button type="submit" name="coupon_code" id="coupon_code" class="site-btn">Áp dụng</button>
                             </form>
-                            <div id="discount_amount"></div>
+                            <p id="error_discount_code"></p>
                         </div>
                     </div>
                 </div>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
                     $(document).ready(function() {
                         $('#coupon_form').on('submit', function(e) {
                             e.preventDefault();
                             var couponCode = $('#coupon_code').val();
+                            var tongtien = {{ $total }};
+                            var tongthanhtoan = 0;
                             $.ajax({
                                 type: 'POST',
-                                url: "/apply-coupon", 
+                                url: "/apply-coupon",
                                 data: {
                                     coupon_code: couponCode,
-                                    _token: '{{csrf_token()}}'
+                                    _token: '{{ csrf_token() }}'
                                 },
                                 dataType: 'json',
                                 success: function(data) {
                                     if (data.success) {
-                                        $('#discount_amount').text('Discount: $' + data.discount);
+                                        $('#discount_amount').text(data.discount);
+                                        tongthanhtoan = tongtien - parseInt(data.discount);
+                                        $('#total_pay').text(tongthanhtoan);
+                                        $('#error_discount_code').text(
+                                            "");
                                     } else {
-                                        $('#discount_amount').text('Invalid or expired coupon code.');
+                                        $('#error_discount_code').text(
+                                            "Mã giảm giá không tồn tại hoặc đã hết hạn!");
+                                        $('#discount_amount').text(0);
+                                        $('#total_pay').text(tongtien);
+
                                     }
+
                                 }
                             });
                         });
@@ -129,15 +140,17 @@
                 </script>
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
-                        <h5>Cart Total</h5>
+                        <h5>Giỏ hàng</h5>
                         <ul>
                             {{-- <li>Subtotal <span>$454.98</span></li> --}}
-                            <li>Total <span>${{ $total }}</span></li>
-                            <li>Giảm giá <span>100</span></li>
+                            <li>Tổng tiền hàng <span>{{ $total }}</span></li>
+                            <li>Giảm giá <span id="discount_amount">0</span></li>
+                            <li>Tổng thanh toán <span id="total_pay">{{ $total }}</span></li>
+
                         </ul>
                         <form action="{{ route('gotocheckout') }}" method="POST">
                             @csrf
-                            <input class="primary-btn" type="submit" value="Đặt hàng">
+                            <input class="site-btn" type="submit" value="Đặt hàng">
                         </form>
                     </div>
                 </div>

@@ -77,7 +77,9 @@
                                     @endforeach
                                 </ul>
                                 {{-- <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div> --}}
-                                <div class="checkout__order__total">Tổng tiền <span>$ {{ $total }}</span></div>
+                                <div class="checkout__order__total">Tổng tiền hàng <span>$ {{ $total }}</span></div>
+                                <div class="checkout__order__total">Giảm giá <span>$ {{ $total }}</span></div>
+                                <div class="checkout__order__total">Tổng thanh toán <span>$ {{ $total }}</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                         Check Payment
