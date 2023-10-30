@@ -111,18 +111,6 @@ class ClientController extends Controller
     }
     public function applyCoupon(Request $request)
     {
-        // $couponCode = $request->coupon_code;
-
-        // $coupon = Coupons::where('code', $couponCode)
-        //     ->where('valid_until', '>=', now())
-        //     ->first();
-        // if (!$coupon) {
-        //     return redirect()->route('addtocart')->with('message', 'Mã giảm giá không tồn tại hoặc đã hết hạn!');
-        // }
-
-        // // Áp dụng giảm giá cho đơn hàng tại đây
-
-        // return redirect()->route('addtocart')->with('message', 'Áp dụng mã giảm giá thành công!');
         $couponCode = $request->input('coupon_code');
         $coupon = Coupons::where('code', $couponCode)
             ->where('valid_until', '>=', now())
@@ -142,6 +130,7 @@ class ClientController extends Controller
         $userProfile = User::where('id', $userid)->first();
         return view('user_template.userprofile', compact('userProfile'));
     }
+
     public function pendingOrders()
     {
         $pending_orders = Order::where('status', 'pending')->latest()->get();

@@ -19,4 +19,8 @@ class Product extends Model
         'product_img',
         'slug',
     ];
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }
