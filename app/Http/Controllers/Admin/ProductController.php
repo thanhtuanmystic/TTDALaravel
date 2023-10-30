@@ -119,6 +119,6 @@ class ProductController extends Controller
         Category::where('id', $cat_id)->decrement('product_count', 1);
         Subcategory::where('id', $subcat_id)->decrement('product_count', 1);
         return redirect()->route('allproducts')->with('message', 'Xóa sản phẩm thành công');
-
     }
+    
 }

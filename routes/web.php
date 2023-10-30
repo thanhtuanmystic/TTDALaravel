@@ -69,6 +69,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/edit-category/{id}', 'editCategory')->name('editcategory');
         Route::post('/admin/update-category', 'updateCategory')->name('updatecategory');
         Route::get('/admin/delete-category/{id}', 'deleteCategory')->name('deletecategory');
+
+
+        Route::get('/admin/all-coupon', 'allCoupon')->name('allcoupon');
+        Route::get('/admin/add-coupon', 'addCoupon')->name('addcoupon');
+        Route::post('/admin/store-coupon', 'storeCoupon')->name('storecoupon');
+        Route::get('/admin/edit-coupon/{id}', 'editCoupon')->name('editcoupon');
+        Route::post('/admin/update-coupon', 'updateCoupon')->name('updatecoupon');
+        Route::get('/admin/delete-coupon/{id}', 'deleteCoupon')->name('deletecoupon');
     });
     Route::controller(SubCategoryController::class)->group(function () {
         Route::get('/admin/all-subcategory', 'index')->name('allsubcategory');

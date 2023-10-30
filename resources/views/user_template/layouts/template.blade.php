@@ -71,7 +71,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="{{ route('home') }}">Home</a></li>
+                <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
                 <li><a href="{{ route('showallproducts') }}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">

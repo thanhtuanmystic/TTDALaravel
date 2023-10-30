@@ -124,6 +124,21 @@
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Mã giảm giá</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('addcoupon') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Thêm mã giảm giá</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('allcoupon') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Tất cả mã giảm giá</div>
+                        </a>
+                    </li>
+                    <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Orders</span>
                     </li>
                     <li class="menu-item">

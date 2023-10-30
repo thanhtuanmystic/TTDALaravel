@@ -1,12 +1,12 @@
 @extends('admin.layouts.template')
 @section('page_title')
-    All category
+   Tất cả danh mục
 @endsection
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Page/</span> All Category</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Tất cả danh mục</h4>
         <div class="card">
-            <h5 class="card-header">Available Category Information</h5>
+            <h5 class="card-header">Tất cả danh mục</h5>
             @if (session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}
@@ -17,10 +17,10 @@
                     <thead class="table-light">
                         <tr>
                             <th>Id</th>
-                            <th>Category Name</th>
-                            <th>Sub Category</th>
+                            <th>Tên danh mục</th>
+                            <th>Danh mục con</th>
                             <th>Slug</th>
-                            <th>Actions</th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -31,9 +31,9 @@
                                 <td>{{ $category->subcategory_count }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>
-                                    <a href="{{ route('editcategory', $category->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('editcategory', $category->id) }}" class="btn btn-primary">Sửa</a>
                                     <a href="{{ route('deletecategory', $category->id) }}"
-                                        class="btn btn-warning">Delete</a>
+                                        class="btn btn-warning">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach

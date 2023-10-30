@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Coupons;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -51,4 +52,46 @@ class CategoryController extends Controller
         return redirect()->route('allcategory')->with('message', 'Xóa danh mục sản phẩm thành công');
 
     }
+
+    // mã giảm giá
+    public function allCoupon()
+    {
+        $coupons = Coupons::latest()->get();
+        return view('admin.allcoupon', compact('coupons'));
+    }
+    public function addCoupon()
+    {
+        return view('admin.addcoupon');
+    }
+    public function storeCoupon(Request $request)
+    {
+        Coupons::insert([
+            'code' => $request->coupon_code,
+            'discount' => $request->coupon_discount,
+            'valid_until' => $request->coupon_expired
+        ]);
+        return redirect()->route('allcoupon')->with('message', 'Thêm mã giảm giá thành công');
+    }
+    public function editCoupon($id)
+    {
+        $coupon_info = Coupons::findOrFail($id);
+        return view('admin.editcoupon', compact('coupon_info'));
+    }
+    public function updateCoupon(Request $request)
+    {
+        $coupon_id = $request->coupon_id;
+        Coupons::findOrFail($coupon_id)->update([
+            'code' => $request->coupon_code,
+            'discount' => $request->coupon_discount,
+            'valid_until' => $request->coupon_expired
+        ]);
+        return redirect()->route('allcoupon')->with('message', 'Sửa mã giảm giá thành công');
+    }
+    public function deleteCoupon($id)
+    {
+        Coupons::findOrFail($id)->delete();
+        return redirect()->route('allcoupon')->with('message', 'Xóa mã giảm giá thành công');
+
+    }
+
 }
