@@ -1,48 +1,22 @@
 @extends('user_template.layouts.template')
-@section('main-content')
-    <!-- Categories Section Begin -->
-    <section class="categories">
-        <div class="container">
-            <div class="row">
-                <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('home/img/categories/cat-1.jpg') }}">
-                            <h5><a href="#">Fresh Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('home/img/categories/cat-2.jpg') }}">
-                            <h5><a href="#">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('home/img/categories/cat-3.jpg') }}">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('home/img/categories/cat-4.jpg') }}">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('home/img/categories/cat-5.jpg') }}">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Categories Section End -->
+@section('banner-home')
+    <div class="hero__item set-bg" data-setbg="{{ asset('home/img/banner/buy1get1.png') }}">
+    </div>
+@endsection
 
+@section('main-content')
+    <script>
+        $(document).ready(function() {
+            $('.hero__categories ul').show();
+        });
+    </script>
     <!-- Featured Section Begin -->
     <section class="featured spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Product</h2>
+                        <h2>Sản phẩm nổi bật</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
@@ -56,11 +30,11 @@
             </div>
             <div class="row featured__filter">
                 @foreach ($allproducts as $product)
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix {{$product->product_category_name}}">
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $product->product_category_name }}">
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
                                 <ul class="featured__item__pic__hover">
-                                    <form action="{{route('addproducttocart')}}" method="POST">
+                                    <form action="{{ route('addproducttocart') }}" method="POST">
                                         @csrf
                                         <input type="hidden" value="{{ $product->id }}" name="product_id">
                                         <input type="hidden" value="{{ $product->price }}" name="price">
@@ -70,14 +44,14 @@
                                         <button type="submit" class="btn">
                                             <i class="fa fa-shopping-cart"></i>
                                         </button>
-                                       </form>
+                                    </form>
                                 </ul>
                             </div>
                             <div class="featured__item__text">
                                 <h6><a
                                         href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
                                 </h6>
-                                <h5>${{ $product->price }}</h5>
+                                <h5>{{ $product->price }}</h5>
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,9 @@
     $categories = App\Models\Category::latest()->get();
     $totalPrice = App\Models\Cart::sum('price');
     $productCount = App\Models\Cart::count();
+    $idCheck = Auth::id();
+    $userInfo = App\Models\User::where('id', $idCheck)->first();
+
 @endphp
 <!DOCTYPE html>
 <html lang="zxx">
@@ -18,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('home/css/font-awesome.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('home/css/elegant-icons.css') }}" type="text/css">
@@ -27,6 +31,7 @@
     <link rel="stylesheet" href="{{ asset('home/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('home/css/style.css') }}" type="text/css">
 </head>
+
 <body>
     <!-- Page Preloder -->
     {{-- <div id="preloder">
@@ -57,13 +62,17 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                @if (!isset($idCheck))
+                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
+                @else
+                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> {{ $userInfo->name }}</a>
+                @endif
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{route('showallproducts')}}">Shop</a></li>
+                <li><a href="{{ route('showallproducts') }}">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
@@ -123,8 +132,14 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
+
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                @if (!isset($idCheck))
+                                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
+                                @else
+                                    <a href="{{ route('login') }}"><i class="fa fa-user"></i>
+                                        {{ $userInfo->name }}</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -143,7 +158,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{route('showallproducts')}}">Shop</a></li>
+                            <li><a href="{{ route('showallproducts') }}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="{{ route('addtocart') }}">Shoping Cart</a></li>
@@ -159,10 +174,10 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="{{route('addtocart')}}"><i class="fa fa-shopping-bag"></i>
+                            <li><a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
                                     <span>{{ $productCount }}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">Tổng tiền: <span>{{ $totalPrice }}</span></div>
+                        <div class="header__cart__price">Tổng thanh toán: <span>{{ $totalPrice }}</span></div>
                     </div>
                 </div>
             </div>
@@ -189,16 +204,16 @@
                                         href="{{ route('category', [$category->id, $category->slug]) }}">{{ $category->category_name }}</a>
                                 </li>
                             @endforeach
-
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="{{route('searchproduct')}}" method="POST">
+                            <form action="{{ route('searchproduct') }}" method="POST">
                                 @csrf
-                                <input name="searchInput" type="text" placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
+                                <input name="searchInput" type="text"
+                                    placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
@@ -212,13 +227,14 @@
                             </div>
                         </div>
                     </div>
+                    @yield('banner-home')
                 </div>
             </div>
         </div>
     </section>
     <!-- banner bg main end -->
     {{-- common part --}}
-    <div class="container py-5">
+    <div class="container">
         @yield('main-content')
     </div>
     {{-- end of common part --}}

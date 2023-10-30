@@ -1,10 +1,10 @@
 @extends('user_template.layouts.template')
 @section('main-content')
-@php
-    $categories = App\Models\Category::latest()->get();
-@endphp
-       <!-- Breadcrumb Section Begin -->
-       <section class="breadcrumb-section set-bg" data-setbg="{{ asset('home/img/breadcrumb.jpg') }}">
+    @php
+        $categories = App\Models\Category::latest()->get();
+    @endphp
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{{ asset('home/img/breadcrumb.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -31,7 +31,9 @@
                             <h4>Danh mục</h4>
                             <ul>
                                 @foreach ($categories as $category)
-                                    <li><a href="{{ route('category', [$category->id, $category->slug]) }}">{{ $category->category_name }}</a></li>
+                                    <li><a
+                                            href="{{ route('category', [$category->id, $category->slug]) }}">{{ $category->category_name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -154,39 +156,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-7">                   
-                    <div class="filter__item">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
-                                    <span>Sort By</span>
-                                    <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <h6><span> 16 </span> sản phẩm được tìm thấy</h6>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-3">
-                                <div class="filter__option">
-                                    <span class="icon_grid-2x2"></span>
-                                    <span class="icon_ul"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-9 col-md-7">
+                    <h3 class="mb-4">{{ $category_->category_name }}</h3>
                     <div class="row">
                         @foreach ($products as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset($product->product_img) }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
                                         <ul class="product__item__pic__hover">
-                                            <form action="{{route('addproducttocart')}}" method="POST">
+                                            <form action="{{ route('addproducttocart') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
                                                 <input type="hidden" value="{{ $product->price }}" name="price">
@@ -196,7 +174,7 @@
                                                 <button type="submit" class="btn">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </button>
-                                               </form>
+                                            </form>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">

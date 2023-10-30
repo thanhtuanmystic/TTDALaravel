@@ -79,48 +79,48 @@
                     </li>
 
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Category</span>
+                        <span class="menu-header-text">Danh mục</span>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('addcategory') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Add Category</div>
+                            <div data-i18n="Analytics">Thêm danh mục</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('allcategory') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">All Category</div>
+                            <div data-i18n="Analytics">Tất cả danh mục</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Sub Category</span>
+                        <span class="menu-header-text">Danh mục con</span>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('addsubcategory') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Add Sub Category</div>
+                            <div data-i18n="Analytics">Thêm danh mục con</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('allsubcategory') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">All Sub Category</div>
+                            <div data-i18n="Analytics">Tất cả danh mục con</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Product</span>
+                        <span class="menu-header-text">Sản phẩm</span>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('addproduct') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Add Product</div>
+                            <div data-i18n="Analytics">Thêm sản phẩm</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('allproducts') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">All Product</div>
+                            <div data-i18n="Analytics">Tất cả sản phẩm</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">

@@ -8,6 +8,7 @@ use App\Models\Coupons;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\ShippingInfo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,9 @@ class ClientController extends Controller
 {
     public function categoryPage($id)
     {
-        $category = Category::findOrFail($id);
+        $category_ = Category::findOrFail($id);
         $products = Product::where('product_category_id', $id)->latest()->get();
-        return view('user_template.category', compact('category', 'products'));
+        return view('user_template.category', compact('category_', 'products'));
     }
     public function singleProduct($id)
     {
@@ -30,7 +31,7 @@ class ClientController extends Controller
     }
     public function showAllProducts()
     {
-        $allproducts = Product::latest()->get();
+        $allproducts = Product::latest()->paginate(6);
         $categories = Category::latest()->get();
         $latestProducts = Product::orderBy('id', 'desc')->take(3)->get();
         $productCount = Product::count();
@@ -79,6 +80,7 @@ class ClientController extends Controller
     }
     public function placeOrder(Request $request)
     {
+
         $userid = Auth::id();
         $cart_items = Cart::where('user_id', $userid)->get();
         foreach ($cart_items as $item) {
@@ -127,7 +129,7 @@ class ClientController extends Controller
             ->first();
         if ($coupon) {
             // Áp dụng giảm giá và tính toán số tiền giảm giá ở đây
-            $discountAmount = 10; // Thay bằng logic thực tế
+            $discountAmount = $coupon->discount; // Thay bằng logic thực tế
             return response()->json(['success' => true, 'discount' => $discountAmount]);
         } else {
             return response()->json(['success' => false]);
@@ -136,7 +138,9 @@ class ClientController extends Controller
     }
     public function userProfile()
     {
-        return view('user_template.userprofile');
+        $userid = Auth::id();
+        $userProfile = User::where('id', $userid)->first();
+        return view('user_template.userprofile', compact('userProfile'));
     }
     public function pendingOrders()
     {
