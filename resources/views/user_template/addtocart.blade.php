@@ -33,10 +33,10 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th class="shoping__product">Products</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
+                                    <th class="shoping__product">Sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng tiền</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -60,9 +60,8 @@
                                         </td>
                                         <td class="shoping__cart__quantity">
                                             <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" name="item_in_cart_quantity"
-                                                        value="{{ $item->quantity }}">
+                                                <div>
+                                                    {{ $item->quantity }}
                                                 </div>
                                             </div>
                                         </td>
@@ -86,7 +85,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="{{ route('showallproducts') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                        <a href="{{ route('showallproducts') }}" class="primary-btn cart-btn">Tiếp tục mua hàng</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -124,13 +123,13 @@
                                         $('#total_pay').text(tongthanhtoan);
                                         $('#error_discount_code').text(
                                             "");
-                                            $('#coupon_value').val(data.discount);
+                                        $('#coupon_value').val(data.discount);
                                     } else {
                                         $('#error_discount_code').text(
                                             "Mã giảm giá không tồn tại hoặc đã hết hạn!");
                                         $('#discount_amount').text(0);
                                         $('#total_pay').text(tongtien);
-                                       
+
                                     }
 
                                 }
@@ -150,7 +149,15 @@
                                 <li>Tổng thanh toán <span id="total_pay">{{ $total }}</span></li>
                                 <input name="coupon_value" type="hidden" id="coupon_value" value="0">
                             </ul>
-                            <input class="site-btn" type="submit" value="Đặt hàng">
+                            @php
+                                $productCount = App\Models\Cart::count();
+                            @endphp
+                            @if ($productCount == 0)
+                                <p>Không có sản phẩm trong giỏ hàng, hãy tiếp tục mua sắm</p>
+                                <input disabled type="submit" value="Đặt hàng">
+                            @else
+                                <input class="site-btn" type="submit" value="Đặt hàng">
+                            @endif
                         </form>
                     </div>
                 </div>

@@ -58,7 +58,7 @@
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
 
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">SingleEcom</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Dream Clothing</span>
                     </a>
 
                     <a href="javascript:void(0);"

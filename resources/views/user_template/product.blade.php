@@ -53,7 +53,7 @@
                             <i class="fa fa-star-half-o"></i>
 
                         </div>
-                        <div class="product__details__price">${{ $product->price }}</div>
+                        <div class="product__details__price">{{ $product->price }}</div>
                         <p> {{ $product->product_long_des }}</p>
                         <div class="product__details__quantity">
                             <form action="{{ route('addproducttocart') }}" method="POST">

@@ -52,7 +52,7 @@
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
         <div class="humberger__menu__widget">
-            
+
             <div class="header__top__right__auth">
                 @if (!isset($idCheck))
                     <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
@@ -109,11 +109,11 @@
                     <div class="col-lg-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>                           
+                                <a href="#"><i class="fa fa-heart"></i><span>1</span></a>
+                                <a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
+                                    <span>{{ $productCount }}</span></a>
+                                <a href="">Tổng thanh toán <span>{{ $totalPrice }}</span></a>
+                            </div>
                             <div class="header__top__right__auth">
                                 @if (!isset($idCheck))
                                     <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
@@ -135,32 +135,19 @@
                                 alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-9">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('showallproducts') }}">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="{{ route('addtocart') }}">Shoping Cart</a></li>
-                                    <li><a href="{{ route('checkout') }}">Check Out</a></li>
-                                </ul>
+                            <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
+                            <li><a href="{{ route('showallproducts') }}">Sản phẩm</a></li>
+                            <li><a href="#">Thời trang nam</a>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="#">Thời trang nữ</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
-                                    <span>{{ $productCount }}</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">Tổng thanh toán: <span>{{ $totalPrice }}</span></div>
-                    </div>
-                </div>
+               
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
@@ -294,9 +281,7 @@
     <script src="{{ asset('home/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('home/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('home/js/main.js') }}"></script>
-    <script>        
-
-    </script>
+    <script></script>
 
 </body>
 

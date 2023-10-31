@@ -30,6 +30,7 @@ class ClientController extends Controller
         return view('user_template.product', compact('product', 'related_product'));
     }
   
+
     public function showAllProducts(Request $request)
     {
         $allproducts = Product::latest()->paginate(6);
@@ -37,7 +38,6 @@ class ClientController extends Controller
         $latestProducts = Product::orderBy('id', 'desc')->take(3)->get();
         $productCount = Product::count();
         return view('user_template.showallproducts', compact('allproducts', 'productCount', 'latestProducts', 'categories'));
-
     }
     public function addToCart()
     {
