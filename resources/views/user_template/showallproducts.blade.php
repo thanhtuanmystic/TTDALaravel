@@ -196,9 +196,10 @@
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
                                     <span>Sort By</span>
-                                    <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                    <select id="sort-by">
+                                        <option value="">Default</option>
+                                        <option value="name">Tên</option>
+                                        <option value="price">Giá</option>
                                     </select>
                                 </div>
                             </div>

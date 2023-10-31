@@ -32,7 +32,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/all-products', 'showAllProducts')->name('showallproducts');
     Route::post('/search-products', 'searchProduct')->name('searchproduct');
     Route::get('/new-release', 'newRelease')->name('newrelease');
-  
+
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {
@@ -53,14 +53,13 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/apply-coupon', 'applyCoupon')->name('applycoupon');
     });
 });
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'role:user'])->name('dashboard');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
-        Route::get('/admin/dashboard', 'index')->name('admindashboard');
+        Route::get('/admin', 'index')->name('admindashboard');
     });
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/admin/all-category', 'index')->name('allcategory');
@@ -69,7 +68,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/edit-category/{id}', 'editCategory')->name('editcategory');
         Route::post('/admin/update-category', 'updateCategory')->name('updatecategory');
         Route::get('/admin/delete-category/{id}', 'deleteCategory')->name('deletecategory');
-
 
         Route::get('/admin/all-coupon', 'allCoupon')->name('allcoupon');
         Route::get('/admin/add-coupon', 'addCoupon')->name('addcoupon');

@@ -61,7 +61,8 @@
                                         <td class="shoping__cart__quantity">
                                             <div class="quantity">
                                                 <div class="pro-qty">
-                                                    <input type="text" value="{{ $item->quantity }}">
+                                                    <input type="text" name="item_in_cart_quantity"
+                                                        value="{{ $item->quantity }}">
                                                 </div>
                                             </div>
                                         </td>
@@ -86,8 +87,6 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="{{ route('showallproducts') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -125,12 +124,13 @@
                                         $('#total_pay').text(tongthanhtoan);
                                         $('#error_discount_code').text(
                                             "");
+                                            $('#coupon_value').val(data.discount);
                                     } else {
                                         $('#error_discount_code').text(
                                             "Mã giảm giá không tồn tại hoặc đã hết hạn!");
                                         $('#discount_amount').text(0);
                                         $('#total_pay').text(tongtien);
-
+                                       
                                     }
 
                                 }
@@ -141,15 +141,15 @@
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Giỏ hàng</h5>
-                        <ul>
-                            {{-- <li>Subtotal <span>$454.98</span></li> --}}
-                            <li>Tổng tiền hàng <span>{{ $total }}</span></li>
-                            <li>Giảm giá <span id="discount_amount">0</span></li>
-                            <li>Tổng thanh toán <span id="total_pay">{{ $total }}</span></li>
-
-                        </ul>
                         <form action="{{ route('gotocheckout') }}" method="POST">
                             @csrf
+                            <ul>
+                                {{-- <li>Subtotal <span>$454.98</span></li> --}}
+                                <li>Tổng tiền hàng <span>{{ $total }}</span></li>
+                                <li>Giảm giá <span id="discount_amount">0</span></li>
+                                <li>Tổng thanh toán <span id="total_pay">{{ $total }}</span></li>
+                                <input name="coupon_value" type="hidden" id="coupon_value" value="0">
+                            </ul>
                             <input class="site-btn" type="submit" value="Đặt hàng">
                         </form>
                     </div>

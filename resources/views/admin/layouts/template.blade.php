@@ -285,6 +285,8 @@
 
 
     <!-- Core JS -->
+    <script src="{{ asset('home/js/main.js') }}"></script>
+
     <!-- build:js assets/vendor/js/core.js -->
     <script src=" {{ asset('dashboard/assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/libs/popper/popper.js') }}"></script>

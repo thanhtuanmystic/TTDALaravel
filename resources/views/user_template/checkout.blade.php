@@ -56,7 +56,7 @@
                             <div class="checkout__input">
                                 <p>Tỉnh/ Thành Phố<span>*</span></p>
                                 <input type="text" name="city">
-                            </div>
+                            </div>                           
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
@@ -76,6 +76,7 @@
                                         @endphp
                                     @endforeach
                                 </ul>
+                                                               
                                 {{-- <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div> --}}
                                 <div class="checkout__order__total">Tổng tiền hàng <span>$ {{ $total }}</span></div>
                                 <div class="checkout__order__total">Giảm giá <span>$ {{ $total }}</span></div>

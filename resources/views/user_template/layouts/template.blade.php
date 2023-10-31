@@ -52,15 +52,7 @@
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
         <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-                <img src="{{ asset('home/img/language.png') }}" alt="">
-                <div>English</div>
-                <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Tiếng việt</a></li>
-                    <li><a href="#">English</a></li>
-                </ul>
-            </div>
+            
             <div class="header__top__right__auth">
                 @if (!isset($idCheck))
                     <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
@@ -121,18 +113,7 @@
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img style="width: 25px" src="{{ asset('home/img/VN-Vietnam-Flag-icon.png') }}"
-                                    alt="">
-                                <div>Tiếng việt</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Tiếng việt</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
-
+                            </div>                           
                             <div class="header__top__right__auth">
                                 @if (!isset($idCheck))
                                     <a href="{{ route('login') }}"><i class="fa fa-user"></i> Đăng nhập</a>
@@ -212,9 +193,9 @@
                         <div class="hero__search__form">
                             <form action="{{ route('searchproduct') }}" method="POST">
                                 @csrf
-                                <input name="searchInput" type="text"
+                                <input required name="searchInput" type="text" id="searchInput"
                                     placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <button type="submit" class="site-btn">Tìm kiếm</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -313,6 +294,9 @@
     <script src="{{ asset('home/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('home/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('home/js/main.js') }}"></script>
+    <script>        
+
+    </script>
 
 </body>
 

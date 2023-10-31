@@ -29,7 +29,8 @@ class ClientController extends Controller
         $related_product = Product::where('product_subcategory_id', $subcat_id)->latest()->get();
         return view('user_template.product', compact('product', 'related_product'));
     }
-    public function showAllProducts()
+  
+    public function showAllProducts(Request $request)
     {
         $allproducts = Product::latest()->paginate(6);
         $categories = Category::latest()->get();

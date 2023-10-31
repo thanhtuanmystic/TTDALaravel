@@ -51,7 +51,7 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
-                            <span>(18 reviews)</span>
+
                         </div>
                         <div class="product__details__price">${{ $product->price }}</div>
                         <p> {{ $product->product_long_des }}</p>
@@ -68,17 +68,17 @@
                                     </div>
                                 </div>
                                 <br>
-                                <input type="submit" class="site-btn" value="Add To Cart">
+                                <input type="submit" class="site-btn" value="Thêm vào giỏ hàng">
                                 <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             </form>
 
                         </div>
 
                         <ul>
-                            <li><b>Availability</b> <span>In Stock - {{ $product->quantity }} </span></li>
-                            <li><b>Category </b> {{ $product->product_category_name }} </li>
-                            <li><b>Subcategory </b> {{ $product->product_subcategory_name }} </li>
-                            <li><b>Share on</b>
+                            <li><b>Tình trạng</b> <span>Còn hàng ({{ $product->quantity }} sản phẩm) </span></li>
+                            <li><b>Danh mục </b> {{ $product->product_category_name }} </li>
+                            <li><b>Danh mục con </b> {{ $product->product_subcategory_name }} </li>
+                            <li><b>Chia sẻ</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -94,27 +94,20 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                    aria-selected="true">Description</a>
+                                    aria-selected="true">Mô tả</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                    aria-selected="false">Information</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false">Reviews <span>(1)</span></a>
-                            </li>
+                           
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
+                                    <h6>Mô tả sản phẩm</h6>
                                     <p>{{ $product->product_long_des }}</p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
+                                    <h6>Thông tin sản phẩm</h6>
                                     <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
                                         Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
                                         Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
@@ -135,7 +128,7 @@
                             </div>
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
+                                    <h6>Đánh giá</h6>
                                     <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
                                         Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
                                         Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
@@ -163,7 +156,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title related__product__title">
-                        <h2>Related Product</h2>
+                        <h2>Sản phẩm liên quan</h2>
                     </div>
                 </div>
             </div>
@@ -182,7 +175,7 @@
                                 <h6><a
                                         href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
                                 </h6>
-                                <h5>${{ $product->price }}</h5>
+                                <h5>{{ $product->price }}</h5>
                             </div>
                         </div>
                     </div>
