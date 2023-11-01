@@ -53,52 +53,53 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::post('/apply-coupon', 'applyCoupon')->name('applycoupon');
     });
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'role:user'])->name('dashboard');
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::controller(DashboardController::class)->group(function () {
-        Route::get('/admin', 'index')->name('admindashboard');
-    });
-    Route::controller(CategoryController::class)->group(function () {
-        Route::get('/admin/all-category', 'index')->name('allcategory');
-        Route::get('/admin/add-category', 'addCategory')->name('addcategory');
-        Route::post('/admin/store-category', 'storeCategory')->name('storecategory');
-        Route::get('/admin/edit-category/{id}', 'editCategory')->name('editcategory');
-        Route::post('/admin/update-category', 'updateCategory')->name('updatecategory');
-        Route::get('/admin/delete-category/{id}', 'deleteCategory')->name('deletecategory');
 
-        Route::get('/admin/all-coupon', 'allCoupon')->name('allcoupon');
-        Route::get('/admin/add-coupon', 'addCoupon')->name('addcoupon');
-        Route::post('/admin/store-coupon', 'storeCoupon')->name('storecoupon');
-        Route::get('/admin/edit-coupon/{id}', 'editCoupon')->name('editcoupon');
-        Route::post('/admin/update-coupon', 'updateCoupon')->name('updatecoupon');
-        Route::get('/admin/delete-coupon/{id}', 'deleteCoupon')->name('deletecoupon');
-    });
-    Route::controller(SubCategoryController::class)->group(function () {
-        Route::get('/admin/all-subcategory', 'index')->name('allsubcategory');
-        Route::get('/admin/add-subcategory', 'addSubCategory')->name('addsubcategory');
-        Route::post('/admin/store-subcategory', 'storeSubCategory')->name('storesubcategory');
-        Route::get('/admin/edit-subcategory/{id}', 'editSubCategory')->name('editsubcategory');
-        Route::post('/admin/update-subcategory', 'updateSubCategory')->name('updatesubcategory');
-        Route::get('/admin/delete-subcategory/{id}', 'deleteSubCategory')->name('deletesubcategory');
 
-    });
-    Route::controller(ProductController::class)->group(function () {
-        Route::get('/admin/all-products', 'index')->name('allproducts');
-        Route::get('/admin/add-product', 'addProduct')->name('addproduct');
-        Route::post('/admin/store-product', 'storeProduct')->name('storeproduct');
-        Route::get('/admin/edit-product-img/{id}', 'editProductImg')->name('editproductimg');
-        Route::post('/admin/update-product-img', 'updateProductImg')->name('updateproductimg');
-        Route::get('/admin/edit-product/{id}', 'editProduct')->name('editproduct');
-        Route::post('/admin/update-product', 'updateProduct')->name('updateproduct');
-        Route::get('/admin/delete-product/{id}', 'deleteProduct')->name('deleteproduct');
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/admin', 'index')->name('admindashboard');
+    Route::get('/admin-login', 'adminLogin')->name('adminlogin');
+    Route::post('/admin-login-post', 'adminLoginPost')->name('adminloginpost');
+    Route::post('/admin-logout-post', 'adminLogout')->name('adminlogout');
+});
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/admin/all-category', 'index')->name('allcategory');
+    Route::get('/admin/add-category', 'addCategory')->name('addcategory');
+    Route::post('/admin/store-category', 'storeCategory')->name('storecategory');
+    Route::get('/admin/edit-category/{id}', 'editCategory')->name('editcategory');
+    Route::post('/admin/update-category', 'updateCategory')->name('updatecategory');
+    Route::get('/admin/delete-category/{id}', 'deleteCategory')->name('deletecategory');
+    Route::get('/admin/all-coupon', 'allCoupon')->name('allcoupon');
+    Route::get('/admin/add-coupon', 'addCoupon')->name('addcoupon');
+    Route::post('/admin/store-coupon', 'storeCoupon')->name('storecoupon');
+    Route::get('/admin/edit-coupon/{id}', 'editCoupon')->name('editcoupon');
+    Route::post('/admin/update-coupon', 'updateCoupon')->name('updatecoupon');
+    Route::get('/admin/delete-coupon/{id}', 'deleteCoupon')->name('deletecoupon');
+});
+Route::controller(SubCategoryController::class)->group(function () {
+    Route::get('/admin/all-subcategory', 'index')->name('allsubcategory');
+    Route::get('/admin/add-subcategory', 'addSubCategory')->name('addsubcategory');
+    Route::post('/admin/store-subcategory', 'storeSubCategory')->name('storesubcategory');
+    Route::get('/admin/edit-subcategory/{id}', 'editSubCategory')->name('editsubcategory');
+    Route::post('/admin/update-subcategory', 'updateSubCategory')->name('updatesubcategory');
+    Route::get('/admin/delete-subcategory/{id}', 'deleteSubCategory')->name('deletesubcategory');
 
-    });
-    Route::controller(OrderController::class)->group(function () {
-        Route::get('/admin/pending-order', 'index')->name('pendingorder');
-    });
+});
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/admin/all-products', 'index')->name('allproducts');
+    Route::get('/admin/add-product', 'addProduct')->name('addproduct');
+    Route::post('/admin/store-product', 'storeProduct')->name('storeproduct');
+    Route::get('/admin/edit-product-img/{id}', 'editProductImg')->name('editproductimg');
+    Route::post('/admin/update-product-img', 'updateProductImg')->name('updateproductimg');
+    Route::get('/admin/edit-product/{id}', 'editProduct')->name('editproduct');
+    Route::post('/admin/update-product', 'updateProduct')->name('updateproduct');
+    Route::get('/admin/delete-product/{id}', 'deleteProduct')->name('deleteproduct');
+
+});
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/admin/pending-order', 'pendingOrder')->name('pendingorder');
+    Route::get('/admin/completed-order', 'completedOrder')->name('completedorder');
+    Route::post('/admin/change-status', 'changeStatus')->name('changestatus');
 });
 
 

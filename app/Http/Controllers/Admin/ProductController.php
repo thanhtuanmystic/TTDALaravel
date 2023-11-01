@@ -55,7 +55,7 @@ class ProductController extends Controller
             'product_long_des' => 'required',
             'product_category_id' => 'required',
             'product_subcategory_id' => 'required',
-            'product_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           
         ]);
         $image = $request->file('product_img');
         $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();

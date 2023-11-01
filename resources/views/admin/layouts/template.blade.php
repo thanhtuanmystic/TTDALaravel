@@ -148,7 +148,7 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="{{ route('admindashboard') }}" class="menu-link">
+                        <a href="{{ route('completedorder') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Completed Orders</div>
                         </a>
@@ -250,14 +250,14 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                       <form action="{{route('logout')}}" method="POST">
-                                        @csrf
-                                        <a class="dropdown-item" href="auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
-                                        <button type="submit" value="logout"></button>
-                                       </form>
+                                        <form action="{{ route('adminlogout') }}" method="POST">
+                                            @csrf
+                                            <a class="dropdown-item" href="auth-login-basic.html">
+                                                <i class="bx bx-power-off me-2"></i>
+                                                <span class="align-middle">Log Out</span>
+                                            </a>
+                                            <button type="submit" value="logout"></button>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>

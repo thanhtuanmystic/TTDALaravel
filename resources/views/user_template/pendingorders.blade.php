@@ -23,7 +23,7 @@
                     {{ $product_name }}
                 </td>
                 <td>
-                   <img src=" {{ asset($img) }}" alt="">
+                   <img class="pending_img" src=" {{ asset($img) }}" alt="">
                 </td>
                 <td>
                     {{ $order->total_price }}

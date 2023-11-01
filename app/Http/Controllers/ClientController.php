@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ShippingInfo;
 use App\Models\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,7 @@ class ClientController extends Controller
         $related_product = Product::where('product_subcategory_id', $subcat_id)->latest()->get();
         return view('user_template.product', compact('product', 'related_product'));
     }
-  
+
 
     public function showAllProducts(Request $request)
     {
@@ -79,29 +80,64 @@ class ClientController extends Controller
         $shipping_address = ShippingInfo::where('user_id', $userid)->first();
         return view('user_template.checkout', compact('cart_items', 'shipping_address'));
     }
+
     public function placeOrder(Request $request)
     {
 
+        // $latestOrder = DB::table('orders')->where('id', '11')->get();
+        $lastOrder = Order::latest('id')->first();
+        if ($lastOrder) {
+            $lastOrderId = $lastOrder->id;
+        }
         $userid = Auth::id();
         $cart_items = Cart::where('user_id', $userid)->get();
+        $quantity = Cart::count();
+        Order::insert([
+            'userid' => $userid,
+            'shipping_fullname' => $request->fullname,
+            'shipping_phoneNumber' => $request->phone_number,
+            'shipping_email' => $request->email,
+            'shipping_address' => $request->address,
+            'shipping_district' => $request->district,
+            'shipping_city' => $request->city,
+            'product_id' => "1",
+            'quantity' => $quantity,
+            'total_price' => 999999
+        ]);
         foreach ($cart_items as $item) {
-            Order::insert([
-                'userid' => $userid,
-                'shipping_fullname' => $request->fullname,
-                'shipping_phoneNumber' => $request->phone_number,
-                'shipping_email' => $request->email,
-                'shipping_address' => $request->address,
-                'shipping_district' => $request->district,
-                'shipping_city' => $request->city,
+            DB::table('order_product')->insert([
+                'order_id' => $lastOrderId + 1,
                 'product_id' => $item->product_id,
-                'quantity' => $item->quantity,
-                'total_price' => $item->price
+                'quantity' => $item->quantity
             ]);
             $id = $item->id;
             Cart::findOrFail($id)->delete();
         }
         return redirect()->route('pendingorders')->with('message', 'Đơn hàng của bạn đã được đặt thành công');
     }
+    // public function placeOrder(Request $request)
+    // {
+
+    //     $userid = Auth::id();
+    //     $cart_items = Cart::where('user_id', $userid)->get();
+    //     foreach ($cart_items as $item) {
+    //         Order::insert([
+    //             'userid' => $userid,
+    //             'shipping_fullname' => $request->fullname,
+    //             'shipping_phoneNumber' => $request->phone_number,
+    //             'shipping_email' => $request->email,
+    //             'shipping_address' => $request->address,
+    //             'shipping_district' => $request->district,
+    //             'shipping_city' => $request->city,
+    //             'product_id' => $item->product_id,
+    //             'quantity' => $item->quantity,
+    //             'total_price' => $item->price
+    //         ]);
+    //         $id = $item->id;
+    //         Cart::findOrFail($id)->delete();
+    //     }
+    //     return redirect()->route('pendingorders')->with('message', 'Đơn hàng của bạn đã được đặt thành công');
+    // }
     public function searchProduct(Request $request)
     {
 

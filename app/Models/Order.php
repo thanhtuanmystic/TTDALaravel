@@ -14,7 +14,8 @@ class Order extends Model
         'shipping_city',
         'shipping_postalcode',
         'product_name',
-        'quantity'
+        'quantity',
+        'status'
     ];
     public function products()
     {

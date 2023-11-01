@@ -2075,6 +2075,9 @@ ol {
     color: #dd2222;
     float: right;
 }
+.pending_img {
+    width: 10%;
+}
 
 .shoping__checkout .primary-btn {
     display: block;
