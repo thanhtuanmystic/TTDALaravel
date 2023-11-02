@@ -22,6 +22,7 @@
 
                         <th>Tổng tiền</th>
                         <th>Thanh toán</th>
+                        <th>Phí ship</th>
                         <th>Trạng thái</th>
                         <th>Action</th>
                     </tr>
@@ -54,10 +55,9 @@
                                         @endforeach
                                     @endif
                                 </td>
-
-                                <td>
-                                    {{ $order->total_price }}</td>
-                                <td>x</td>
+                                <td> {{ $order->total_price }}</td>                               
+                                <td>{{ $order->payment_method }}</td>
+                                <td> {{ $order->shipping_fee }}</td>
                                 <td>{{ $order->status }}</td>
                                 <td>
                                     <form action="{{ route('changestatus') }}" method="POST">

@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Coupons;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\ShippingInfo;
 use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
@@ -69,17 +68,16 @@ class ClientController extends Controller
     {
         return view('user_template.shippingaddress');
     }
-    public function goToCheckOut()
-    {
-        return redirect()->route('checkout');
-    }
-    public function checkout()
+    public function goToCheckOut(Request $request)
     {
         $userid = Auth::id();
         $cart_items = Cart::where('user_id', $userid)->get();
-        $shipping_address = ShippingInfo::where('user_id', $userid)->first();
-        return view('user_template.checkout', compact('cart_items', 'shipping_address'));
+        $discount_amount = $request->discount_amount_hidden;
+        $shipping_fee = 35000;
+        $totalFinal = $request->total_final_hidden - $shipping_fee;
+        return view('user_template.checkout', compact('discount_amount', 'totalFinal', 'cart_items', 'shipping_fee'));
     }
+
 
     public function placeOrder(Request $request)
     {
@@ -102,7 +100,9 @@ class ClientController extends Controller
             'shipping_city' => $request->city,
             'product_id' => "1",
             'quantity' => $quantity,
-            'total_price' => 999999
+            'total_price' => $request->total_final_checkout,
+            'shipping_fee' => $request->shipping_fee_checkout,
+            'payment_method' => 'COD'
         ]);
         foreach ($cart_items as $item) {
             DB::table('order_product')->insert([

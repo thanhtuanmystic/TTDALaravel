@@ -15,6 +15,8 @@ class Order extends Model
         'shipping_postalcode',
         'product_name',
         'quantity',
+        'shipping_fee',
+        'payment_method',
         'status'
     ];
     public function products()

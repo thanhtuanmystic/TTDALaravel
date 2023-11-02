@@ -119,17 +119,17 @@
                                 success: function(data) {
                                     if (data.success) {
                                         $('#discount_amount').text(data.discount);
+                                        $("#discount_amount_hidden").val(data.discount);
                                         tongthanhtoan = tongtien - parseInt(data.discount);
+                                        $('#total_final_hidden').val(tongthanhtoan);
                                         $('#total_pay').text(tongthanhtoan);
                                         $('#error_discount_code').text(
                                             "");
-                                        $('#coupon_value').val(data.discount);
                                     } else {
                                         $('#error_discount_code').text(
                                             "Mã giảm giá không tồn tại hoặc đã hết hạn!");
                                         $('#discount_amount').text(0);
                                         $('#total_pay').text(tongtien);
-
                                     }
 
                                 }
@@ -144,10 +144,14 @@
                             @csrf
                             <ul>
                                 {{-- <li>Subtotal <span>$454.98</span></li> --}}
+                                <input id="discount_amount_hidden" type="hidden" name="discount_amount_hidden"
+                                    value="0">
+                                <input id="total_hidden" type="hidden" name="total_hidden" value="{{ $total }}">
+                                <input id="total_final_hidden" type="hidden" name="total_final_hidden"
+                                    value="{{ $total }}">
                                 <li>Tổng tiền hàng <span>{{ $total }}</span></li>
                                 <li>Giảm giá <span id="discount_amount">0</span></li>
                                 <li>Tổng thanh toán <span id="total_pay">{{ $total }}</span></li>
-                                <input name="coupon_value" type="hidden" id="coupon_value" value="0">
                             </ul>
                             @php
                                 $productCount = App\Models\Cart::count();
