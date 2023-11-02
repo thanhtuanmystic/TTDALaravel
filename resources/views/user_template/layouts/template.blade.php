@@ -1,10 +1,9 @@
 @php
     $categories = App\Models\Category::latest()->get();
-    $totalPrice = App\Models\Cart::sum('price');
-    $productCount = App\Models\Cart::count();
+    $totalPrice = App\Models\Cart::where('user_id', Auth::id())->sum('price');
+    $productCount = App\Models\Cart::where('user_id', Auth::id())->count();
     $idCheck = Auth::id();
     $userInfo = App\Models\User::where('id', $idCheck)->first();
-
 @endphp
 <!DOCTYPE html>
 <html lang="zxx">
@@ -112,7 +111,13 @@
                                 <a href="#"><i class="fa fa-heart"></i><span>1</span></a>
                                 <a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
                                     <span>{{ $productCount }}</span></a>
-                                <a href="">Tổng thanh toán <span>{{ $totalPrice }}</span></a>
+                                <a href="{{ route('addtocart') }}">Tổng thanh toán <span>
+                                        @if (Auth::check())
+                                            {{ $totalPrice }}
+                                        @else
+                                            0
+                                        @endif
+                                    </span></a>
                             </div>
                             <div class="header__top__right__auth">
                                 @if (!isset($idCheck))
@@ -143,11 +148,11 @@
                             <li><a href="#">Thời trang nam</a>
                             </li>
                             <li><a href="#">Thời trang nữ</a></li>
-                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="{{route('contact')}}">Liên hệ</a></li>
                         </ul>
                     </nav>
                 </div>
-               
+
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>

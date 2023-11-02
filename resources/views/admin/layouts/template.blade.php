@@ -139,24 +139,39 @@
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Orders</span>
+                        <span class="menu-header-text">Đơn hàng</span>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('pendingorder') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Pending Orders</div>
+                            <div data-i18n="Analytics">Đang chờ</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('completedorder') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Completed Orders</div>
+                            <div data-i18n="Analytics">Đã xác nhận</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('doneorder') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Đã giao</div>
                         </a>
                     </li>
                     <li class="menu-item">
                         <a href="{{ route('admindashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Cancel Orders</div>
+                        </a>
+                    </li>
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Liên hệ</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('admincontact') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Liên hệ</div>
                         </a>
                     </li>
                 </ul>

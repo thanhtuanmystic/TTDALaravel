@@ -32,6 +32,9 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/all-products', 'showAllProducts')->name('showallproducts');
     Route::post('/search-products', 'searchProduct')->name('searchproduct');
     Route::get('/new-release', 'newRelease')->name('newrelease');
+    Route::get('/contact', 'contact')->name('contact');
+    Route::post('/send-contact', 'sendContact')->name('sendcontact');
+
 
 });
 
@@ -54,12 +57,15 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 });
 
 
-
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/admin', 'index')->name('admindashboard');
     Route::get('/admin-login', 'adminLogin')->name('adminlogin');
     Route::post('/admin-login-post', 'adminLoginPost')->name('adminloginpost');
     Route::post('/admin-logout-post', 'adminLogout')->name('adminlogout');
+
+    // Liên hệ
+    Route::get('/admin-contact', 'adminContact')->name('admincontact');
+
 });
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/admin/all-category', 'index')->name('allcategory');
@@ -68,6 +74,8 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('/admin/edit-category/{id}', 'editCategory')->name('editcategory');
     Route::post('/admin/update-category', 'updateCategory')->name('updatecategory');
     Route::get('/admin/delete-category/{id}', 'deleteCategory')->name('deletecategory');
+
+    // Viết nhờ mã giảm giá
     Route::get('/admin/all-coupon', 'allCoupon')->name('allcoupon');
     Route::get('/admin/add-coupon', 'addCoupon')->name('addcoupon');
     Route::post('/admin/store-coupon', 'storeCoupon')->name('storecoupon');
@@ -98,7 +106,9 @@ Route::controller(ProductController::class)->group(function () {
 Route::controller(OrderController::class)->group(function () {
     Route::get('/admin/pending-order', 'pendingOrder')->name('pendingorder');
     Route::get('/admin/completed-order', 'completedOrder')->name('completedorder');
+    Route::get('/admin/done-order', 'doneOrder')->name('doneorder');
     Route::post('/admin/change-status', 'changeStatus')->name('changestatus');
+    Route::post('/admin/change-status-to-done', 'changeStatusToDone')->name('changestatustodone');
 });
 
 

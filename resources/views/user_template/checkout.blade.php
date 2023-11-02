@@ -29,33 +29,33 @@
                         <div class="col-lg-8 col-md-6">
                             <div class="checkout__input">
                                 <p>Họ và tên<span>*</span></p>
-                                <input type="text" name="fullname">
+                                <input required type="text" name="fullname">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Số điện thoại<span>*</span></p>
-                                        <input type="text" name="phone_number">
+                                        <input required type="text" name="phone_number">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text" name="email">
+                                        <input required type="text" name="email">
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text" name="address">
+                                <input required type="text" name="address">
                             </div>
                             <div class="checkout__input">
                                 <p>Quận/ Huyện<span>*</span></p>
-                                <input type="text" name="district">
+                                <input required type="text" name="district">
                             </div>
                             <div class="checkout__input">
                                 <p>Tỉnh/ Thành Phố<span>*</span></p>
-                                <input type="text" name="city">
+                                <input required type="text" name="city">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">

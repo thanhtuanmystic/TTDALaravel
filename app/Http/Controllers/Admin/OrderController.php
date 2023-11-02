@@ -19,6 +19,11 @@ class OrderController extends Controller
         $orders = Order::where('status', 'completed')->with('products')->get();
         return view('admin.completedorders', compact('orders'));
     }
+    public function doneOrder() {
+        $orders = Order::where('status', 'done')->with('products')->get();
+        return view('admin.doneorders', compact('orders'));
+
+    }   
     public function changeStatus(Request $request)
     {
         $id = $request->changestatus;
@@ -26,6 +31,14 @@ class OrderController extends Controller
             'status' => "completed"
         ]);
         return redirect()->route('pendingorder')->with('message', 'Đã xác nhận sản phẩm');
+    }
+    public function changeStatusToDone(Request $request)
+    {
+        $id = $request->changestatustodone;
+        Order::findOrFail($id)->update([
+            'status' => "done"
+        ]);
+        return redirect()->route('completedorder')->with('message', 'Đã xác nhận giao hàng thành công');
     }
 
 }

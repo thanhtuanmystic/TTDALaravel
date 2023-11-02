@@ -1,34 +1,60 @@
 @extends('user_template.layouts.user_profile_template')
 @section('profilecontent')
-    <h1>Pending Orders</h1>
-    @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
-    <table class="table">
-        <tr>            
-            <th>Tên sản phẩm</th>
-            <th>Ảnh sản phẩm</th>
-            <th>Price</th>
-        </tr>
-        @foreach ($pending_orders as $order)
-            @php
-                $product_name = App\Models\Product::where('id', $order->product_id)->value('product_name');
-                $img = App\Models\Product::where('id', $order->product_id)->value('product_img');
-            @endphp
+    <h2>Đơn hàng đang chờ</h2>
+    <style>
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+    </style>
+    <div class="cart-body">
+        <table class="table">
             <tr>
-                
-                <td>
-                    {{ $product_name }}
-                </td>
-                <td>
-                   <img class="pending_img" src=" {{ asset($img) }}" alt="">
-                </td>
-                <td>
-                    {{ $order->total_price }}
-                </td>
+
+                <th>Sản phẩm - Số lượng</th>
+
+                <th>Thanh toán</th>
+                <th>Phí ship</th>
+                <th>Tổng tiền</th>
             </tr>
-        @endforeach
-    </table>
+            @if ($orders->isNotEmpty())
+                @foreach ($orders as $order)
+                    <tr>
+                        <td>
+                            @if ($order->products->isNotEmpty())
+                                @foreach ($order->products as $product)
+                                    @php
+                                        $quantity = DB::table('order_product')
+                                            ->where('product_id', $product->id)
+                                            ->where('order_id', $order->id)
+                                            ->value('quantity');
+                                    @endphp
+                                    <ul>
+                                        <li>{{ $product->product_name }} - SL: {{ $quantity }}</li>
+                                    </ul>
+                                @endforeach
+                            @endif
+                        </td>
+
+                        <td>{{ $order->payment_method }}</td>
+                        <td> {{ $order->shipping_fee }}</td>
+                        <td> {{ $order->total_price }}</td>
+
+                    </tr>
+                @endforeach
+            @endif
+
+        </table>
+    </div>
 @endsection

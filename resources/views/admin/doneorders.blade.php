@@ -1,6 +1,6 @@
 @extends('admin.layouts.template')
 @section('page_title')
-    Đơn hàng đã xác nhận
+   Đơn hàng đã giao
 @endsection
 @section('content')
     <div class="container my-5">
@@ -11,7 +11,7 @@
         @endif
         <div class="card p-4">
             <div class="card-title">
-                <h2 class="text-center">Đơn hàng đã xác nhận</h2>
+                <h2 class="text-center">Đơn hàng đã giao thành công</h2>
             </div>
             <div class="cart-body">
                 <table class="table">
@@ -24,7 +24,6 @@
                         <th>Thanh toán</th>
                         <th>Phí ship</th>
                         <th>Trạng thái</th>
-                        <th>Action</th>
                     </tr>
                     @if ($orders->isNotEmpty())
                         @foreach ($orders as $order)
@@ -59,13 +58,7 @@
                                 <td>{{ $order->payment_method }}</td>
                                 <td> {{ $order->shipping_fee }}</td>
                                 <td>{{ $order->status }}</td>
-                                <td>
-                                    <form action="{{ route('changestatustodone') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="changestatustodone" value="{{ $order->id }}">
-                                        <button type="submit" class="btn btn-success">Xác nhận đã giao</button>
-                                    </form>
-                                </td>
+                               
                             </tr>
                         @endforeach
                     @endif

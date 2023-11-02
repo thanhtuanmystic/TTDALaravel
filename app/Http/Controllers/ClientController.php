@@ -165,19 +165,39 @@ class ClientController extends Controller
     {
         $userid = Auth::id();
         $userProfile = User::where('id', $userid)->first();
-        return view('user_template.userprofile', compact('userProfile'));
+        $orders = Order::where('status', 'done')->where('userid', Auth::id())->with('products')->get();
+        return view('user_template.userprofile', compact('userProfile', 'orders'));
     }
 
     public function pendingOrders()
     {
-        $pending_orders = Order::where('status', 'pending')->latest()->get();
-        return view('user_template.pendingorders', compact('pending_orders'));
+
+        $orders = Order::where('status', 'pending')->where('userid', Auth::id())->with('products')->get();
+        return view('user_template.pendingorders', compact('orders'));
     }
     public function history()
     {
-        return view('user_template.history');
+        $orders = Order::where('status', 'done')->where('userid', Auth::id())->with('products')->get();
+        return view('user_template.history', compact('orders'));
     }
-
+    public function contact()
+    {
+        return view('user_template.contact');
+    }
+    public function sendContact(Request $request)
+    {
+        $name = $request->contact_name;
+        $email = $request->contact_email;
+        $phone = $request->contact_phone;
+        $message = $request->contact_message;
+        DB::table('contact')->insert([
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'message' => $message
+        ]);
+        return redirect()->route('contact')->with('message','Chúng tớ đã nhận được lời nhắn của bạn');
+    }
     public function newRelease()
     {
         return view('user_template.newrelease');

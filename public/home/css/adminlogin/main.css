@@ -1,25 +1,7 @@
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
-@font-face {
-    font-family: Poppins-Regular;
-    src: url("../../fonts/adminlogin/poppins/Poppins-Regular.ttf");
-}
-
-@font-face {
-    font-family: Poppins-Bold;
-    src: url("../../fonts/adminlogin/poppins/Poppins-Bold.ttf");
-}
-
-@font-face {
-    font-family: Poppins-Medium;
-    src: url("../../fonts/adminlogin/poppins/Poppins-Medium.ttf");
-}
-
-@font-face {
-    font-family: Montserrat-Bold;
-    src: url("../../fonts/adminlogin/montserrat/Montserrat-Bold.ttf");
-}
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900&display=swap");
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
@@ -33,12 +15,12 @@
 body,
 html {
     height: 100%;
-    font-family: Poppins-Regular, sans-serif;
+font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 /*---------------------------------------------*/
 a {
-    font-family: Poppins-Regular;
+font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 14px;
     line-height: 1.7;
     color: #666666;
@@ -69,7 +51,7 @@ h6 {
 }
 
 p {
-    font-family: Poppins-Regular;
+font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 14px;
     line-height: 1.7;
     color: #666666;
@@ -168,14 +150,14 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ Utility ]*/
 .txt1 {
-    font-family: Poppins-Regular;
+font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 13px;
     line-height: 1.5;
     color: #999999;
 }
 
 .txt2 {
-    font-family: Poppins-Regular;
+font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 13px;
     line-height: 1.5;
     color: #666666;
@@ -209,7 +191,6 @@ iframe {
 }
 
 .wrap-login100 {
-    width: 960px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -240,7 +221,7 @@ iframe {
 }
 
 .login100-form-title {
-    font-family: Poppins-Bold;
+font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 24px;
     color: #333333;
     line-height: 1.2;
@@ -260,7 +241,7 @@ iframe {
 }
 
 .input100 {
-    font-family: Poppins-Medium;
+font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 15px;
     line-height: 1.5;
     color: #666666;
@@ -352,7 +333,7 @@ iframe {
 }
 
 .login100-form-btn {
-    font-family: Montserrat-Bold;
+font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 15px;
     line-height: 1.5;
     color: #fff;
@@ -442,7 +423,7 @@ iframe {
     right: 8px;
     pointer-events: none;
 
-    font-family: Poppins-Medium;
+font-family: 'Be Vietnam Pro', sans-serif;
     color: #c80000;
     font-size: 13px;
     line-height: 1.4;
@@ -459,7 +440,7 @@ iframe {
 
 .alert-validate::after {
     content: "\f06a";
-    font-family: FontAwesome;
+font-family: 'Be Vietnam Pro', sans-serif;
     display: block;
     position: absolute;
     color: #c80000;
