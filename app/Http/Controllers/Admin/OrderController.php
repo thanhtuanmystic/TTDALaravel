@@ -10,14 +10,14 @@ class OrderController extends Controller
 {
     public function pendingOrder()
     {
-        $pending_orders = Order::where("status", "pending")->latest()->get();
-        $orders = Order::with('products')->get();
-        return view('admin.pendingorders', compact('pending_orders','orders'));
+        $orders = Order::where('status', 'pending')->with('products')->get();
+        return view('admin.pendingorders', compact('orders'));
     }
     public function completedOrder()
     {
-        $completed_orders = Order::where("status", "completed")->latest()->get();
-        return view('admin.completedorders', compact('completed_orders'));
+
+        $orders = Order::where('status', 'completed')->with('products')->get();
+        return view('admin.completedorders', compact('orders'));
     }
     public function changeStatus(Request $request)
     {
