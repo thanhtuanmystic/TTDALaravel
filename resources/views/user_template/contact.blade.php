@@ -1,3 +1,5 @@
+@extends('user_template.layouts.template')
+@section('main-content')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,3 +101,4 @@
 </body>
 
 </html>
+@endsection

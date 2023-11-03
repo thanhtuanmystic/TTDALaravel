@@ -45,6 +45,12 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/shipping-address', 'getShippingAddress')->name('shippingaddress');
         Route::post('/add-shipping-address', 'goToCheckOut')->name('gotocheckout');
         Route::post('/place-order', 'placeOrder')->name('placeorder');
+
+        // vnpay
+        Route::post('/vnpay-payment', 'vnpayPayment')->name('vnpaypayment');
+        Route::get('/vnpay-payment-result', 'vnpayPaymentResult')->name('vnpaypaymentresult');
+
+        // user profile
         Route::get('/user-profile', 'userProfile')->name('userprofile');
         Route::get('/user-profile/pending-orders', 'pendingOrders')->name('pendingorders');
         Route::get('/user-profile/history', 'history')->name('history');

@@ -50,6 +50,7 @@
         </div>
 
         <div class="cart-body">
+            <h3 class="mb-4">Đơn hàng đã mua:</h3>
             <table class="table">
                 <tr>
                     <th>Sản phẩm - Số lượng</th>

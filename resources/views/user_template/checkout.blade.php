@@ -108,5 +108,10 @@
             </div>
         </div>
     </section>
+    <form action="{{ route('vnpaypayment') }}" method="POST">
+        @csrf
+        <input type="submit" value="Thanh toán vnpay" name="redirect">
+        <input type="hidden" name="vnpay_totalFinal" value="{{$totalFinal}}">
+    </form>
     <!-- Checkout Section End -->
 @endsection

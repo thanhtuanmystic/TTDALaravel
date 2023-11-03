@@ -73,15 +73,20 @@ class ClientController extends Controller
         $userid = Auth::id();
         $cart_items = Cart::where('user_id', $userid)->get();
         $discount_amount = $request->discount_amount_hidden;
-        $shipping_fee = 35000;
+        if ($request->total_final_hidden > 1000000) {
+            $shipping_fee = 0;
+        } else {
+            $shipping_fee = 35000;
+        }
+
         $totalFinal = $request->total_final_hidden - $shipping_fee;
+
         return view('user_template.checkout', compact('discount_amount', 'totalFinal', 'cart_items', 'shipping_fee'));
     }
 
 
     public function placeOrder(Request $request)
     {
-
         // $latestOrder = DB::table('orders')->where('id', '11')->get();
         $lastOrder = Order::latest('id')->first();
         if ($lastOrder) {
@@ -115,29 +120,91 @@ class ClientController extends Controller
         }
         return redirect()->route('pendingorders')->with('message', 'Đơn hàng của bạn đã được đặt thành công');
     }
-    // public function placeOrder(Request $request)
-    // {
+    public function vnpayPayment(Request $request)
+    {
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = "http://127.0.0.1:8000/vnpay-payment-result";
+        $vnp_TmnCode = "K8CIIPWU"; //Mã website tại VNPAY 
+        $vnp_HashSecret = "JWRXCXSWHRBBHVOOQARHPZSIKWLNQVLU"; //Chuỗi bí mật
 
-    //     $userid = Auth::id();
-    //     $cart_items = Cart::where('user_id', $userid)->get();
-    //     foreach ($cart_items as $item) {
-    //         Order::insert([
-    //             'userid' => $userid,
-    //             'shipping_fullname' => $request->fullname,
-    //             'shipping_phoneNumber' => $request->phone_number,
-    //             'shipping_email' => $request->email,
-    //             'shipping_address' => $request->address,
-    //             'shipping_district' => $request->district,
-    //             'shipping_city' => $request->city,
-    //             'product_id' => $item->product_id,
-    //             'quantity' => $item->quantity,
-    //             'total_price' => $item->price
-    //         ]);
-    //         $id = $item->id;
-    //         Cart::findOrFail($id)->delete();
-    //     }
-    //     return redirect()->route('pendingorders')->with('message', 'Đơn hàng của bạn đã được đặt thành công');
-    // }
+
+
+        $vnp_TxnRef = '8';
+        $vnp_OrderInfo = 'thanh toan don hang';
+        $vnp_OrderType = 'billpayment';
+        $vnp_Amount = $request->vnpay_totalFinal;
+        $vnp_Locale = 'vn';
+        $vnp_BankCode = 'NCB';
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        //Add Params of 2.0.1 Version
+        // $vnp_ExpireDate = $_POST['txtexpire'];
+
+
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_Amount" => $vnp_Amount,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_ReturnUrl" => $vnp_Returnurl,
+            "vnp_TxnRef" => $vnp_TxnRef,
+        );
+
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+        }
+
+        //var_dump($inputData);
+        ksort($inputData);
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_Url = $vnp_Url . "?" . $query;
+        if (isset($vnp_HashSecret)) {
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+        $returnData = array(
+            'code' => '00'
+            ,
+            'message' => 'success'
+            ,
+            'data' => $vnp_Url
+        );
+        if (isset($_POST['redirect'])) {
+            header('Location: ' . $vnp_Url);
+            die();
+        } else {
+            echo json_encode($returnData);
+        }
+        // vui lòng tham khảo thêm tại code demo
+    }
+    public function vnpayPaymentResult()
+    {
+        if (isset($_GET['vnp_Amount'])) {
+            dd($_GET['vnp_Amount']);
+        } else {
+            dd(999);
+        }
+    }
     public function searchProduct(Request $request)
     {
 
@@ -196,7 +263,7 @@ class ClientController extends Controller
             'phone' => $phone,
             'message' => $message
         ]);
-        return redirect()->route('contact')->with('message','Chúng tớ đã nhận được lời nhắn của bạn');
+        return redirect()->route('contact')->with('message', 'Chúng tớ đã nhận được lời nhắn của bạn');
     }
     public function newRelease()
     {

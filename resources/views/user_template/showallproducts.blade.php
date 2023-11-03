@@ -28,7 +28,9 @@
                             <h4>Danh mục</h4>
                             <ul>
                                 @foreach ($categories as $category)
-                                    <li><a href="{{ route('category', [$category->id, $category->slug]) }}">{{ $category->category_name }}</a></li>
+                                    <li><a
+                                            href="{{ route('category', [$category->id, $category->slug]) }}">{{ $category->category_name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -165,24 +167,29 @@
                                                 data-setbg="{{ asset($product->product_img) }}">
                                                 <div class="product__discount__percent">-20%</div>
                                                 <ul class="product__item__pic__hover">
-                                                    <form action="{{route('addproducttocart')}}" method="POST">
+                                                    <form action="{{ route('addproducttocart') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
-                                                        <input type="hidden" value="{{ $product->price }}" name="price">
+                                                        <input type="hidden" value="{{ $product->id }}"
+                                                            name="product_id">
+                                                        <input type="hidden" value="{{ $product->price }}"
+                                                            name="price">
                                                         <input type="hidden" value="1" name="quantity">
                                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                         <button type="submit" class="btn">
                                                             <i class="fa fa-shopping-cart"></i>
                                                         </button>
-                                                       </form>
+                                                    </form>
                                                 </ul>
                                             </div>
                                             <div class="product__discount__item__text">
-                                                <span>Dried Fruit</span>
-                                                <h5><a href="#">{{ $product->product_name }}</a></h5>
+                                                <span>{{ $product->product_subcategory_name }}</span>
+                                                <h5><a
+                                                        href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
+                                                </h5>
                                                 <div class="product__item__price">{{ $product->price }}
-                                                    <span>$36.00</span></div>
+                                                    <span>$36.00</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -209,10 +216,6 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
-                                <div class="filter__option">
-                                    <span class="icon_grid-2x2"></span>
-                                    <span class="icon_ul"></span>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -223,7 +226,7 @@
                                     <div class="product__item__pic set-bg"
                                         data-setbg="{{ asset($product->product_img) }}">
                                         <ul class="product__item__pic__hover">
-                                            <form action="{{route('addproducttocart')}}" method="POST">
+                                            <form action="{{ route('addproducttocart') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
                                                 <input type="hidden" value="{{ $product->price }}" name="price">
@@ -233,18 +236,18 @@
                                                 <button type="submit" class="btn">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </button>
-                                               </form>
+                                            </form>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="#">{{ $product->product_name }}</a></h6>
+                                        <h6><a
+                                                href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
+                                        </h6>
                                         <h5>{{ $product->price }}</h5>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                    
-
                     </div>
                     <style></style>
                     <div class="d-flex">
