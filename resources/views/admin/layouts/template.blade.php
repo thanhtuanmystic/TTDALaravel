@@ -174,6 +174,21 @@
                             <div data-i18n="Analytics">Liên hệ</div>
                         </a>
                     </li>
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Blog</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('adminblog') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Tất cả bài viết</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('addblog') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Thêm bài viết</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -307,7 +322,11 @@
     <script src=" {{ asset('dashboard/assets/vendor/libs/popper/popper.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/js/bootstrap.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-
+    <script src="{{ asset('home/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('blog_content_ckeditor_addblog');
+        CKEDITOR.replace('blog_content_ckeditor_editblog');
+    </script>
     <script src=" {{ asset('dashboard/assets/vendor/js/menu.js') }}"></script>
     <!-- endbuild -->
 

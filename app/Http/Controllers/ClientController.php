@@ -124,7 +124,7 @@ class ClientController extends Controller
     {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://127.0.0.1:8000/vnpay-payment-result";
-        $vnp_TmnCode = "K8CIIPWU"; //Mã website tại VNPAY 
+        $vnp_TmnCode = "K8CIIPWU"; //Mã website tại VNPAY
         $vnp_HashSecret = "JWRXCXSWHRBBHVOOQARHPZSIKWLNQVLU"; //Chuỗi bí mật
 
 
@@ -179,7 +179,7 @@ class ClientController extends Controller
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
         $returnData = array(

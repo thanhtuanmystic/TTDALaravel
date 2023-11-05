@@ -50,7 +50,7 @@
                                                     ->value('quantity');
                                             @endphp
                                             <ul>
-                                                <li>{{ $product->product_name }} - SL: {{ $quantity }}</li>
+                                                <li>{{ $product->product_name }} <br> SL: {{ $quantity }}</li>
                                             </ul>
                                         @endforeach
                                     @endif

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
@@ -68,11 +69,26 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('/admin-login', 'adminLogin')->name('adminlogin');
     Route::post('/admin-login-post', 'adminLoginPost')->name('adminloginpost');
     Route::post('/admin-logout-post', 'adminLogout')->name('adminlogout');
-
     // Liên hệ
     Route::get('/admin-contact', 'adminContact')->name('admincontact');
+});
+
+// blog
+Route::controller(BlogController::class)->group(function () {
+    // them sua xoa
+    Route::get('/admin-blog', 'adminBlog')->name('adminblog');
+    Route::get('/admin/add-blog', 'addBlog')->name('addblog');
+    Route::post('/admin/store-blog', 'storeBlog')->name('storeblog');
+    Route::get('/admin/edit-blog/{id}', 'editBlog')->name('editblog');
+    Route::post('/admin/update-blog', 'updateBlog')->name('updateblog');
+    Route::get('/admin/delete-blog/{id}', 'deleteBlog')->name('deleteblog');
+
+    // hien thi
+    Route::get('blog', 'allBlog')->name('allblog');
+    Route::get('blogdetail', 'blogDetail')->name('blogdetail');
 
 });
+
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/admin/all-category', 'index')->name('allcategory');
     Route::get('/admin/add-category', 'addCategory')->name('addcategory');
