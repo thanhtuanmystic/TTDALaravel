@@ -23,7 +23,7 @@
         <div class="container">
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form method="POST" action="{{ route('placeorder') }}">
+                <form id="checkout_info" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
@@ -83,7 +83,6 @@
                                 <input type="hidden" name="total_final_checkout" value="{{ $totalFinal }}">
                                 <div class="checkout__order__total">Phí giao hàng: <span>{{ $shipping_fee }}</span></div>
                                 <input type="hidden" name="shipping_fee_checkout" value="{{ $shipping_fee }}">
-
                                 <div class="checkout__order__total">Tổng thanh toán <span>{{ $totalFinal }}</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
@@ -99,8 +98,35 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <input type="submit" class="site-btn" value="Place Order">
+                                <input id="testvn" type="button" name="redirect" value="test vn">
+                                <script>
+                                    $('#testvn').on('click', function() {
+                                        // let form = document.createElement('form');
+                                        // form.setAttribute('method', 'POST');
+                                        // form.setAttribute('action', '{{ route('vnpaypayment') }}');
+                                        // document.body.appendChild(form);
+                                        // // Thêm input ẩn chứa giá trị CSRF token
+                                        // let csrfToken = document.createElement('input');
+                                        // csrfToken.setAttribute('type', 'hidden');
+                                        // csrfToken.setAttribute('name', '_token');
+                                        // csrfToken.setAttribute('value',
+                                        //     '{{ csrf_token() }}'); // Sử dụng blade template để lấy giá trị CSRF token
+                                        // form.appendChild(csrfToken);
+                                        // let redirect_input = document.createElement('input');
+                                        // redirect_input.setAttribute('name', 'redirect');
+                                        // form.appendChild(redirect_input);
+                                        // let vnpay_totalFinal = document.createElement('input');
+                                        // vnpay_totalFinal.setAttribute('name', 'vnpay_totalFinal')
+                                        // vnpay_totalFinal.setAttribute('value', {{ $totalFinal }})
+                                        // form.appendChild(vnpay_totalFinal);
+                                        // form.submit();
+                                        alert(1);
 
+                                        $("#checkout_info").setAttribute('action', '{{ route('vnpaypayment') }}');
+                                        $("#checkout_info").submit();
+                                    })
+                                </script>
+                                {{-- <input type="submit" class="site-btn" value="Place Order"> --}}
                             </div>
                         </div>
                     </div>
@@ -108,10 +134,11 @@
             </div>
         </div>
     </section>
+
     <form action="{{ route('vnpaypayment') }}" method="POST">
         @csrf
         <input type="submit" value="Thanh toán vnpay" name="redirect">
-        <input type="hidden" name="vnpay_totalFinal" value="{{$totalFinal}}">
+        <input type="hidden" name="vnpay_totalFinal" value="{{ $totalFinal }}">
     </form>
     <!-- Checkout Section End -->
 @endsection

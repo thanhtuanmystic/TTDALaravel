@@ -251,6 +251,7 @@
     <script src=" {{ asset('dashboard/assets/vendor/js/bootstrap.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <!-- Core JS -->
+    
     <script src="{{ asset('home/js/main.js') }}"></script>
 
     <script src="{{ asset('home/ckeditor/ckeditor.js') }}"></script>
@@ -272,7 +273,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
+   
 </body>
 
 </html>

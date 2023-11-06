@@ -79,7 +79,7 @@ class ClientController extends Controller
             $shipping_fee = 35000;
         }
 
-        $totalFinal = $request->total_final_hidden - $shipping_fee;
+        $totalFinal = $request->total_final_hidden + $shipping_fee;
 
         return view('user_template.checkout', compact('discount_amount', 'totalFinal', 'cart_items', 'shipping_fee'));
     }
@@ -126,19 +126,15 @@ class ClientController extends Controller
         $vnp_Returnurl = "http://127.0.0.1:8000/vnpay-payment-result";
         $vnp_TmnCode = "K8CIIPWU"; //Mã website tại VNPAY
         $vnp_HashSecret = "JWRXCXSWHRBBHVOOQARHPZSIKWLNQVLU"; //Chuỗi bí mật
-
-
-
         $vnp_TxnRef = '8';
         $vnp_OrderInfo = 'thanh toan don hang';
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = $request->vnpay_totalFinal;
+        $vnp_Amount = $request->vnpay_totalFinal * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         //Add Params of 2.0.1 Version
         // $vnp_ExpireDate = $_POST['txtexpire'];
-
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
