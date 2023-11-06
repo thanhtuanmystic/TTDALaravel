@@ -149,6 +149,7 @@
                             </li>
                             <li><a href="#">Thời trang nữ</a></li>
                             <li><a href="{{route('contact')}}">Liên hệ</a></li>
+                            <li><a href="{{route('allblog')}}">Blog</a></li>
                         </ul>
                     </nav>
                 </div>

@@ -99,5 +99,10 @@ class BlogController extends Controller
         $allblog = Blog::latest()->get();
         return view('user_template.allblog', compact('allblog'));
     }
+    public function singleBlog($id)
+    {
+        $blog = Blog::findOrFail($id);        
+        return view('user_template.blogdetail', compact('blog'));
+    }
 }
 

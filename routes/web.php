@@ -86,6 +86,7 @@ Route::controller(BlogController::class)->group(function () {
     // hien thi
     Route::get('blog', 'allBlog')->name('allblog');
     Route::get('blogdetail', 'blogDetail')->name('blogdetail');
+    Route::get('/blog-details/{id}/{slug}', 'singleBlog')->name('singleblog');
 
 });
 
