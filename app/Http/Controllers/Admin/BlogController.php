@@ -36,11 +36,19 @@ class BlogController extends Controller
     public function adminBlog()
     {
         $blogs = Blog::latest()->get();
-        return view("admin.admin_blog", compact("blogs"));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view("admin.admin_blog", compact("blogs"));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function addBlog()
     {
-        return view("admin.addblog");
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view("admin.addblog");
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function storeBlog(Request $request)
     {
@@ -51,8 +59,6 @@ class BlogController extends Controller
         $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         $request->blog_image->move(public_path('upload/blog'), $img_name);
         $img_url = 'upload/blog/' . $img_name;
-
-
         Blog::insert([
             'blog_title' => $request->blog_title,
             'blog_description' => $request->blog_description,
@@ -68,7 +74,11 @@ class BlogController extends Controller
     public function editBlog($id)
     {
         $blogInfo = Blog::findOrFail($id);
-        return view('admin.editblog', compact('blogInfo'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.editblog', compact('blogInfo'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+        
     }
 
     public function updateBlog(Request $request)

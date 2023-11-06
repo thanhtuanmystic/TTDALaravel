@@ -38,8 +38,13 @@ class DashboardController extends Controller
         $request->session()->forget('user'); // Xóa thông tin người dùng khỏi session
         return redirect()->route('admindashboard');
     }
-    public function adminContact(){
+    public function adminContact()
+    {
         $contact_data = DB::table('contact')->get();
-        return view('admin.admincontact', compact('contact_data'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.admincontact', compact('contact_data'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+
     }
 }

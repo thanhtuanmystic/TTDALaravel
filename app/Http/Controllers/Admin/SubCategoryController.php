@@ -37,12 +37,20 @@ class SubCategoryController extends Controller
     public function index()
     {
         $allsubcategories = Subcategory::latest()->get();
-        return view('admin.allsubcategory', compact('allsubcategories'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.allsubcategory', compact('allsubcategories'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+        
     }
     public function addSubCategory()
     {
         $categories = Category::latest()->get();
-        return view('admin.addsubcategory', compact('categories'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.addsubcategory', compact('categories'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function storeSubCategory(Request $request)
     {
@@ -64,7 +72,11 @@ class SubCategoryController extends Controller
     public function editSubCategory($id)
     {
         $subcateinfo = Subcategory::findOrFail($id);
-        return view('admin.editsubcategory', compact('subcateinfo'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.editsubcategory', compact('subcateinfo'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function updateSubCategory(Request $request)
     {

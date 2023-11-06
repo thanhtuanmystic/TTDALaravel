@@ -11,17 +11,29 @@ class OrderController extends Controller
     public function pendingOrder()
     {
         $orders = Order::where('status', 'pending')->with('products')->get();
-        return view('admin.pendingorders', compact('orders'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.pendingorders', compact('orders'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function completedOrder()
     {
 
         $orders = Order::where('status', 'completed')->with('products')->get();
-        return view('admin.completedorders', compact('orders'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.completedorders', compact('orders'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function doneOrder() {
         $orders = Order::where('status', 'done')->with('products')->get();
-        return view('admin.doneorders', compact('orders'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.doneorders', compact('orders'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+        
 
     }   
     public function changeStatus(Request $request)

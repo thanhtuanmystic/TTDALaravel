@@ -37,13 +37,21 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->get();
-        return view('admin.allproducts', compact('products'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.allproducts', compact('products'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function addProduct()
     {
         $categories = Category::latest()->get();
         $subcategories = Subcategory::latest()->get();
-        return view('admin.addproduct', compact('categories', 'subcategories'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.addproduct', compact('categories', 'subcategories'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+        
     }
     public function storeProduct(Request $request)
     {
@@ -89,7 +97,11 @@ class ProductController extends Controller
     public function editProductImg($id)
     {
         $productinfo = Product::findOrFail($id);
-        return view('admin.editproductimg', compact('productinfo'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.editproductimg', compact('productinfo'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function updateProductImg(Request $request)
     {
@@ -110,7 +122,11 @@ class ProductController extends Controller
     public function editProduct($id)
     {
         $productinfo = Product::findOrFail($id);
-        return view('admin.editproduct', compact('productinfo'));
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.editproduct', compact('productinfo'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+       
     }
     public function updateProduct(Request $request)
     {
