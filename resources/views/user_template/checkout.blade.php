@@ -23,39 +23,39 @@
         <div class="container">
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form id="checkout_info" method="POST">
+                <form action="{{route('placeorder')}}" id="checkout_info" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="checkout__input">
                                 <p>Họ và tên<span>*</span></p>
-                                <input required type="text" name="fullname">
+                                <input required type="text" id="fullname" name="fullname">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Số điện thoại<span>*</span></p>
-                                        <input required type="text" name="phone_number">
+                                        <input required type="text" id="phone_number" name="phone_number">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input required type="text" name="email">
+                                        <input required type="text" id="email" name="email">
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input required type="text" name="address">
+                                <input required type="text" id="address" name="address">
                             </div>
                             <div class="checkout__input">
                                 <p>Quận/ Huyện<span>*</span></p>
-                                <input required type="text" name="district">
+                                <input required type="text" id="district" name="district">
                             </div>
                             <div class="checkout__input">
                                 <p>Tỉnh/ Thành Phố<span>*</span></p>
-                                <input required type="text" name="city">
+                                <input required type="text" id="city" name="city">
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
@@ -84,49 +84,9 @@
                                 <div class="checkout__order__total">Phí giao hàng: <span>{{ $shipping_fee }}</span></div>
                                 <input type="hidden" name="shipping_fee_checkout" value="{{ $shipping_fee }}">
                                 <div class="checkout__order__total">Tổng thanh toán <span>{{ $totalFinal }}</span></div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="payment">
-                                        Check Payment
-                                        <input type="checkbox" id="payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="checkout__input__checkbox">
-                                    <label for="paypal">
-                                        Paypal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <input id="testvn" type="button" name="redirect" value="test vn">
-                                <script>
-                                    $('#testvn').on('click', function() {
-                                        // let form = document.createElement('form');
-                                        // form.setAttribute('method', 'POST');
-                                        // form.setAttribute('action', '{{ route('vnpaypayment') }}');
-                                        // document.body.appendChild(form);
-                                        // // Thêm input ẩn chứa giá trị CSRF token
-                                        // let csrfToken = document.createElement('input');
-                                        // csrfToken.setAttribute('type', 'hidden');
-                                        // csrfToken.setAttribute('name', '_token');
-                                        // csrfToken.setAttribute('value',
-                                        //     '{{ csrf_token() }}'); // Sử dụng blade template để lấy giá trị CSRF token
-                                        // form.appendChild(csrfToken);
-                                        // let redirect_input = document.createElement('input');
-                                        // redirect_input.setAttribute('name', 'redirect');
-                                        // form.appendChild(redirect_input);
-                                        // let vnpay_totalFinal = document.createElement('input');
-                                        // vnpay_totalFinal.setAttribute('name', 'vnpay_totalFinal')
-                                        // vnpay_totalFinal.setAttribute('value', {{ $totalFinal }})
-                                        // form.appendChild(vnpay_totalFinal);
-                                        // form.submit();
-                                        alert(1);
-
-                                        $("#checkout_info").setAttribute('action', '{{ route('vnpaypayment') }}');
-                                        $("#checkout_info").submit();
-                                    })
-                                </script>
-                                {{-- <input type="submit" class="site-btn" value="Place Order"> --}}
+                                <div>Phương thức thanh toán</div>
+                                <button type="submit" id="code_btn" name="button" value="placeorder">COD</button>
+                                <button type="submit" id="vnpay_btn" name="button" value="vnpay">VNPAY</button>
                             </div>
                         </div>
                     </div>
@@ -134,11 +94,11 @@
             </div>
         </div>
     </section>
-
-    <form action="{{ route('vnpaypayment') }}" method="POST">
+  
+    {{-- <form action="{{ route('vnpaypayment') }}" method="POST">
         @csrf
         <input type="submit" value="Thanh toán vnpay" name="redirect">
         <input type="hidden" name="vnpay_totalFinal" value="{{ $totalFinal }}">
-    </form>
+    </form> --}}
     <!-- Checkout Section End -->
 @endsection

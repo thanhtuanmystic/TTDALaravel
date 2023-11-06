@@ -49,6 +49,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
         // vnpay
         Route::post('/vnpay-payment', 'vnpayPayment')->name('vnpaypayment');
+        Route::get('/vnpay-check', 'vnpayCheck')->name('vnpaycheck');
 
         // user profile
         Route::get('/user-profile', 'userProfile')->name('userprofile');
