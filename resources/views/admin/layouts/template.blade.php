@@ -1,3 +1,6 @@
+@php
+    $currentRoute = \Request::route()->getName();
+@endphp
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
     data-assets-path=" {{ asset('dashboard/assets/') }}" data-template="vertical-menu-template-free">
@@ -57,7 +60,6 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
-
                         <span class="app-brand-text demo menu-text fw-bolder ms-2">Dream Clothing</span>
                     </a>
 
@@ -68,125 +70,124 @@
                 </div>
 
                 <div class="menu-inner-shadow"></div>
-
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
+                    <li class="menu-item {{ $currentRoute === 'admindashboard' ? 'active' : '' }}">
                         <a href="{{ route('admindashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
+                            <div>Dashboard</div>
                         </a>
                     </li>
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Danh mục</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'addcategory' ? 'active' : '' }}">
                         <a href="{{ route('addcategory') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Thêm danh mục</div>
+                            <i class="menu-icon bx bxs-category"></i>
+                            <div>Thêm danh mục</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'allcategory' ? 'active' : '' }}">
                         <a href="{{ route('allcategory') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Tất cả danh mục</div>
+                            <i class="menu-icon bx bxs-category"></i>
+                            <div>Tất cả danh mục</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Danh mục con</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'addsubcategory' ? 'active' : '' }}">
                         <a href="{{ route('addsubcategory') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Thêm danh mục con</div>
+                            <i class="menu-icon bx bx-category"></i>
+                            <div>Thêm danh mục con</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'allsubcategory' ? 'active' : '' }}">
                         <a href="{{ route('allsubcategory') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Tất cả danh mục con</div>
+                            <i class="menu-icon bx bx-category"></i>
+                            <div>Tất cả danh mục con</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Sản phẩm</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'addproduct' ? 'active' : '' }}">
                         <a href="{{ route('addproduct') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Thêm sản phẩm</div>
+                            <i class="menu-icon bx bxl-product-hunt"></i>
+                            <div>Thêm sản phẩm</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'allproducts' ? 'active' : '' }}">
                         <a href="{{ route('allproducts') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Tất cả sản phẩm</div>
+                            <i class="menu-icon bx bxl-product-hunt"></i>
+                            <div>Tất cả sản phẩm</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Mã giảm giá</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'addcoupon' ? 'active' : '' }}">
                         <a href="{{ route('addcoupon') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Thêm mã giảm giá</div>
+                            <i class="menu-icon  bx bxs-discount"></i>
+                            <div>Thêm mã giảm giá</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'allcoupon' ? 'active' : '' }}">
                         <a href="{{ route('allcoupon') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Tất cả mã giảm giá</div>
+                            <i class="menu-icon  bx bxs-discount"></i>
+                            <div>Tất cả mã giảm giá</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Đơn hàng</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'pendingorder' ? 'active' : '' }}">
                         <a href="{{ route('pendingorder') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Đang chờ</div>
+                            <i class="menu-icon bx bxl-shopify"></i>
+                            <div>Đang chờ</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'completedorder' ? 'active' : '' }}">
                         <a href="{{ route('completedorder') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Đã xác nhận</div>
+                            <i class="menu-icon bx bxl-shopify"></i>
+                            <div>Đã xác nhận</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'doneorder' ? 'active' : '' }}">
                         <a href="{{ route('doneorder') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Đã giao</div>
+                            <i class="menu-icon bx bxl-shopify"></i>
+                            <div>Đã giao</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'cancelorder' ? 'active' : '' }}">
                         <a href="{{ route('admindashboard') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Cancel Orders</div>
+                            <i class="menu-icon bx bxl-shopify"></i>
+                            <div>Cancel Orders</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Liên hệ</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'admincontact' ? 'active' : '' }}">
                         <a href="{{ route('admincontact') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Liên hệ</div>
+                            <i class='menu-icon bx bxs-contact'></i>
+                            <div>Liên hệ</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Blog</span>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'adminblog' ? 'active' : '' }}">
                         <a href="{{ route('adminblog') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Tất cả bài viết</div>
+                            <i class='menu-icon bx bxl-blogger'></i>
+                            <div>Tất cả bài viết</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {{ $currentRoute === 'addblog' ? 'active' : '' }}">
                         <a href="{{ route('addblog') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Thêm bài viết</div>
+                            <i class="menu-icon bx bxs-edit-alt"></i>
+                            <div>Thêm bài viết</div>
                         </a>
                     </li>
                 </ul>
@@ -219,79 +220,11 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
                             <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+                                <form action="{{ route('adminlogout') }}" method="POST">
+                                    @csrf
+                                    <input type="submit" value="Đăng xuất">
+                                </form>
                             </li>
-
-                            <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                    data-bs-toggle="dropdown">
-                                    <div class="avatar avatar-online">
-                                        <img src=" {{ asset('dashboard/assets/img/avatars/1.png') }}" alt
-                                            class="w-px-40 h-auto rounded-circle" />
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <div class="d-flex">
-                                                <div class="flex-shrink-0 me-3">
-                                                    <div class="avatar avatar-online">
-                                                        <img src=" {{ asset('dashboard/assets/img/avatars/1.png') }}"
-                                                            alt class="w-px-40 h-auto rounded-circle" />
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-cog me-2"></i>
-                                            <span class="align-middle">Settings</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                                <span class="flex-grow-1 align-middle">Billing</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <form action="{{ route('adminlogout') }}" method="POST">
-                                            @csrf
-                                            <a class="dropdown-item" href="auth-login-basic.html">
-                                                <i class="bx bx-power-off me-2"></i>
-                                                <span class="align-middle">Log Out</span>
-                                            </a>
-                                            <button type="submit" value="logout"></button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!--/ User -->
                         </ul>
                     </div>
                 </nav>
@@ -312,16 +245,14 @@
     </div>
     <!-- / Layout wrapper -->
 
-
-
-    <!-- Core JS -->
-    <script src="{{ asset('home/js/main.js') }}"></script>
-
     <!-- build:js assets/vendor/js/core.js -->
     <script src=" {{ asset('dashboard/assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/libs/popper/popper.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/js/bootstrap.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <!-- Core JS -->
+    <script src="{{ asset('home/js/main.js') }}"></script>
+
     <script src="{{ asset('home/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('blog_content_ckeditor_addblog');
@@ -341,6 +272,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </body>
 
 </html>
