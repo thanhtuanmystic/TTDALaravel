@@ -4,6 +4,7 @@
     $productCount = App\Models\Cart::where('user_id', Auth::id())->count();
     $idCheck = Auth::id();
     $userInfo = App\Models\User::where('id', $idCheck)->first();
+    $currentRoute = \Request::route()->getName();
 @endphp
 <!DOCTYPE html>
 <html lang="zxx">
@@ -111,7 +112,7 @@
                                 <a href="#"><i class="fa fa-heart"></i><span>1</span></a>
                                 <a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
                                     <span>{{ $productCount }}</span></a>
-                                <a href="{{ route('addtocart') }}">Tổng thanh toán <span>
+                                <a href="{{ route('addtocart') }}">Tổng thanh toán: <span>
                                         @if (Auth::check())
                                             {{ $totalPrice }}
                                         @else
@@ -143,17 +144,15 @@
                 <div class="col-lg-9">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
-                            <li><a href="{{ route('showallproducts') }}">Sản phẩm</a></li>
-                            <li><a href="#">Thời trang nam</a>
-                            </li>
-                            <li><a href="#">Thời trang nữ</a></li>
-                            <li><a href="{{route('contact')}}">Liên hệ</a></li>
-                            <li><a href="{{route('allblog')}}">Blog</a></li>
+                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Trang chủ</a></li>
+                            <li class="{{ $currentRoute === 'showallproducts' ? 'active' : '' }}"><a href="{{ route('showallproducts') }}">Sản phẩm</a></li>
+                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang nam</a></li>
+                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang nữ</a></li>
+                            <li class="{{ $currentRoute === 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Liên hệ</a></li>
+                            <li class="{{ $currentRoute === 'allblog' ? 'active' : '' }}"><a href="{{ route('allblog') }}">Blog</a></li>
                         </ul>
                     </nav>
                 </div>
-
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
