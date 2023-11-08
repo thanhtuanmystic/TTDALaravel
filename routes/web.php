@@ -30,12 +30,17 @@ Route::controller(HomeController::class)->group(function () {
 Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'categoryPage')->name('category');
     Route::get('/product-details/{id}/{slug}', 'singleProduct')->name('singleproduct');
+    // show san pham trang san pham
     Route::get('/all-products', 'showAllProducts')->name('showallproducts');
+    // loc san pham trang san pham
+    Route::post('/sort-by', 'sortBy')->name('sortby');
+
+
+    // search
     Route::post('/search-products', 'searchProduct')->name('searchproduct');
     Route::get('/new-release', 'newRelease')->name('newrelease');
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/send-contact', 'sendContact')->name('sendcontact');
-
 
 });
 

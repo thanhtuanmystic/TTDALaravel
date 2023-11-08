@@ -198,18 +198,88 @@
                             </div>
                         </div>
                     </div>
+                    <style>
+                        #sort-by {
+                            display: block !important;
+                        }
+
+                        .nice-select {
+                            display: none !important;
+                        }
+
+                        .filter__sort {
+                            display: flex;
+                            gap: 1rem;
+                        }
+                    </style>
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
                                     <span>Sort By</span>
                                     <select id="sort-by">
-                                        <option value="">Default</option>
+                                        <option value="dafault">Default</option>
                                         <option value="name">Tên</option>
                                         <option value="price">Giá</option>
                                     </select>
                                 </div>
                             </div>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#sort-by').on('change', function(e) {
+                                        let sort_by = $('#sort-by').val();
+                                        $.ajax({
+                                            url: "{{ route('sortby') }}",
+                                            method: "POST",
+                                            data: {
+                                                sort_by: sort_by,
+                                                _token: '{{ csrf_token() }}'
+                                            },
+                                            dataType: 'json',
+                                            success: function(data) {
+                                                if (data.success) {
+                                                    listProducts = data.listProducts;
+                                                    $("#testdata").html("")
+                                                    listProducts.forEach(product => {
+                                                        var htmldata = `                                                     
+                                                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                                                            <div class="product__item">
+                                                                                <div class="product__item__pic set-bg" style="background-image: url(&quot;${product['product_img']}&quot;);"
+                                                                                    data-setbg="${product['product_img']}">
+                                                                                    <ul class="product__item__pic__hover">
+                                                                                        <form action="{{ route('addproducttocart') }}" method="POST">
+                                                                                            @csrf
+                                                                                            <input type="hidden" value="${product['product_id']}" name="${product['product_id']}">
+                                                                                            <input type="hidden" value="${product['product_price']}}" name="price">
+                                                                                            <input type="hidden" value="1" name="quantity">
+                                                                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                                                            <button type="submit" class="btn">
+                                                                                                <i class="fa fa-shopping-cart"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <div class="product__item__text">
+                                                                                    <h6><a
+                                                                                            href="">${product['product_name']}</a>
+                                                                                    </h6>
+                                                                                    <h5>${product['price']}</h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>`;
+                                                        $("#testdata").append(htmldata);
+                                                    });
+
+                                                } else {
+                                                    alert("error");
+                                                }
+
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
                                     <h6><span>{{ $productCount }}</span> sản phẩm được tìm thấy</h6>
@@ -219,7 +289,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="testdata">
                         @foreach ($allproducts as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
@@ -250,9 +320,9 @@
                         @endforeach
                     </div>
                     <style></style>
-                    <div class="d-flex">
+                    {{-- <div class="d-flex">
                         {!! $allproducts->links() !!}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -172,6 +172,17 @@ class ClientController extends Controller
 
     }
 
+    public function sortBy(Request $request)
+    {
+        if ($request->sort_by == 'name') {
+            $listProducts = Product::orderBy('product_name','desc')->get();
+            return response()->json(['success' => true, 'listProducts' => $listProducts]);
+        }
+        if ($request->sort_by == 'price') {
+            $listProducts = Product::orderBy('price','desc')->get();
+            return response()->json(['success' => true, 'listProducts' => $listProducts]);
+        }
+    }
     public function searchProduct(Request $request)
     {
 
