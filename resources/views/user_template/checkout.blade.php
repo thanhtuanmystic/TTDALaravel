@@ -22,7 +22,7 @@
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
-                <h4>Billing Details</h4>
+                <h4>Thông tin thanh toán</h4>
                 <form action="{{route('placeorder')}}" id="checkout_info" method="POST">
                     @csrf
                     <div class="row">

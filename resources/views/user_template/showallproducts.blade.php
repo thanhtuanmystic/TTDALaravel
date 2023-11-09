@@ -22,7 +22,7 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-5">
+                {{-- <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
                             <h4>Danh mục</h4>
@@ -152,8 +152,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-9 col-md-7">
+                </div> --}}
+                <div class="col-lg-12 col-md-12">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
                             <h2>Giảm giá</h2>
@@ -216,11 +216,12 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
-                                    <span>Sort By</span>
+                                    {{-- <span>Sắp xếp theo</span> --}}
                                     <select id="sort-by">
-                                        <option value="dafault">Default</option>
+                                        <option value="dafault">Sắp xếp</option>
                                         <option value="name">Tên</option>
-                                        <option value="price">Giá</option>
+                                        <option value="price-hightolow">Giá cao xuống thấp</option>
+                                        <option value="price-lowtohigh">Giá thấp đến cao</option>
                                     </select>
                                 </div>
                             </div>
@@ -242,16 +243,16 @@
                                                     $("#testdata").html("")
                                                     listProducts.forEach(product => {
                                                         var htmldata = `                                                     
-                                                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                                                        <div class="col-lg-3 col-md-6 col-sm-6">
                                                                             <div class="product__item">
                                                                                 <div class="product__item__pic set-bg" style="background-image: url(&quot;${product['product_img']}&quot;);"
                                                                                     data-setbg="${product['product_img']}">
                                                                                     <ul class="product__item__pic__hover">
                                                                                         <form action="{{ route('addproducttocart') }}" method="POST">
                                                                                             @csrf
-                                                                                            <input type="hidden" value="${product['product_id']}" name="${product['product_id']}">
-                                                                                            <input type="hidden" value="${product['product_price']}}" name="price">
-                                                                                            <input type="hidden" value="1" name="quantity">
+                                                                                            <input type="hidden" value="${product['id']}" name="product_id">
+                                                                                            <input type="hidden" value="${product['price']}" name="price">
+                                                                                            <input type="hidden" value="${1}" name="quantity">
                                                                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                                                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                                                             <button type="submit" class="btn">
@@ -291,7 +292,7 @@
                     </div>
                     <div class="row" id="testdata">
                         @foreach ($allproducts as $product)
-                            <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg"
                                         data-setbg="{{ asset($product->product_img) }}">

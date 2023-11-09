@@ -47,9 +47,15 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="{{route('addtocart')}}"><i class="fa fa-shopping-bag"></i> <span>{{ $productCount }}</span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">item: <span>
+                    @if (Auth::check())
+                        {{ $totalPrice }}
+                    @else
+                        0
+                    @endif
+                </span></div>
         </div>
         <div class="humberger__menu__widget">
 
@@ -63,18 +69,18 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
-                <li><a href="{{ route('showallproducts') }}">Shop</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
+                <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Trang chủ</a>
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li class="{{ $currentRoute === 'showallproducts' ? 'active' : '' }}"><a
+                        href="{{ route('showallproducts') }}">Sản phẩm</a></li>
+                <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang
+                        nam</a></li>
+                <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang
+                        nữ</a></li>
+                <li class="{{ $currentRoute === 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Liên
+                        hệ</a></li>
+                <li class="{{ $currentRoute === 'allblog' ? 'active' : '' }}"><a
+                        href="{{ route('allblog') }}">Blog</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -86,8 +92,8 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> dreamclothing@gmail.com</li>
+                <li>Miễn phí vận chuyển cho tất cả các đơn hàng có giá trị từ 1.000.000 vnd</li>
             </ul>
         </div>
     </div>
@@ -101,7 +107,7 @@
                     <div class="col-lg-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> softdreams@gmail.com</li>
+                                <li><i class="fa fa-envelope"></i> dreamclothing@gmail.com</li>
                                 <li>Free Ship cho tất cả các đơn hàng từ 1 triệu đồng</li>
                             </ul>
                         </div>
@@ -144,12 +150,18 @@
                 <div class="col-lg-9">
                     <nav class="header__menu">
                         <ul>
-                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Trang chủ</a></li>
-                            <li class="{{ $currentRoute === 'showallproducts' ? 'active' : '' }}"><a href="{{ route('showallproducts') }}">Sản phẩm</a></li>
-                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang nam</a></li>
-                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang nữ</a></li>
-                            <li class="{{ $currentRoute === 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Liên hệ</a></li>
-                            <li class="{{ $currentRoute === 'allblog' ? 'active' : '' }}"><a href="{{ route('allblog') }}">Blog</a></li>
+                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a
+                                    href="{{ route('home') }}">Trang chủ</a></li>
+                            <li class="{{ $currentRoute === 'showallproducts' ? 'active' : '' }}"><a
+                                    href="{{ route('showallproducts') }}">Sản phẩm</a></li>
+                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang
+                                    nam</a></li>
+                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang
+                                    nữ</a></li>
+                            <li class="{{ $currentRoute === 'contact' ? 'active' : '' }}"><a
+                                    href="{{ route('contact') }}">Liên hệ</a></li>
+                            <li class="{{ $currentRoute === 'allblog' ? 'active' : '' }}"><a
+                                    href="{{ route('allblog') }}">Blog</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -224,7 +236,7 @@
                         <ul>
                             <li>Địa chỉ: Thị trấn Lập Thạch, huyện Lập Thạch, tỉnh Vĩnh Phúc</li>
                             <li>SĐT: 0977686868</li>
-                            <li>Email: softdreams@gmail.com</li>
+                            <li>Email: dreamclothing@gmail.com</li>
                         </ul>
                     </div>
                 </div>
