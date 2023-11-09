@@ -45,7 +45,7 @@
         </form>
         <div class="customer-ranking">
             <h3 class="mb-4">Xếp hạng thành viên:</h3>
-            <h4>Member</h4>
+            <h4>{{$rank}}</h4>
             <p>Bạn sẽ tăng hạng thành viên khi mua thêm 100000</p>
         </div>
 

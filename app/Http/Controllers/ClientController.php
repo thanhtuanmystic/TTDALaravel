@@ -73,9 +73,10 @@ class ClientController extends Controller
     public function goToCheckOut(Request $request)
     {
         $userid = Auth::id();
+        $rank = User::where('id', $userid)->first()->rank;
         $cart_items = Cart::where('user_id', $userid)->get();
         $discount_amount = $request->discount_amount_hidden;
-        if ($request->total_final_hidden > 1000000) {
+        if ($request->total_final_hidden > 1000000 || $rank == "VIP" || $rank == "VVIP") {
             $shipping_fee = 0;
         } else {
             $shipping_fee = 35000;
@@ -219,7 +220,14 @@ class ClientController extends Controller
         $userid = Auth::id();
         $userProfile = User::where('id', $userid)->first();
         $orders = Order::where('status', 'done')->where('userid', Auth::id())->with('products')->get();
-        return view('user_template.userprofile', compact('userProfile', 'orders'));
+        $checkTotalPriceOfUser = $orders->sum('total_price');
+        if ($checkTotalPriceOfUser >= 1000000) {
+            User::findOrFail($userid)->update([
+                'rank' => "VIP",
+            ]);
+        }
+        $rank = $userProfile->rank;
+        return view('user_template.userprofile', compact('userProfile', 'orders', 'rank'));
     }
 
     public function pendingOrders()
