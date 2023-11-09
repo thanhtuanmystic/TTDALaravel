@@ -174,12 +174,20 @@ class ClientController extends Controller
 
     public function sortBy(Request $request)
     {
-        if ($request->sort_by == 'name') {
-            $listProducts = Product::orderBy('product_name','desc')->get();
+        if ($request->sort_by == 'dafault') {
+            $listProducts = Product::orderBy('id', 'desc')->get();
             return response()->json(['success' => true, 'listProducts' => $listProducts]);
         }
-        if ($request->sort_by == 'price') {
-            $listProducts = Product::orderBy('price','desc')->get();
+        if ($request->sort_by == 'name') {
+            $listProducts = Product::orderBy('product_name', 'desc')->get();
+            return response()->json(['success' => true, 'listProducts' => $listProducts]);
+        }
+        if ($request->sort_by == 'price-hightolow') {
+            $listProducts = Product::orderBy('price', 'desc')->get();
+            return response()->json(['success' => true, 'listProducts' => $listProducts]);
+        }
+        if ($request->sort_by == 'price-lowtohigh') {
+            $listProducts = Product::orderBy('price', 'asc')->get();
             return response()->json(['success' => true, 'listProducts' => $listProducts]);
         }
     }
