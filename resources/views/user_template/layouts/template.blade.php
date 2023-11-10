@@ -47,7 +47,8 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="{{route('addtocart')}}"><i class="fa fa-shopping-bag"></i> <span>{{ $productCount }}</span></a></li>
+                <li><a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
+                        <span>{{ $productCount }}</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>
                     @if (Auth::check())
@@ -298,6 +299,12 @@
     <script src="{{ asset('home/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('home/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('home/js/main.js') }}"></script>
+    <script src="{{ asset('home/js/simple.money.format.js') }}"></script>
+    <script>
+        $('.formatMoney').simpleMoneyFormat();
+        $('.formatMoneyy').simpleMoneyFormat();
+    </script>
+
     <script></script>
 
 </body>

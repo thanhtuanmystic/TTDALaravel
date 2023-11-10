@@ -51,7 +51,7 @@
                                 <h6><a
                                         href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
                                 </h6>
-                                <h5>{{ $product->price }}</h5>
+                                <h5 class="formatMoney">{{ $product->price }}</h5>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $product->product_name }}</h6>
-                                            <span>{{ $product->price }}</span>
+                                            <span class="formatMoney">{{ $product->price }}</span>
                                         </div>
                                     </a>
                                 @endforeach
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $product->product_name }}</h6>
-                                            <span>{{ $product->price }}</span>
+                                            <span class="formatMoney">{{ $product->price }}</span>
                                         </div>
                                     </a>
                                 @endforeach
@@ -144,7 +144,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $product->product_name }}</h6>
-                                            <span>{{ $product->price }}</span>
+                                            <span class="formatMoney">{{ $product->price }}</span>
                                         </div>
                                     </a>
                                 @endforeach
@@ -165,7 +165,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $product->product_name }}</h6>
-                                            <span>{{ $product->price }}</span>
+                                            <span class="formatMoney">{{ $product->price }}</span>
                                         </div>
                                     </a>
                                 @endforeach
@@ -179,7 +179,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>{{ $product->product_name }}</h6>
-                                            <span>{{ $product->price }}</span>
+                                            <span class="formatMoney">{{ $product->price }}</span>
                                         </div>
                                     </a>
                                 @endforeach

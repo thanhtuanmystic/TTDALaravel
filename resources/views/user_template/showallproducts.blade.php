@@ -169,10 +169,8 @@
                                                 <ul class="product__item__pic__hover">
                                                     <form action="{{ route('addproducttocart') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" value="{{ $product->id }}"
-                                                            name="product_id">
-                                                        <input type="hidden" value="{{ $product->price }}"
-                                                            name="price">
+                                                        <input type="hidden" value="{{ $product->id }}" name="product_id">
+                                                        <input type="hidden" value="{{ $product->price }}" name="price">
                                                         <input type="hidden" value="1" name="quantity">
                                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -187,8 +185,9 @@
                                                 <h5><a
                                                         href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
                                                 </h5>
-                                                <div class="product__item__price">{{ $product->price }}
-                                                    <span>$36.00</span>
+                                                <div class="product__item__price">
+                                                    <p class="formatMoney">{{ $product->price }}</p>
+                                                    <span class="formatMoney">{{ $product->price }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -241,17 +240,17 @@
                                                 if (data.success) {
                                                     listProducts = data.listProducts;
                                                     $("#testdata").html("")
-                                                    listProducts.forEach(product => {
+                                                    listProducts.forEach(product => {                                                       
                                                         var htmldata = `                                                     
                                                                         <div class="col-lg-3 col-md-6 col-sm-6">
                                                                             <div class="product__item">
-                                                                                <div class="product__item__pic set-bg" style="background-image: url(&quot;${product['product_img']}&quot;);"
-                                                                                    data-setbg="${product['product_img']}">
+                                                                                <div class="product__item__pic set-bg" style="background-image: url(&quot;${product.product_img}&quot;);"
+                                                                                    data-setbg="${product.product_img}">
                                                                                     <ul class="product__item__pic__hover">
                                                                                         <form action="{{ route('addproducttocart') }}" method="POST">
                                                                                             @csrf
-                                                                                            <input type="hidden" value="${product['id']}" name="product_id">
-                                                                                            <input type="hidden" value="${product['price']}" name="price">
+                                                                                            <input type="hidden" value="${product.id}" name="product_id">
+                                                                                            <input type="hidden" value="${product.price}" name="price">
                                                                                             <input type="hidden" value="${1}" name="quantity">
                                                                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                                                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -263,9 +262,9 @@
                                                                                 </div>
                                                                                 <div class="product__item__text">
                                                                                     <h6><a
-                                                                                            href="">${product['product_name']}</a>
+                                                                                            href="">${product.product_name}</a>
                                                                                     </h6>
-                                                                                    <h5>${product['price']}</h5>
+                                                                                    <h5 class="formatMoney">${product.price}</h5>
                                                                                 </div>
                                                                             </div>
                                                                         </div>`;
@@ -294,8 +293,7 @@
                         @foreach ($allproducts as $product)
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset($product->product_img) }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
                                         <ul class="product__item__pic__hover">
                                             <form action="{{ route('addproducttocart') }}" method="POST">
                                                 @csrf
@@ -314,7 +312,7 @@
                                         <h6><a
                                                 href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
                                         </h6>
-                                        <h5>{{ $product->price }}</h5>
+                                        <h5 class="formatMoney">{{ $product->price }}</h5>
                                     </div>
                                 </div>
                             </div>

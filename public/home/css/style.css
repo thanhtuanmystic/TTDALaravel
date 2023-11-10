@@ -1386,10 +1386,11 @@ ol {
     color: #1c1c1c;
 }
 
-.product__discount__item__text .product__item__price {
+.product__discount__item__text .product__item__price p{
     font-size: 18px;
     color: #1c1c1c;
     font-weight: 700;
+    display: inline;
 }
 
 .product__discount__item__text .product__item__price span {
@@ -1931,14 +1932,14 @@ ol {
     display: inline-block;
 }
 
-.shoping__cart__table table tbody tr td.shoping__cart__price {
+.shoping__cart__table table tbody tr td.shoping__cart__price span{
     font-size: 18px;
     color: #1c1c1c;
     font-weight: 700;
     width: 100px;
 }
 
-.shoping__cart__table table tbody tr td.shoping__cart__total {
+.shoping__cart__table table tbody tr td.shoping__cart__total span{
     font-size: 18px;
     color: #1c1c1c;
     font-weight: 700;

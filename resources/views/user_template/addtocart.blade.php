@@ -56,7 +56,7 @@
                                             <h5>{{ $product_name }}</h5>
                                         </td>
                                         <td class="shoping__cart__price">
-                                            ${{ $item->price }}
+                                            <span class="formatMoney">{{ $item->price }}</span>
                                         </td>
                                         <td class="shoping__cart__quantity">
                                             <div class="quantity">
@@ -66,7 +66,7 @@
                                             </div>
                                         </td>
                                         <td class="shoping__cart__total">
-                                            ${{ $item->price }}
+                                            <span class="formatMoney">{{ $item->price }}</span>
                                         </td>
                                         <td class="shoping__cart__item__close">
                                             <a href="{{ route('removecartitem', $item->id) }}"> <span
@@ -149,9 +149,9 @@
                                 <input id="total_hidden" type="hidden" name="total_hidden" value="{{ $total }}">
                                 <input id="total_final_hidden" type="hidden" name="total_final_hidden"
                                     value="{{ $total }}">
-                                <li>Tổng tiền hàng <span>{{ $total }}</span></li>
-                                <li>Giảm giá <span id="discount_amount">0</span></li>
-                                <li>Tổng thanh toán <span id="total_pay">{{ $total }}</span></li>
+                                <li>Tổng tiền hàng <span class="formatMoney">{{ $total }}</span></li>
+                                <li>Giảm giá <span class="formatMoney" id="discount_amount">0</span></li>
+                                <li>Tổng thanh toán <span class="formatMoney" id="total_pay">{{ $total }}</span></li>
                             </ul>
                             @php
                                 $productCount = App\Models\Cart::count();

@@ -70,7 +70,7 @@
                                         @php
                                             $product_name = App\Models\Product::where('id', $item->product_id)->value('product_name');
                                         @endphp
-                                        <li>{{ $product_name }} <span>${{ $item->price }}</span></li>
+                                        <li>{{ $product_name }} <span class="formatMoney">{{ $item->price }}</span></li>
                                         @php
                                             $total = $total + $item->price;
                                         @endphp
@@ -78,12 +78,12 @@
                                 </ul>
 
                                 {{-- <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div> --}}
-                                <div class="checkout__order__total">Tổng tiền hàng <span>{{ $total }}</span></div>
-                                <div class="checkout__order__total">Giảm giá <span>{{ $discount_amount }}</span></div>
+                                <div class="checkout__order__total">Tổng tiền hàng <span class="formatMoney">{{ $total }}</span></div>
+                                <div class="checkout__order__total">Giảm giá <span class="formatMoney">{{ $discount_amount }}</span></div>
                                 <input type="hidden" name="total_final_checkout" value="{{ $totalFinal }}">
-                                <div class="checkout__order__total">Phí giao hàng: <span>{{ $shipping_fee }}</span></div>
+                                <div class="checkout__order__total">Phí giao hàng: <span class="formatMoney">{{ $shipping_fee }}</span></div>
                                 <input type="hidden" name="shipping_fee_checkout" value="{{ $shipping_fee }}">
-                                <div class="checkout__order__total">Tổng thanh toán <span>{{ $totalFinal }}</span></div>
+                                <div class="checkout__order__total">Tổng thanh toán <span class="formatMoney">{{ $totalFinal }}</span></div>
                                 <div>Phương thức thanh toán</div>
                                 <button type="submit" id="code_btn" name="button" value="placeorder">COD</button>
                                 <button type="submit" id="vnpay_btn" name="button" value="vnpay">VNPAY</button>
