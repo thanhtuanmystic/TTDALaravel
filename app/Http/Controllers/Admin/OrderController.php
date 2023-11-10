@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderConfirmation;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -15,7 +17,7 @@ class OrderController extends Controller
             return view('admin.pendingorders', compact('orders'));
         }
         return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
-       
+
     }
     public function completedOrder()
     {
@@ -25,17 +27,18 @@ class OrderController extends Controller
             return view('admin.completedorders', compact('orders'));
         }
         return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
-       
+
     }
-    public function doneOrder() {
+    public function doneOrder()
+    {
         $orders = Order::where('status', 'done')->with('products')->get();
         if (\Illuminate\Support\Facades\Session::has('user')) {
             return view('admin.doneorders', compact('orders'));
         }
         return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
-        
 
-    }   
+
+    }
     public function changeStatus(Request $request)
     {
         $id = $request->changestatus;
@@ -50,6 +53,8 @@ class OrderController extends Controller
         Order::findOrFail($id)->update([
             'status' => "done"
         ]);
+        $orderConfirmation = new OrderConfirmation();
+        Mail::to("tuanvp2001@gmail.com")->send($orderConfirmation);
         return redirect()->route('completedorder')->with('message', 'Đã xác nhận giao hàng thành công');
     }
 
