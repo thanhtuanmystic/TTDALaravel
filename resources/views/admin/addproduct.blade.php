@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>  Thêm sản phẩm</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span> Thêm sản phẩm</h4>
         <div class="col-xxl">
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
@@ -24,7 +24,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Giá sản phẩm</label>
                             <div class="col-sm-10">
-                                <input type="number" class="form-control" name="price" id="price" placeholder="120000" />
+                                <input type="number" class="form-control" name="price" id="price"
+                                    placeholder="120000" />
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -58,8 +59,6 @@
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                                     @endforeach
-
-
                                 </select>
                             </div>
                         </div>
@@ -72,10 +71,23 @@
                                     @foreach ($subcategories as $subcategory)
                                         <option value="{{ $subcategory->id }}">{{ $subcategory->subcategory_name }}</option>
                                     @endforeach
-
                                 </select>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label" for="basic-default-name">Chọn mùa</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" id="season" name="season"
+                                    aria-label="Default select example">
+                                    <option selected>Chọn mùa</option>
+                                    <option value="spring">Xuân</option>
+                                    <option value="summer">Hạ</option>
+                                    <option value="fall">Thu</option>
+                                    <option value="winter">Đông</option>
+                                </select>
+                            </div>
+                        </div>
+                        {{-- black, beige(màu be),blue, brown, gold, green,  grey, navyblue, olive, orange, peach, pink, purple, red, silver, white, yellow --}}
                         <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Ảnh sản phẩm</label>
                             <div class="col-sm-10">

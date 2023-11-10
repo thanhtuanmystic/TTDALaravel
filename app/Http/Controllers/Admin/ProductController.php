@@ -69,8 +69,6 @@ class ProductController extends Controller
         $img_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         $request->product_img->move(public_path('upload'), $img_name);
         $img_url = 'upload/' . $img_name;
-
-
         $category_id = $request->product_category_id;
         $subcategory_id = $request->product_subcategory_id;
         $category_name = Category::where('id', $category_id)->value('category_name');
