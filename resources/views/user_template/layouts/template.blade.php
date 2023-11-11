@@ -1,5 +1,5 @@
 @php
-    $categories = App\Models\Category::latest()->get();
+    $categories = App\Models\Category::orderBy('created_at', 'asc')->get();
     $totalPrice = App\Models\Cart::where('user_id', Auth::id())->sum('price');
     $productCount = App\Models\Cart::where('user_id', Auth::id())->count();
     $idCheck = Auth::id();
@@ -46,7 +46,6 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                 <li><a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
                         <span>{{ $productCount }}</span></a></li>
             </ul>
@@ -116,7 +115,6 @@
                     <div class="col-lg-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-heart"></i><span>1</span></a>
                                 <a href="{{ route('addtocart') }}"><i class="fa fa-shopping-bag"></i>
                                     <span>{{ $productCount }}</span></a>
                                 <a href="{{ route('addtocart') }}">Tổng thanh toán: <span>
@@ -213,13 +211,14 @@
                             </div>
                         </div>
                     </div>
-                    @yield('banner-home')
                 </div>
             </div>
         </div>
     </section>
     <!-- banner bg main end -->
     {{-- common part --}}
+    @yield('banner-home')
+
     <div class="container">
         @yield('main-content')
     </div>

@@ -29,6 +29,7 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'categoryPage')->name('category');
+    Route::get('/subcategory/{id}/{slug}', 'subcategoryPage')->name('subcategory');
     Route::get('/product-details/{id}/{slug}', 'singleProduct')->name('singleproduct');
     // show san pham trang san pham
     Route::get('/all-products', 'showAllProducts')->name('showallproducts');

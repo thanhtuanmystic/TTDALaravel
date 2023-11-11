@@ -20,7 +20,26 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
+    <style>
+        .category_product {
+            font-weight: 600;
+        }
 
+        .category_product:hover .subcategory_product {
+            display: block;
+        }
+
+        .subcategory_product {
+            padding-left: 10px;
+            font-size: 14px;
+            font-weight: 400;
+            display: none;
+        }
+
+        .subcategory_product:hover {
+            opacity: 0.8;
+        }
+    </style>
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">
@@ -30,11 +49,30 @@
                         <div class="sidebar__item">
                             <h4>Danh mục</h4>
                             <ul>
-                                @foreach ($categories as $category)
-                                    <li><a
-                                            href="{{ route('category', [$category->id, $category->slug]) }}">{{ $category->category_name }}</a>
-                                    </li>
-                                @endforeach
+                                <li class="category_product"><a
+                                        href="{{ route('category', [$categories[2]->id, $categories[2]->slug]) }}">{{ $categories[2]->category_name }}</a>
+                                    @foreach ($subcate_men as $subcategory)
+                                        <div class="subcategory_product"><a
+                                                href="{{ route('subcategory', [$subcategory->id, $subcategory->slug]) }}">{{ $subcategory->subcategory_name }}</a>
+                                        </div>
+                                    @endforeach
+                                </li>
+                                <li class="category_product"><a
+                                        href="{{ route('category', [$categories[1]->id, $categories[1]->slug]) }}">{{ $categories[1]->category_name }}</a>
+                                    @foreach ($subcate_women as $subcategory)
+                                        <div class="subcategory_product"><a
+                                                href="{{ route('subcategory', [$subcategory->id, $subcategory->slug]) }}">{{ $subcategory->subcategory_name }}</a>
+                                        </div>
+                                    @endforeach
+                                </li>
+                                <li class="category_product"><a
+                                        href="{{ route('category', [$categories[0]->id, $categories[0]->slug]) }}">{{ $categories[0]->category_name }}</a>
+                                    @foreach ($subcate_kid as $subcategory)
+                                        <div class="subcategory_product"><a
+                                                href="{{ route('subcategory', [$subcategory->id, $subcategory->slug]) }}">{{ $subcategory->subcategory_name }}</a>
+                                        </div>
+                                    @endforeach
+                                </li>
                             </ul>
                         </div>
                         <div class="sidebar__item">
@@ -157,7 +195,13 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <h3 class="mb-4">{{ $category_->category_name }}</h3>
+                    <h3 class="mb-4">
+                        @if (isset($subcategory_))
+                            {{ $subcategory_->category_name }} @if (isset($current_subcate))
+                                > {{ $current_subcate }}
+                            @endif
+                        @endif
+                    </h3>
                     <div class="row">
                         @foreach ($products as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6">
@@ -169,8 +213,6 @@
                                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
                                                 <input type="hidden" value="{{ $product->price }}" name="price">
                                                 <input type="hidden" value="1" name="quantity">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                 <button type="submit" class="btn">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </button>
@@ -178,7 +220,7 @@
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="#">{{ $product->product_name }}</a></h6>
+                                        <h6><a href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a></h6>
                                         <h5>{{ $product->price }}</h5>
                                     </div>
                                 </div>

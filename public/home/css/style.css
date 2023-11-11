@@ -562,11 +562,11 @@ ol {
 -----------------------*/
 
 .hero {
-    padding-bottom: 50px;
+    /* padding-bottom: 50px; */
 }
 
 .hero.hero-normal {
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
 }
 
 .hero.hero-normal .hero__categories {

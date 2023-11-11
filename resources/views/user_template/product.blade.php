@@ -69,7 +69,6 @@
                                 </div>
                                 <br>
                                 <input type="submit" class="site-btn" value="Thêm vào giỏ hàng">
-                                <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                             </form>
 
                         </div>
@@ -166,8 +165,6 @@
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
                                 <ul class="product__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                     <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>

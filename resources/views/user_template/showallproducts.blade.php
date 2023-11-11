@@ -172,8 +172,6 @@
                                                         <input type="hidden" value="{{ $product->id }}" name="product_id">
                                                         <input type="hidden" value="{{ $product->price }}" name="price">
                                                         <input type="hidden" value="1" name="quantity">
-                                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                         <button type="submit" class="btn">
                                                             <i class="fa fa-shopping-cart"></i>
                                                         </button>
@@ -252,8 +250,6 @@
                                                                                             <input type="hidden" value="${product.id}" name="product_id">
                                                                                             <input type="hidden" value="${product.price}" name="price">
                                                                                             <input type="hidden" value="${1}" name="quantity">
-                                                                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                                                             <button type="submit" class="btn">
                                                                                                 <i class="fa fa-shopping-cart"></i>
                                                                                             </button>
@@ -300,8 +296,6 @@
                                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
                                                 <input type="hidden" value="{{ $product->price }}" name="price">
                                                 <input type="hidden" value="1" name="quantity">
-                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                 <button type="submit" class="btn">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </button>

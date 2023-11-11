@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Coupons;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Subcategory;
 use App\Models\User;
 use App\Utilities\VNPay;
 use DB;
@@ -20,9 +21,28 @@ class ClientController extends Controller
 {
     public function categoryPage($id)
     {
-        $category_ = Category::findOrFail($id);
+        $subcategory_ = Subcategory::where('category_id', $id)->first();
         $products = Product::where('product_category_id', $id)->latest()->get();
-        return view('user_template.category', compact('category_', 'products'));
+
+        // subcate
+        $subcate_men = Subcategory::where('category_id', 11)->orderBy('created_at', 'asc')->get();
+        $subcate_women = Subcategory::where('category_id', 12)->orderBy('created_at', 'asc')->get();
+        $subcate_kid = Subcategory::where('category_id', 13)->orderBy('created_at', 'asc')->get();
+
+        return view('user_template.category', compact('subcategory_', 'products', 'subcate_men', 'subcate_women', 'subcate_kid'));
+    }
+    public function subcategoryPage($id)
+    {
+        $subcategory_ = Subcategory::findOrFail($id);
+        $current_subcate = $subcategory_->subcategory_name;
+        $products = Product::where('product_subcategory_id', $id)->latest()->get();
+
+        // subcate
+        $subcate_men = Subcategory::where('category_id', 11)->orderBy('created_at', 'asc')->get();
+        $subcate_women = Subcategory::where('category_id', 12)->orderBy('created_at', 'asc')->get();
+        $subcate_kid = Subcategory::where('category_id', 13)->orderBy('created_at', 'asc')->get();
+
+        return view('user_template.category', compact('subcategory_', 'current_subcate', 'products', 'subcate_men', 'subcate_women', 'subcate_kid'));
     }
     public function singleProduct($id)
     {

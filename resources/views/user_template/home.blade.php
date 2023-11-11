@@ -1,19 +1,13 @@
 @extends('user_template.layouts.template')
 @section('banner-home')
-    <div class="hero__item set-bg" data-setbg="{{ asset('home/img/banner/buy1get1.png') }}">
-    </div>
+    <img src="{{ asset('home/img/banner/dreamclothing.png') }}" alt="">
 @endsection
 
 @section('main-content')
-    <script>
-        $(document).ready(function() {
-            $('.hero__categories ul').show();
-        });
-    </script>
     <!-- Featured Section Begin -->
     <section class="featured spad">
         <div class="container">
-            <div class="row">
+            <div class="row" >
                 <div class="col-lg-12">
                     <div class="section-title">
                         <h2>Sản phẩm nổi bật</h2>
@@ -39,8 +33,6 @@
                                         <input type="hidden" value="{{ $product->id }}" name="product_id">
                                         <input type="hidden" value="{{ $product->price }}" name="price">
                                         <input type="hidden" value="1" name="quantity">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                         <button type="submit" class="btn">
                                             <i class="fa fa-shopping-cart"></i>
                                         </button>
@@ -60,24 +52,7 @@
         </div>
     </section>
     <!-- Featured Section End -->
-    <!-- Banner Begin -->
-    <div class="banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="{{ asset('home/img/banner/banner-1.jpg') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="{{ asset('home/img/banner/banner-2.jpg') }}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Banner End -->
+ 
     <!-- Latest Product Section Begin -->
     <section class="latest-product spad">
         <div class="container">
