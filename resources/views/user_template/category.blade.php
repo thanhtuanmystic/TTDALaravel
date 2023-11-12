@@ -159,38 +159,7 @@
                             </div>
                         </div>
                         <div class="sidebar__item">
-                            {{-- <div class="latest-product__text">
-                                <h4>Sản phẩm mới</h4>
-                                <div class="latest-product__slider owl-carousel">
-                                    <div class="latest-prdouct__slider__item">
-                                        @foreach ($latestProducts as $product)
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{ asset($product->product_img) }}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>{{ $product->product_name }}</h6>
-                                                    <span>{{ $product->price }}</span>
-                                                </div>
-                                            </a>
-                                        @endforeach
-
-                                    </div>
-                                    <div class="latest-prdouct__slider__item">
-                                        @foreach ($latestProducts as $product)
-                                            <a href="#" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img src="{{ asset($product->product_img) }}" alt="">
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6>{{ $product->product_name }}</h6>
-                                                    <span>{{ $product->price }}</span>
-                                                </div>
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div> --}}
+                            
                         </div>
                     </div>
                 </div>

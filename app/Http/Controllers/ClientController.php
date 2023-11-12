@@ -68,7 +68,7 @@ class ClientController extends Controller
         return view('user_template.addtocart', compact('cart_items'));
     }
     public function addProductToCart(Request $request)
-    {
+    {        
         $product_price = $request->price;
         $quantity = $request->quantity;
         $price = $product_price * $quantity;
@@ -77,6 +77,7 @@ class ClientController extends Controller
             'user_id' => Auth::id(),
             'quantity' => $request->quantity,
             'price' => $price,
+            'size' => $request->sizeoption
         ]);
         return redirect()->route('addtocart')->with('message', 'Thêm vào giỏ hàng thành công!');
     }

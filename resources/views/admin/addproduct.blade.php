@@ -50,7 +50,7 @@
 
 
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label class="col-sm-2 col-form-label" for="basic-default-name">Chọn danh mục</label>
                             <div class="col-sm-10">
                                 <select class="form-select" id="product_category_id" name="product_category_id"
@@ -61,15 +61,17 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
+
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="basic-default-name">Chọn danh mục con</label>
+                            <label class="col-sm-2 col-form-label" for="basic-default-name">Chọn danh mục</label>
                             <div class="col-sm-10">
                                 <select class="form-select" id="product_subcategory_id" name="product_subcategory_id"
                                     aria-label="Default select example">
-                                    <option selected>Chọn danh mục con sản phẩm</option>
+                                    <option selected>Chọn danh mục sản phẩm</option>
                                     @foreach ($subcategories as $subcategory)
-                                        <option value="{{ $subcategory->id }}">{{ $subcategory->subcategory_name }}</option>
+                                        <option value="{{ $subcategory->id }}">{{ $subcategory->category_name }}:
+                                            {{ $subcategory->subcategory_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -106,3 +108,9 @@
         </div>
     </div>
 @endsection
+
+
+{{-- Câu truy vấn thêm sản phẩm
+    INSERT INTO `products` (`product_name`, `product_short_des`, `product_long_des`, `price`, `product_color`, `season`, `product_category_name`, `product_subcategory_name`, `product_category_id`, `product_subcategory_id`, `product_img`, `quantity`, `slug`) VALUES
+('Áo thun xanh 2', '2', '2', 123, 'red', 'spring', 'Nam', 'Áo', 11, 20, 'upload/1782333266654955.jpg', 2, 'ao-thun-xanhh');
+    --}}

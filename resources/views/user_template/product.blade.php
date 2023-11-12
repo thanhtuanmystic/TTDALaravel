@@ -68,6 +68,21 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div class="sizePart">
+                                    <label style="margin-left: 20px">
+                                        <input type="radio" name="sizeoption" value="S"> S
+                                    </label>
+                                    <label style="margin-left: 20px">
+                                        <input type="radio" name="sizeoption" value="M"> M
+                                    </label>
+                                    <label style="margin-left: 20px">
+                                        <input type="radio" name="sizeoption" value="L"> L
+                                    </label>
+                                    <label style="margin-left: 20px">
+                                        <input type="radio" name="sizeoption" value="XL"> XL
+                                    </label>
+                                </div>
+                                <br>
                                 <input type="submit" class="site-btn" value="Thêm vào giỏ hàng">
                             </form>
 
@@ -95,7 +110,7 @@
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
                                     aria-selected="true">Mô tả</a>
                             </li>
-                           
+
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">

@@ -13,6 +13,7 @@ class Product extends Model
         'product_short_des',
         'product_long_des',
         'price',
+        'season',
         'product_category_name',
         'product_subcategory_name',
         'product_subcategory_id',

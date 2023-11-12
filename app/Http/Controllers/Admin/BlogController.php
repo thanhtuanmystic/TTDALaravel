@@ -64,10 +64,9 @@ class BlogController extends Controller
             'blog_description' => $request->blog_description,
             'blog_content' => $request->blog_content,
             'blog_image' => $img_url,
-            'blog_author' => $request->blog_title,
+            'blog_author' => $request->blog_author,
             'slug' => strtolower($this->locdautiengviet(str_replace(' ', '-', $request->blog_title))),
         ]);
-
 
         return redirect()->route('adminblog')->with('message', 'Thêm bài viết thành công');
     }
