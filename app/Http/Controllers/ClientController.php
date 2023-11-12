@@ -68,7 +68,7 @@ class ClientController extends Controller
         return view('user_template.addtocart', compact('cart_items'));
     }
     public function addProductToCart(Request $request)
-    {        
+    {
         $product_price = $request->price;
         $quantity = $request->quantity;
         $price = $product_price * $quantity;
@@ -132,6 +132,32 @@ class ClientController extends Controller
                 'total_price' => $request->total_final_checkout,
                 'shipping_fee' => $request->shipping_fee_checkout,
                 'payment_method' => 'COD'
+            ]);
+            foreach ($cart_items as $item) {
+                DB::table('order_product')->insert([
+                    'order_id' => $lastOrderId + 1,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity
+                ]);
+                $id = $item->id;
+                Cart::findOrFail($id)->delete();
+            }
+            return redirect()->route('pendingorders')->with('message', 'Đơn hàng của bạn đã được đặt thành công');
+
+        } elseif ($request->input('button') === 'banking') {
+            Order::insert([
+                'userid' => $userid,
+                'shipping_fullname' => $request->fullname,
+                'shipping_phoneNumber' => $request->phone_number,
+                'shipping_email' => $request->email,
+                'shipping_address' => $request->address,
+                'shipping_district' => $request->district,
+                'shipping_city' => $request->city,
+                'product_id' => "1",
+                'quantity' => $quantity,
+                'total_price' => $request->total_final_checkout,
+                'shipping_fee' => $request->shipping_fee_checkout,
+                'payment_method' => 'Banking'
             ]);
             foreach ($cart_items as $item) {
                 DB::table('order_product')->insert([

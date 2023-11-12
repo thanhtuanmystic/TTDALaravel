@@ -1,6 +1,11 @@
 @extends('user_template.layouts.template')
 @section('banner-home')
-    <img src="{{ asset('home/img/banner/dreamclothing.png') }}" alt="">
+    {{-- <img src="{{ asset('home/img/banner/dreamclothing.png') }}" alt=""> --}}
+    <swiper-container class="mySwiper" pagination="true" autoplay-delay="4000">
+        <swiper-slide><img src="{{ asset('home/img/banner/dreamclothing.png') }}" alt=""></swiper-slide>
+        <swiper-slide>Slide 2</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+      </swiper-container>
 @endsection
 
 @section('main-content')
@@ -198,4 +203,5 @@
         </div>
     </section>
     <!-- Blog Section End -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 @endsection

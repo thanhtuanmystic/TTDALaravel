@@ -57,6 +57,15 @@
                                 <p>Tỉnh/ Thành Phố<span>*</span></p>
                                 <input required type="text" id="city" name="city">
                             </div>
+                            <div>
+                                *Ghi chú: Với phương thức thanh toán là <b>Chuyển khoản ngân hàng</b> <br> Quý khách vui lòng chuyển khoản vào stk sau: <br>
+                                1. 102870677510 - Vietinbank - Triệu Thanh Tuấn <br>
+                                2. 0354202904 - MB Bank - Triệu Thanh Tuấn
+                                <br>
+                                Nội dung: Tên + Số điện thoại
+                                <br>
+                                Dream Clothing sẽ liên hệ để xác nhận đơn hàng của bạn trong vòng 24h
+                            </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
@@ -87,6 +96,7 @@
                                 <div>Phương thức thanh toán</div>
                                 <button type="submit" id="code_btn" name="button" value="placeorder">COD</button>
                                 <button type="submit" id="vnpay_btn" name="button" value="vnpay">VNPAY</button>
+                                <button type="submit" id="banking_btn" name="button" value="banking">Chuyển khoản</button>
                             </div>
                         </div>
                     </div>
