@@ -43,6 +43,10 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/send-contact', 'sendContact')->name('sendcontact');
 
+    // search by Image
+    Route::get('/search-by-image', 'searchByImage')->name('searchbyimage');
+    Route::post('/search-by-image-handle', 'searchByImageHandle')->name('searchbyimagehandle');
+
 });
 
 Route::middleware(['auth', 'role:user'])->group(function () {

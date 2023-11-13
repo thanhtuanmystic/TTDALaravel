@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-
 class ClientController extends Controller
 {
     public function categoryPage($id)
@@ -246,6 +245,30 @@ class ClientController extends Controller
         $searchProducts = Product::where('product_name', 'like', '%' . $searchTerm . '%')->get();
         $searchProductCount = $searchProducts->count();
         return view('user_template.search', compact('searchProducts', 'searchProductCount', 'searchProductCount'));
+    }
+
+    //  Tich hop AI tim kiem san pham bang hinh anh
+    public function searchByImage()
+    {
+        return view('user_template.searchByImage');
+    }
+    public function searchByImageHandle(Request $request)
+    {
+       
+        $image = $request->file('fileToUpload');
+        $img_name = $image->getClientOriginalName();
+        $request->fileToUpload->move(public_path('AI/uploads'), $img_name);
+        // target_file dung de lay ra duong dan cua anh
+        $target_file = './public/AI/uploads/'. $img_name;
+
+        $file = fopen(public_path('AI/image_path.txt'), "w");
+        fwrite($file, $target_file);
+        fclose($file);
+
+        // xu ly api python        
+        $api_url = "http://127.0.0.1:5000/";
+        $response = file_get_contents($api_url);
+        dd($response);
     }
     public function applyCoupon(Request $request)
     {
