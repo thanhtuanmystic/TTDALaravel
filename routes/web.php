@@ -30,6 +30,8 @@ Route::controller(HomeController::class)->group(function () {
 Route::controller(ClientController::class)->group(function () {
     Route::get('/category/{id}/{slug}', 'categoryPage')->name('category');
     Route::get('/subcategory/{id}/{slug}', 'subcategoryPage')->name('subcategory');
+    Route::post('/category-sort', 'categorySort')->name('categorysort');
+    
     Route::get('/product-details/{id}/{slug}', 'singleProduct')->name('singleproduct');
     // show san pham trang san pham
     Route::get('/all-products', 'showAllProducts')->name('showallproducts');
@@ -140,8 +142,10 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/admin/pending-order', 'pendingOrder')->name('pendingorder');
     Route::get('/admin/completed-order', 'completedOrder')->name('completedorder');
     Route::get('/admin/done-order', 'doneOrder')->name('doneorder');
+    Route::get('/admin/cancel-order', 'cancelOrder')->name('cancelorder');
     Route::post('/admin/change-status', 'changeStatus')->name('changestatus');
     Route::post('/admin/change-status-to-done', 'changeStatusToDone')->name('changestatustodone');
+    Route::post('/admin/change-status-to-cancel', 'changeStatusToCancel')->name('changestatustocancel');
 });
 
 

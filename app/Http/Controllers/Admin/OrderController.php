@@ -39,6 +39,15 @@ class OrderController extends Controller
 
 
     }
+    public function cancelOrder()
+    {
+        $orders = Order::where('status', 'cancel')->with('products')->get();
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            return view('admin.cancelorders', compact('orders'));
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+
+    }
     public function changeStatus(Request $request)
     {
         $id = $request->changestatus;
@@ -56,6 +65,14 @@ class OrderController extends Controller
         $orderConfirmation = new OrderConfirmation();
         Mail::to("tuanvp2001@gmail.com")->send($orderConfirmation);
         return redirect()->route('completedorder')->with('message', 'Đã xác nhận giao hàng thành công');
+    }
+    public function changeStatusToCancel(Request $request)
+    {
+        $id = $request->changestatustocancel;
+        Order::findOrFail($id)->update([
+            'status' => "cancel"
+        ]);       
+        return redirect()->route('cancelorder')->with('message', 'Đã hủy đơn hàng thành công');
     }
 
 }

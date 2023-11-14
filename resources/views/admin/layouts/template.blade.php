@@ -60,7 +60,7 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Dream Clothing</span>
+                        <span class="menu-text fw-bolder ms-2">Dream Clothing</span>
                     </a>
 
                     <a href="javascript:void(0);"
@@ -161,9 +161,9 @@
                         </a>
                     </li>
                     <li class="menu-item {{ $currentRoute === 'cancelorder' ? 'active' : '' }}">
-                        <a href="{{ route('admindashboard') }}" class="menu-link">
+                        <a href="{{ route('cancelorder') }}" class="menu-link">
                             <i class="menu-icon bx bxl-shopify"></i>
-                            <div>Cancel Orders</div>
+                            <div>Đã hủy</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">

@@ -1,6 +1,6 @@
 @extends('admin.layouts.template')
 @section('page_title')
-    Pending orders
+   Đơn hàng đã hủy
 @endsection
 @section('content')
     <div class="container my-5">
@@ -11,7 +11,7 @@
         @endif
         <div class="card p-4">
             <div class="card-title">
-                <h2 class="text-center">Đơn hàng đang chờ xác nhận</h2>
+                <h2 class="text-center">Đơn hàng đã hủy</h2>
             </div>
             <div class="cart-body">
                 <table class="table">
@@ -24,7 +24,6 @@
                         <th>Thanh toán</th>
                         <th>Phí ship</th>
                         <th>Trạng thái</th>
-                        <th>Action</th>
                     </tr>
                     @if ($orders->isNotEmpty())
                         @foreach ($orders as $order)
@@ -50,27 +49,16 @@
                                                     ->value('quantity');
                                             @endphp
                                             <ul>
-                                                <li>{{ $product->product_name }} <br> SL: {{ $quantity }}</li>
+                                                <li>{{ $product->product_name }} - SL: {{ $quantity }}</li>
                                             </ul>
                                         @endforeach
                                     @endif
                                 </td>
-                                <td> {{ $order->total_price }}</td>
+                                <td> {{ $order->total_price }}</td>                               
                                 <td>{{ $order->payment_method }}</td>
                                 <td> {{ $order->shipping_fee }}</td>
                                 <td>{{ $order->status }}</td>
-                                <td>
-                                    <form action="{{ route('changestatus') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="changestatus" value="{{ $order->id }}">
-                                        <button type="submit" class="btn btn-success">Xác nhận</button>
-                                    </form>
-                                    <form action="{{ route('changestatustocancel') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="changestatustocancel" value="{{ $order->id }}">
-                                        <button type="submit" class="btn btn-danger">Hủy</button>
-                                    </form>
-                                </td>
+                               
                             </tr>
                         @endforeach
                     @endif

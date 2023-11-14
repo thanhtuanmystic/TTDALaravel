@@ -20,7 +20,7 @@
                             <th>Tên sản phẩm</th>
                             <th>Ảnh</th>
                             <th>Giá</th>
-                            <th>Thao tác</th>
+                            <th>Thao tác</th>                           
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -31,14 +31,16 @@
                                 <td>
                                     <img style="height: 100px" src="{{ asset($product->product_img) }}" alt="">
                                     <br>
-                                    <a href="{{ route('editproductimg', $product->id) }}" class="btn btn-primary">Sửa hình ảnh
-                                        </a>
+                                    <a href="{{ route('editproductimg', $product->id) }}" class="btn btn-primary">Sửa hình
+                                        ảnh
+                                    </a>
                                 </td>
                                 <td>{{ $product->price }}</td>
                                 <td>
-                                    <a href="{{route('editproduct',$product->id)}}" class="btn btn-primary">Sửa</a>
-                                    <a href="{{route('deleteproduct',$product->id)}}" class="btn btn-warning">Xóa</a>
+                                    <a href="{{ route('editproduct', $product->id) }}" class="btn btn-primary">Sửa</a>
+                                    <a href="{{ route('deleteproduct', $product->id) }}" class="btn btn-warning">Xóa</a>
                                 </td>
+                               
                             </tr>
                         @endforeach
 

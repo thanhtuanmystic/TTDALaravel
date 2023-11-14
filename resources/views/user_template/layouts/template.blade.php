@@ -153,9 +153,9 @@
                                     href="{{ route('home') }}">Trang chủ</a></li>
                             <li class="{{ $currentRoute === 'showallproducts' ? 'active' : '' }}"><a
                                     href="{{ route('showallproducts') }}">Sản phẩm</a></li>
-                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang
+                            <li class="{{ $currentRoute === '' ? 'active' : '' }}"><a href="{{route('category', [11, 'nam'])}}">Thời trang
                                     nam</a></li>
-                            <li class="{{ $currentRoute === 'home' ? 'active' : '' }}"><a href="#">Thời trang
+                            <li class="{{ $currentRoute === '' ? 'active' : '' }}"><a href="{{route('category', [12, 'nu'])}}">Thời trang
                                     nữ</a></li>
                             <li class="{{ $currentRoute === 'contact' ? 'active' : '' }}"><a
                                     href="{{ route('contact') }}">Liên hệ</a></li>

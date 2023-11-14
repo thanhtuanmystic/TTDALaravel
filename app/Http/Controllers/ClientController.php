@@ -11,6 +11,7 @@ use App\Models\Subcategory;
 use App\Models\User;
 use App\Utilities\VNPay;
 use DB;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class ClientController extends Controller
     public function categoryPage($id)
     {
         $subcategory_ = Subcategory::where('category_id', $id)->first();
-        $products = Product::where('product_category_id', $id)->latest()->get();
+        $products = Product::where('product_category_id', $id)->latest()->paginate(6);
 
         // subcate
         $subcate_men = Subcategory::where('category_id', 11)->orderBy('created_at', 'asc')->get();
@@ -34,7 +35,7 @@ class ClientController extends Controller
     {
         $subcategory_ = Subcategory::findOrFail($id);
         $current_subcate = $subcategory_->subcategory_name;
-        $products = Product::where('product_subcategory_id', $id)->latest()->get();
+        $products = Product::where('product_subcategory_id', $id)->latest()->paginate(6);
 
         // subcate
         $subcate_men = Subcategory::where('category_id', 11)->orderBy('created_at', 'asc')->get();
@@ -42,6 +43,21 @@ class ClientController extends Controller
         $subcate_kid = Subcategory::where('category_id', 13)->orderBy('created_at', 'asc')->get();
 
         return view('user_template.category', compact('subcategory_', 'current_subcate', 'products', 'subcate_men', 'subcate_women', 'subcate_kid'));
+    }
+    public function categorysort(Request $request)
+    {
+        $id = $request->sort_category_id;
+        $subcategory_ = Subcategory::where('category_id', $id)->first();
+        if ($request->season_sort != 'null') {
+            $products = Product::where('product_category_id', $id)->where('season', $request->season_sort)->paginate(6);
+        }
+
+        // subcate
+        $subcate_men = Subcategory::where('category_id', 11)->orderBy('created_at', 'asc')->get();
+        $subcate_women = Subcategory::where('category_id', 12)->orderBy('created_at', 'asc')->get();
+        $subcate_kid = Subcategory::where('category_id', 13)->orderBy('created_at', 'asc')->get();
+
+        return view('user_template.category', compact('subcategory_', 'products', 'subcate_men', 'subcate_women', 'subcate_kid'));
     }
     public function singleProduct($id)
     {
@@ -254,21 +270,35 @@ class ClientController extends Controller
     }
     public function searchByImageHandle(Request $request)
     {
-       
+
         $image = $request->file('fileToUpload');
         $img_name = $image->getClientOriginalName();
         $request->fileToUpload->move(public_path('AI/uploads'), $img_name);
         // target_file dung de lay ra duong dan cua anh
-        $target_file = './public/AI/uploads/'. $img_name;
+        $target_file = './public/AI/uploads/' . $img_name;
 
         $file = fopen(public_path('AI/image_path.txt'), "w");
         fwrite($file, $target_file);
         fclose($file);
 
-        // xu ly api python        
-        $api_url = "http://127.0.0.1:5000/";
-        $response = file_get_contents($api_url);
-        dd($response);
+        sleep(5);
+
+        // Đổi URL thành API Flask của bạn
+        $flaskApiUrl = 'http://127.0.0.1:5000/';
+
+        // // Tạo một đối tượng Guzzle client
+        $client = new Client();
+
+        try {
+            // Gửi request GET đến Flask API
+            $response = $client->get($flaskApiUrl);
+            $data = json_decode($response->getBody(), true);
+            $search_data = array_map('intval', $data);
+            return view('user_template.searchbyimage_view', compact('search_data'));
+        } catch (\Exception $e) {
+            // Xử lý lỗi nếu có
+            echo "Error: " . $e->getMessage();
+        }
     }
     public function applyCoupon(Request $request)
     {

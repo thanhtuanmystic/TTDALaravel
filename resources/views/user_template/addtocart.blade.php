@@ -49,6 +49,7 @@
                                     @php
                                         $product_name = App\Models\Product::where('id', $item->product_id)->value('product_name');
                                         $img = App\Models\Product::where('id', $item->product_id)->value('product_img');
+                                        $product_price = App\Models\Product::where('id', $item->product_id)->first();
                                     @endphp
                                     <tr>
                                         <td class="shoping__cart__item">
@@ -56,7 +57,7 @@
                                             <h5>{{ $product_name }}</h5>
                                         </td>
                                         <td class="shoping__cart__price">
-                                            <span class="formatMoney">{{ $item->price }}</span>
+                                            <span class="formatMoney">{{ $product_price->price }}</span>
                                         </td>
                                         <td class="shoping__cart__quantity">
                                             <div class="quantity">
@@ -151,7 +152,8 @@
                                     value="{{ $total }}">
                                 <li>Tổng tiền hàng <span class="formatMoney">{{ $total }}</span></li>
                                 <li>Giảm giá <span class="formatMoney" id="discount_amount">0</span></li>
-                                <li>Tổng thanh toán <span class="formatMoney" id="total_pay">{{ $total }}</span></li>
+                                <li>Tổng thanh toán <span class="formatMoney" id="total_pay">{{ $total }}</span>
+                                </li>
                             </ul>
                             @php
                                 $productCount = App\Models\Cart::count();
