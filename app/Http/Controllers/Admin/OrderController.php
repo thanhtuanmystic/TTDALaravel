@@ -54,6 +54,8 @@ class OrderController extends Controller
         Order::findOrFail($id)->update([
             'status' => "completed"
         ]);
+        $orderConfirmation = new OrderConfirmation();
+        Mail::to("tuanvp2001@gmail.com")->send($orderConfirmation);
         return redirect()->route('pendingorder')->with('message', 'Đã xác nhận sản phẩm');
     }
     public function changeStatusToDone(Request $request)
@@ -62,8 +64,6 @@ class OrderController extends Controller
         Order::findOrFail($id)->update([
             'status' => "done"
         ]);
-        $orderConfirmation = new OrderConfirmation();
-        Mail::to("tuanvp2001@gmail.com")->send($orderConfirmation);
         return redirect()->route('completedorder')->with('message', 'Đã xác nhận giao hàng thành công');
     }
     public function changeStatusToCancel(Request $request)

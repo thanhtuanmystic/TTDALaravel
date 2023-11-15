@@ -291,7 +291,9 @@ class ClientController extends Controller
             $data = json_decode($response->getBody(), true);
             // chuyen data tu dang mang string -> mang number
             $search_data = array_map('intval', $data); 
-            return view('user_template.searchbyimage_view', compact('search_data'));
+            $search_products = Product::whereIn('id', $search_data)->get();
+            $searchProductCount = $search_products->count();
+            return view('user_template.searchbyimage_view', compact('search_data','search_products','searchProductCount'));
         } catch (\Exception $e) {
             // Xử lý lỗi nếu có
             echo "Error: " . $e->getMessage();
