@@ -48,8 +48,13 @@ class ClientController extends Controller
     {
         $id = $request->sort_category_id;
         $subcategory_ = Subcategory::where('category_id', $id)->first();
-        if ($request->season_sort != 'null') {
-            $products = Product::where('product_category_id', $id)->where('season', $request->season_sort)->paginate(6);
+
+        if ($request->season_sort != null) {
+            $products = Product::where('product_category_id', $id)->where('season', $request->season_sort)->orderBy('created_at', 'desc')->paginate(12);
+        }
+        if ($request->color_sort != null) {
+            $products = Product::where('product_category_id', $id)->where('product_color', $request->color_sort)->orderBy('created_at', 'desc')->paginate(12);
+
         }
 
         // subcate
@@ -63,7 +68,7 @@ class ClientController extends Controller
     {
         $product = Product::findOrFail($id);
         $subcat_id = Product::where('id', $id)->value('product_subcategory_id');
-        $related_product = Product::where('product_subcategory_id', $subcat_id)->latest()->get();
+        $related_product = Product::where('product_subcategory_id', $subcat_id)->latest()->paginate(12);
         return view('user_template.product', compact('product', 'related_product'));
     }
 
@@ -74,7 +79,9 @@ class ClientController extends Controller
         $categories = Category::latest()->get();
         $latestProducts = Product::orderBy('id', 'desc')->take(3)->get();
         $productCount = Product::count();
-        return view('user_template.showallproducts', compact('allproducts', 'productCount', 'latestProducts', 'categories'));
+        $saleoff_data = [1635, 1637, 1639];
+        $saleoffProducts = Product::whereIn('id', $saleoff_data)->get();
+        return view('user_template.showallproducts', compact('allproducts', 'productCount', 'latestProducts', 'categories', 'saleoffProducts'));
     }
     public function addToCart()
     {
@@ -290,10 +297,10 @@ class ClientController extends Controller
             $response = $client->get($flaskApiUrl);
             $data = json_decode($response->getBody(), true);
             // chuyen data tu dang mang string -> mang number
-            $search_data = array_map('intval', $data); 
+            $search_data = array_map('intval', $data);
             $search_products = Product::whereIn('id', $search_data)->get();
             $searchProductCount = $search_products->count();
-            return view('user_template.searchByImage', compact('search_data','search_products','searchProductCount'));
+            return view('user_template.searchByImage', compact('search_data', 'search_products', 'searchProductCount'));
         } catch (\Exception $e) {
             // Xử lý lỗi nếu có
             echo "Error: " . $e->getMessage();

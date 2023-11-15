@@ -6,10 +6,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Organi Shop</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Shop</span>
                         </div>
                     </div>
                 </div>
@@ -160,12 +157,12 @@
                         </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
-                                @foreach ($latestProducts as $product)
+                                @foreach ($saleoffProducts as $product)
                                     <div class="col-lg-4">
                                         <div class="product__discount__item">
                                             <div class="product__discount__item__pic set-bg"
                                                 data-setbg="{{ asset($product->product_img) }}">
-                                                <div class="product__discount__percent">-20%</div>
+                                                <div class="product__discount__percent">-30%</div>
                                                 <ul class="product__item__pic__hover">
                                                     <form action="{{ route('addproducttocart') }}" method="POST">
                                                         @csrf

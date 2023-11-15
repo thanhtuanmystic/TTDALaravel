@@ -70,7 +70,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Đơn hàng của bạn</h4>
-                                <div class="checkout__order__products">Tên sản phẩm <span>Giá tiền</span></div>
+                                <div class="checkout__order__products">Tên sản phẩm </div>
                                 <ul>
                                     @php
                                         $total = 0;
@@ -79,7 +79,8 @@
                                         @php
                                             $product_name = App\Models\Product::where('id', $item->product_id)->value('product_name');
                                         @endphp
-                                        <li>{{ $product_name }} <span class="formatMoney">{{ $item->price }}</span></li>
+                                        <li>{{ $product_name }}</li>
+                                        <li class="formatMoney">{{ $item->price }}</li>
                                         @php
                                             $total = $total + $item->price;
                                         @endphp

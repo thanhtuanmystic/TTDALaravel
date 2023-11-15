@@ -16,6 +16,8 @@ class HomeController extends Controller
         $allproducts = Product::latest()->paginate(12);
         $categories = Category::latest()->get();
         $latestProducts = Product::orderBy('id', 'desc')->take(3)->get();
-        return view('user_template.home', compact('allproducts', 'latestProducts', 'categories','allblogs'));
+        $recomment_data = [1,2,3];
+        $recommendProducts = Product::whereIn('id', $recomment_data)->get();
+        return view('user_template.home', compact('allproducts', 'latestProducts', 'categories','allblogs','recommendProducts'));
     }
 }

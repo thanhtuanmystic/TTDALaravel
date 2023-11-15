@@ -51,7 +51,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="{{ asset('home/img/logo-thanhtuan.png') }}" alt=""></a>
+            <a href="#"><img src="{{ asset('home/img/dreamclothing_logo.png') }}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -151,7 +151,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="{{ route('home') }}"><img src="{{ asset('home/img/logo-thanhtuan.png') }}"
+                        <a href="{{ route('home') }}"><img src="{{ asset('home/img/dreamclothing_logo.png') }}"
                                 alt=""></a>
                     </div>
                 </div>
@@ -240,7 +240,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{{ asset('home/img/logo-thanhtuan.png') }}"
+                            <a href="{{route('home')}}"><img src="{{ asset('home/img/dreamclothing_logo.png') }}"
                                     alt=""></a>
                         </div>
                         <ul>

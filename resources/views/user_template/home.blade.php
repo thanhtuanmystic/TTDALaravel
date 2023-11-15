@@ -2,9 +2,10 @@
 @section('banner-home')
     {{-- <img src="{{ asset('home/img/banner/dreamclothing.png') }}" alt=""> --}}
     <swiper-container class="mySwiper" pagination="true" autoplay-delay="4000">
-        <swiper-slide><img src="{{ asset('home/img/banner/dreamclothing.png') }}" alt=""></swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide><img src="{{ asset('home/img/banner/homebanner1.png') }}" alt=""></swiper-slide>
+        <swiper-slide><img src="{{ asset('home/img/banner/homebanner2.png') }}" alt=""></swiper-slide>
+        <swiper-slide><img src="{{ asset('home/img/banner/homebanner3.png') }}" alt=""></swiper-slide>
+       
       </swiper-container>
 @endsection
 
@@ -137,7 +138,7 @@
                         <h4>Sản phẩm được gợi ý</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
-                                @foreach ($latestProducts as $product)
+                                @foreach ($recommendProducts as $product)
                                     <a href="{{ route('singleproduct', [$product->id, $product->slug]) }}"
                                         class="latest-product__item">
                                         <div class="latest-product__item__pic">
@@ -151,7 +152,7 @@
                                 @endforeach
                             </div>
                             <div class="latest-prdouct__slider__item">
-                                @foreach ($latestProducts as $product)
+                                @foreach ($recommendProducts as $product)
                                     <a href="{{ route('singleproduct', [$product->id, $product->slug]) }}"
                                         class="latest-product__item">
                                         <div class="latest-product__item__pic">

@@ -1,9 +1,9 @@
 @extends('user_template.layouts.template')
 @section('main-content')
-    <div class="searchByImageDiv">
+    <div class="searchByImageDiv" style="padding-bottom: 40px">
         <form action="{{ route('searchbyimagehandle') }}" method="post" enctype="multipart/form-data">
             @csrf
-            Chọn ảnh để tải lên:
+            Chọn ảnh để tải lên: <br>
             <input type="file" name="fileToUpload" id="fileToUpload">
             <input type="submit" value="Tải lên" name="submit">
         </form>

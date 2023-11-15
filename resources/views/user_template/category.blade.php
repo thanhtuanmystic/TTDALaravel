@@ -3,23 +3,7 @@
     @php
         $categories = App\Models\Category::latest()->get();
     @endphp
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="{{ asset('home/img/breadcrumb.jpg') }}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="breadcrumb__text">
-                        <h2>Organi Shop</h2>
-                        <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
-                            <span>Shop</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Breadcrumb Section End -->
+
     <style>
         .category_product {
             font-weight: 600;
@@ -96,40 +80,41 @@
                             </div>
                             <div class="sidebar__item sidebar__item__color--option">
                                 <h4>Màu sắc</h4>
-                                <div class="sidebar__item__color sidebar__item__color--white">
+                                <div class=" ">
+                                    <input type="radio" name="color_sort" value="White" id="white">
                                     <label for="white">
                                         Trắng
-                                        <input type="radio" id="white">
                                     </label>
                                 </div>
-                                <div class="sidebar__item__color sidebar__item__color--gray">
+                                <div class=" ">
+                                    <input type="radio" name="color_sort" value="Gray" id="gray">
                                     <label for="gray">
                                         Xám
-                                        <input type="radio" id="gray">
                                     </label>
                                 </div>
-                                <div class="sidebar__item__color sidebar__item__color--red">
+                                <div class=" ">
+                                    <input type="radio" name="color_sort" value="Red" id="red">
                                     <label for="red">
                                         Đỏ
-                                        <input type="radio" id="red">
                                     </label>
                                 </div>
-                                <div class="sidebar__item__color sidebar__item__color--black">
+                                <div class=" ">
+                                    <input type="radio" name="color_sort" value="Black" id="black">
                                     <label for="black">
                                         Đen
-                                        <input type="radio" id="black">
                                     </label>
                                 </div>
-                                <div class="sidebar__item__color sidebar__item__color--blue">
+                                <div class=" ">
+                                    <input type="radio" name="color_sort" value="Blue" id="blue">
+
                                     <label for="blue">
                                         Blue
-                                        <input type="radio" id="blue">
                                     </label>
                                 </div>
-                                <div class="sidebar__item__color sidebar__item__color--green">
+                                <div class="">
+                                    <input type="radio" name="color_sort" value="Green" id="green">
                                     <label for="green">
                                         Xanh
-                                        <input type="radio" id="green">
                                     </label>
                                 </div>
                             </div>
@@ -162,7 +147,7 @@
                             </div>
                             <input type="hidden" name="sort_category_id" value="{{ $subcategory_->category_id }}">
                             <div class="sidebar__item">
-                                <input class="btn-success" type="submit" value="Sắp xếp">
+                                <input class="btn-success" type="submit" value="Lọc sản phẩm">
                             </div>
                         </form>
                     </div>
@@ -179,8 +164,7 @@
                         @foreach ($products as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                        data-setbg="{{ asset($product->product_img) }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
                                         <ul class="product__item__pic__hover">
                                             <form action="{{ route('addproducttocart') }}" method="POST">
                                                 @csrf
@@ -197,16 +181,16 @@
                                         <h6><a
                                                 href="{{ route('singleproduct', [$product->id, $product->slug]) }}">{{ $product->product_name }}</a>
                                         </h6>
-                                        <h5>{{ $product->price }}</h5>
+                                        <h5 class="formatMoney">{{ $product->price }}</h5>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
 
                     </div>
-                        <div class="d-flex">
-                            {!! $products->links() !!}
-                        </div>
+                    <div class="d-flex">
+                        {!! $products->links() !!}
+                    </div>
                 </div>
             </div>
         </div>

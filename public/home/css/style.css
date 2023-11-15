@@ -1042,7 +1042,7 @@ ol {
 .breadcrumb-section {
     display: flex;
     align-items: center;
-    padding: 45px 0 40px;
+    padding: 256px 0 40px;
 }
 
 .breadcrumb__text h2 {
@@ -1217,7 +1217,7 @@ ol {
 
 .sidebar__item__color label input {
     position: absolute;
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .sidebar__item__color label:after {
