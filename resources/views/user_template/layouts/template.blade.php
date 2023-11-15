@@ -31,6 +31,15 @@
     <link rel="stylesheet" href="{{ asset('home/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('home/css/style.css') }}" type="text/css">
 </head>
+<style>
+    .camera_icon {
+        color: black;
+    }
+    .camera_icon:hover {
+        color: black;
+        opacity: 0.8;
+    }
+</style>
 
 <body>
     <!-- Page Preloder -->
@@ -198,6 +207,7 @@
                                 @csrf
                                 <input required name="searchInput" type="text" id="searchInput"
                                     placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
+                                    <a class="camera_icon" href="{{route('searchbyimage')}}"><i class="fa fa-camera"></i> </a>
                                 <button type="submit" class="site-btn">Tìm kiếm</button>
                             </form>
                         </div>
