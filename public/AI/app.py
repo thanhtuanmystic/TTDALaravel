@@ -31,14 +31,14 @@ def extract_features(img_path,model):
 
 filenames = []
 
-for file in os.listdir('image'):
-    filenames.append(os.path.join('image',file))
+for file in os.listdir('./public/AI/image'):
+    filenames.append(os.path.join('./public/AI/image',file))
 
 feature_list = []
 
 for file in tqdm(filenames):
     feature_list.append(extract_features(file,model))
 
-pickle.dump(feature_list,open('embeddings.pkl','wb'))
-pickle.dump(filenames,open('filenames.pkl','wb'))
+pickle.dump(feature_list,open('./public/AI/embeddings.pkl','wb'))
+pickle.dump(filenames,open('./public/AI/filenames.pkl','wb'))
 

@@ -70,7 +70,7 @@ class ClientController extends Controller
 
     public function showAllProducts(Request $request)
     {
-        $allproducts = Product::latest()->paginate(6);
+        $allproducts = Product::latest()->paginate(12);
         $categories = Category::latest()->get();
         $latestProducts = Product::orderBy('id', 'desc')->take(3)->get();
         $productCount = Product::count();
@@ -280,20 +280,17 @@ class ClientController extends Controller
         $file = fopen(public_path('AI/image_path.txt'), "w");
         fwrite($file, $target_file);
         fclose($file);
-
         sleep(5);
-
         // Đổi URL thành API Flask của bạn
         $flaskApiUrl = 'http://127.0.0.1:5000/';
-
         // // Tạo một đối tượng Guzzle client
         $client = new Client();
-
         try {
             // Gửi request GET đến Flask API
             $response = $client->get($flaskApiUrl);
             $data = json_decode($response->getBody(), true);
-            $search_data = array_map('intval', $data);
+            // chuyen data tu dang mang string -> mang number
+            $search_data = array_map('intval', $data); 
             return view('user_template.searchbyimage_view', compact('search_data'));
         } catch (\Exception $e) {
             // Xử lý lỗi nếu có

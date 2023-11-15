@@ -10,7 +10,8 @@ from tensorflow.keras.layers import GlobalMaxPooling2D
 from tensorflow.keras.preprocessing import image
 
 feature_list = np.array(pickle.load(open('./public/AI/embeddings.pkl','rb')))
-# filenames = pickle.load(open('filenames.pkl','rb'))
+filenames = pickle.load(open('./public/AI/filenames.pkl','rb'))
+
 
 model = ResNet50(weights='imagenet',include_top=False,input_shape=(224,224,3))
 model.trainable = False
@@ -34,8 +35,8 @@ distances,indices = neighbors.kneighbors([normalized_result])
 
 print(indices[0])
 
-# for file in indices[0][1:6]:
-#     print(filenames[file])
+for file in indices[0][0:6]:
+    print(filenames[file])
 
 # for file in indices[0][1:6]:
 #     temp_img = cv2.imread(filenames[file])
