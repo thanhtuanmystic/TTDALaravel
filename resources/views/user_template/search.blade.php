@@ -36,7 +36,5 @@
             </div>
         @endforeach
     </div>
-    <div class="d-flex">
-      
-    </div>
+        {!! $searchProducts->links() !!}
 @endsection

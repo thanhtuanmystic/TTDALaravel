@@ -207,19 +207,20 @@
                         }
                     </style>
                     <div class="filter__item">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
-                                    {{-- <span>Sắp xếp theo</span> --}}
-                                    <select id="sort-by">
-                                        <option value="dafault">Sắp xếp</option>
-                                        <option value="name">Tên</option>
-                                        <option value="price-hightolow">Giá cao xuống thấp</option>
-                                        <option value="price-lowtohigh">Giá thấp đến cao</option>
-                                    </select>
+                        <form action="{{route('sortby')}}" method="GET">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-5">
+                                    <div class="filter__sort">
+                                        <select id="sort-by" name="sort_by">
+                                            <option value="dafault">Lọc theo</option>
+                                            <option value="name">Tên</option>
+                                            <option value="price-hightolow">Giá cao xuống thấp</option>
+                                            <option value="price-lowtohigh">Giá thấp đến cao</option>
+                                        </select>
+                                    </div>
+
                                 </div>
-                            </div>
-                            <script>
+                                {{-- <script>
                                 $(document).ready(function() {
                                     $('#sort-by').on('change', function(e) {
                                         let sort_by = $('#sort-by').val();
@@ -272,15 +273,17 @@
                                         });
                                     });
                                 });
-                            </script>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="filter__found">
-                                    <h6><span>{{ $productCount }}</span> sản phẩm được tìm thấy</h6>
+                            </script> --}}
+                                <div class="col-lg-4 col-md-4">
+                                   <input style="padding: 0 20px" type="submit" value="Lọc">
+                                </div>
+                                <div class="col-lg-4 col-md-3">
+                                    <div class="filter__found">
+                                        <h6><span>{{ $productCount }}</span> sản phẩm được tìm thấy</h6>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-3">
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="row" id="testdata">
                         @foreach ($allproducts as $product)

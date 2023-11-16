@@ -36,11 +36,11 @@ Route::controller(ClientController::class)->group(function () {
     // show san pham trang san pham
     Route::get('/all-products', 'showAllProducts')->name('showallproducts');
     // loc san pham trang san pham
-    Route::post('/sort-by', 'sortBy')->name('sortby');
+    Route::get('/sort-by', 'sortBy')->name('sortby');
 
 
     // search
-    Route::post('/search-products', 'searchProduct')->name('searchproduct');
+    Route::get('/search-products', 'searchProduct')->name('searchproduct');
     Route::get('/new-release', 'newRelease')->name('newrelease');
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/send-contact', 'sendContact')->name('sendcontact');

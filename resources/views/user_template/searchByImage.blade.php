@@ -1,7 +1,37 @@
 @extends('user_template.layouts.template')
 @section('main-content')
+    <style>
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+        }
+
+        #loading img {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #loading p {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 700
+        }
+    </style>
+    <div id="loading">
+        <img src="{{ asset('home/img/loading-loading-forever.gif') }}" alt="Loading...">
+        <p>Đang xử lý dữ liệu... vui lòng đợi...</p>
+    </div>
     <div class="searchByImageDiv" style="padding-bottom: 40px">
-        <form action="{{ route('searchbyimagehandle') }}" method="post" enctype="multipart/form-data">
+        <form id="searchForm" action="{{ route('searchbyimagehandle') }}" method="post" enctype="multipart/form-data">
             @csrf
             Chọn ảnh để tải lên: <br>
             <input type="file" name="fileToUpload" id="fileToUpload">
@@ -36,6 +66,12 @@
                 </div>
             @endforeach
         @endif
-
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').submit(function() {
+                $('#loading').show(); // Hiển thị loading khi form được submit
+            });
+        });
+    </script>
 @endsection

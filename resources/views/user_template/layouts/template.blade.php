@@ -15,7 +15,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Softdreams</title>
+    <title>Dream Clothing</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -203,9 +203,8 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="{{ route('searchproduct') }}" method="POST">
-                                @csrf
-                                <input required name="searchInput" type="text" id="searchInput"
+                            <form action="{{ route('searchproduct') }}" method="GET">
+                                <input required name="searchInput" type="text" id="searchInput" 
                                     placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
                                     <a class="camera_icon" href="{{route('searchbyimage')}}"><i class="fa fa-camera"></i> </a>
                                 <button type="submit" class="site-btn">Tìm kiếm</button>

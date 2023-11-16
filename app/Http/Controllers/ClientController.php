@@ -244,30 +244,45 @@ class ClientController extends Controller
 
     public function sortBy(Request $request)
     {
+        $categories = Category::latest()->get();
+        $latestProducts = Product::orderBy('id', 'desc')->take(3)->get();
+        $productCount = Product::count();
+        $saleoff_data = [1635, 1637, 1639];
+        $saleoffProducts = Product::whereIn('id', $saleoff_data)->get();
         if ($request->sort_by == 'dafault') {
             $listProducts = Product::orderBy('id', 'desc')->get();
             return response()->json(['success' => true, 'listProducts' => $listProducts]);
         }
         if ($request->sort_by == 'name') {
-            $listProducts = Product::orderBy('product_name', 'desc')->get();
-            return response()->json(['success' => true, 'listProducts' => $listProducts]);
+            $allproducts = Product::orderBy('product_name', 'asc')->paginate(12);
+            $allproducts->appends(['sort_by' => $request->sort_by]);
+            // return response()->json(['success' => true, 'listProducts' => $listProducts]);
+            return view('user_template.showallproducts', compact('allproducts', 'productCount', 'latestProducts', 'categories', 'saleoffProducts'));
+
         }
         if ($request->sort_by == 'price-hightolow') {
-            $listProducts = Product::orderBy('price', 'desc')->get();
-            return response()->json(['success' => true, 'listProducts' => $listProducts]);
+            $allproducts = Product::orderBy('price', 'desc')->paginate(12);
+            $allproducts->appends(['sort_by' => $request->sort_by]);
+            return view('user_template.showallproducts', compact('allproducts', 'productCount', 'latestProducts', 'categories', 'saleoffProducts'));
+
+            // return response()->json(['success' => true, 'listProducts' => $listProducts]);
         }
         if ($request->sort_by == 'price-lowtohigh') {
-            $listProducts = Product::orderBy('price', 'asc')->get();
-            return response()->json(['success' => true, 'listProducts' => $listProducts]);
+            $allproducts = Product::orderBy('price', 'asc')->paginate(12);
+            $allproducts->appends(['sort_by' => $request->sort_by]);
+            return view('user_template.showallproducts', compact('allproducts', 'productCount', 'latestProducts', 'categories', 'saleoffProducts'));
+            // return response()->json(['success' => true, 'listProducts' => $listProducts]);
         }
     }
     public function searchProduct(Request $request)
     {
 
         $searchTerm = $request->searchInput;
-        $searchProducts = Product::where('product_name', 'like', '%' . $searchTerm . '%')->get();
+        $searchProducts = Product::where('product_name', 'like', '%' . $searchTerm . '%')->paginate(12);
+        $searchProducts->appends(['searchInput' => $searchTerm]);
         $searchProductCount = $searchProducts->count();
         return view('user_template.search', compact('searchProducts', 'searchProductCount', 'searchProductCount'));
+        ;
     }
 
     //  Tich hop AI tim kiem san pham bang hinh anh
@@ -304,6 +319,9 @@ class ClientController extends Controller
         } catch (\Exception $e) {
             // Xử lý lỗi nếu có
             echo "Error: " . $e->getMessage();
+        } finally {
+            // Ẩn màn hình loading khi xử lý xong
+            echo '<script>$("#loading").hide();</script>';
         }
     }
     public function applyCoupon(Request $request)
