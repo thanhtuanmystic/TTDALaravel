@@ -37,7 +37,7 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $products = Product::latest()->get();
+        $products = Product::latest()->paginate(20);
 
         if (\Illuminate\Support\Facades\Session::has('user')) {
             return view('admin.allproducts', compact('products'));

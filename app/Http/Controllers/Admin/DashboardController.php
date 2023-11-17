@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use DB;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,11 @@ class DashboardController extends Controller
     public function index()
     {
         if (\Illuminate\Support\Facades\Session::has('user')) {
-            return view('admin.dashboard');
+            $order_count = Order::count();
+            $total_vnpay = Order::where('payment_method', 'Thanh toan VNPAY')->sum('total_price');
+            $total_banking = Order::where('payment_method', 'Banking')->sum('total_price');
+            $total_cod = Order::where('payment_method', 'COD')->sum('total_price');
+            return view('admin.dashboard', compact('order_count','total_vnpay','total_banking','total_cod'));
         } else {
             return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
         }

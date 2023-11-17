@@ -19,11 +19,11 @@
       series: [
         {
           name: '2021',
-          data: [18, 7, 15, 29, 18, 12, 9]
+          data: [18, 7, 15, 29, 18, 12, 9,12,7,34,33,22]
         },
         {
           name: '2020',
-          data: [-13, -18, -9, -14, -5, -17, -15]
+          data: [-13, -18, -9, -14, -5, -17, -15, -8,-12,-6,-7,-20]
         }
       ],
       chart: {
@@ -78,7 +78,7 @@
         }
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7','T8','T9','T10','T11','T12'],
         labels: {
           style: {
             fontSize: '13px',
@@ -427,8 +427,8 @@
         width: 130,
         type: 'donut'
       },
-      labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-      series: [85, 15, 50, 50],
+      labels: ['Nam', 'Nữ', 'Trẻ em'],
+      series: [7,20,7],
       colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
       stroke: {
         width: 5,
