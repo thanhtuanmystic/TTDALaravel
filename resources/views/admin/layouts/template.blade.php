@@ -220,14 +220,80 @@
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
                             <li class="nav-item lh-1 me-3">
-                                <form action="{{ route('adminlogout') }}" method="POST">
-                                    @csrf
-                                    <input type="submit" value="Đăng xuất">
-                                </form>
+                                <a class="github-button"
+                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
+                                    data-icon="octicon-star" data-size="large" data-show-count="true"
+                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
                             </li>
+
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                                    data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="{{ asset('dashboard/assets/img/avatars/1.png') }}" alt
+                                            class="w-px-40 h-auto rounded-circle" />
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="{{ asset('dashboard/assets/img/avatars/1.png') }}"
+                                                            alt class="w-px-40 h-auto rounded-circle" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block">John Doe</span>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">My Profile</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <style>
+                                        .form-row-logout {
+                                            display: flex;
+                                            align-items: center;
+                                        }
+
+                                        .logout-admin-btn {
+                                            background: transparent;
+                                            border: none;
+                                            color: #697a8d;
+                                        }
+                                    </style>
+                                    <li>
+                                        <a class="dropdown-item form-row-logout">
+                                            <i class="bx bx-power-off me-2"></i>
+                                            <form action="{{ route('adminlogout') }}" method="POST">
+                                                @csrf
+                                                <input class="align-middle logout-admin-btn" type="submit"
+                                                    value="Đăng xuất">
+                                            </form>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--/ User -->
                         </ul>
                     </div>
                 </nav>
+
 
                 <!-- / Navbar -->
 
@@ -251,7 +317,7 @@
     <script src=" {{ asset('dashboard/assets/vendor/js/bootstrap.js') }}"></script>
     <script src=" {{ asset('dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <!-- Core JS -->
-    
+
     <script src="{{ asset('home/js/main.js') }}"></script>
 
     <script src="{{ asset('home/ckeditor/ckeditor.js') }}"></script>
@@ -273,7 +339,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-   
+
 </body>
 
 </html>
