@@ -48,13 +48,15 @@ class ClientController extends Controller
     {
         $id = $request->sort_category_id;
         $subcategory_ = Subcategory::where('category_id', $id)->first();
+        $start_price = $request->start_price;
+        $end_price = $request->end_price;
 
         if ($request->season_sort != null) {
-            $products = Product::where('product_category_id', $id)->where('season', $request->season_sort)->orderBy('created_at', 'desc')->paginate(12);
-        }
-        if ($request->color_sort != null) {
-            $products = Product::where('product_category_id', $id)->where('product_color', $request->color_sort)->orderBy('created_at', 'desc')->paginate(12);
-
+            $products = Product::whereBetween('price', [$start_price, $end_price])->where('product_category_id', $id)->where('season', $request->season_sort)->orderBy('created_at', 'desc')->paginate(12);
+        } elseif ($request->color_sort != null) {
+            $products = Product::whereBetween('price', [$start_price, $end_price])->where('product_category_id', $id)->where('product_color', $request->color_sort)->orderBy('created_at', 'desc')->paginate(12);
+        } else {
+            $products = Product::whereBetween('price', [$start_price, $end_price])->where('product_category_id', $id)->orderBy('created_at', 'desc')->paginate(12);
         }
 
         // subcate

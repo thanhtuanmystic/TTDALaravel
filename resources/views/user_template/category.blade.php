@@ -25,6 +25,24 @@
         }
     </style>
     <!-- Product Section Begin -->
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 1000000,
+                values: [0, 1000000],
+                slide: function(event, ui) {
+                    $("#amount").val("" + ui.values[0] + " - " + ui.values[1]);
+                    $("#start_price").val("" + ui.values[0]);
+                    $("#end_price").val("" + ui.values[1]);
+                }
+            });
+            $("#amount").val("" + $("#slider-range").slider("values", 0) +
+                " - " + $("#slider-range").slider("values", 1));
+        });
+    </script>
     <section class="product spad">
         <div class="container">
             <div class="row">
@@ -64,18 +82,15 @@
                             <div class="sidebar__item">
                                 <h4>Giá</h4>
                                 <div class="price-range-wrap">
-                                    <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                        data-min="10" data-max="540">
-                                        <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                        <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                    </div>
-                                    <div class="range-slider">
-                                        <div class="price-input">
-                                            <input type="text" id="minamount">
-                                            <input type="text" id="maxamount">
-                                        </div>
-                                    </div>
+                                    <p>
+                                        <label for="amount">Chọn khoảng giá:</label>
+                                        <input type="text" id="amount" readonly
+                                            style="border:0; color:#f6931f; font-weight:bold;">
+                                        <input type="hidden" id="start_price" name="start_price" value="0">
+                                        <input type="hidden" id="end_price" name="end_price" value="1000000">
+                                    </p>
+
+                                    <div id="slider-range"></div>
                                 </div>
                             </div>
                             <div class="sidebar__item sidebar__item__color--option">
@@ -164,7 +179,8 @@
                         @foreach ($products as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
+                                    <div class="product__item__pic set-bg"
+                                        data-setbg="{{ asset($product->product_img) }}">
                                         <ul class="product__item__pic__hover">
                                             <form action="{{ route('addproducttocart') }}" method="POST">
                                                 @csrf
