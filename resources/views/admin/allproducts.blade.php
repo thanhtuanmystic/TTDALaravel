@@ -17,7 +17,17 @@
                     <thead class="table-light">
                         <tr>
                             <th>Id</th>
-                            <th>Tên sản phẩm</th>
+                            <th style="display: flex; gap: 1rem; align-items: center">Tên sản phẩm
+                                <form action="{{route('adminsortproduct')}}" method="GET">
+                                    <select id="admin_sort_product" name="admin_sort_product" onchange="this.form.submit()">
+                                        <option value="default">Sắp xếp theo</option>
+                                        <option value="name">Tên</option>
+                                        <option value="price-hightolow">Giá cao xuống thấp</option>
+                                        <option value="price-lowtohigh">Giá thếp đến cao</option>
+                                    </select>
+                                </form>
+                                <input type="text" id="adminsearch" name="adminsearch" placeholder="Nhập tên sản phẩm...">
+                            </th>
                             <th>Ảnh</th>
                             <th>Giá</th>
                             <th>Thao tác</th>                           
@@ -43,11 +53,30 @@
                                
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
-            {!! $products->links() !!}
+            <div class="pagination-part">
+                {!! $products->links() !!}
+            </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('#adminsearch').on('keyup',function(){
+            $value = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '{{ route('adminsearch') }}',
+                data: {
+                    'adminsearch': $value
+                },
+                success:function(data){
+                    $('tbody').html(data);
+                }
+            });
+            $('.pagination-part').css('display', 'none');
+        })
+        $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    </script>
 @endsection

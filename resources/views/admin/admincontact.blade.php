@@ -11,7 +11,7 @@
         @endif
         <div class="card p-4">
             <div class="card-title">
-                <h2 class="text-center">Đơn hàng đang chờ xác nhận</h2>
+                <h2 class="text-center">Ý kiến từ khách hàng</h2>
             </div>
             <div class="cart-body">
                 <table class="table">

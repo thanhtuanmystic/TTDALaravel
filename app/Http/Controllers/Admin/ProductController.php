@@ -45,6 +45,61 @@ class ProductController extends Controller
         return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
 
     }
+    
+    public function adminSearch(Request $request)
+    {
+        $searchTerm = $request->adminsearch;
+        if ($request->ajax()) {
+            $output = '';
+            $products = Product::where('product_name', 'LIKE', '%' . $searchTerm . '%')->get();
+            if ($products) {                
+                foreach ($products as $key => $product) {
+                    $output .= '<tr>
+                    <td>' . $product->id . '</td>
+                    <td>' . $product->product_name . '</td>
+                    <td> <img style="height: 100px" src="http://127.0.0.1:8000/'.$product->product_img.'" alt="">
+                    <br>    
+                    <a href="http://127.0.0.1:8000/admin/edit-product-img/'.$product->id.'" class="btn btn-primary"> Sửa hình ảnh
+                    </a>
+                    </td>            
+                    <td>' . $product->price . '</td>
+                    <td>
+                    <a href="http://127.0.0.1:8000/admin/edit-product/'.$product->id.'" class="btn btn-primary">Sửa</a>
+                    <a href="http://127.0.0.1:8000/admin/delete-product/'.$product->id.'" class="btn btn-warning">Xóa</a>
+                    </td>
+                    </tr>';                    
+                }
+            }
+            
+            return Response($output);
+        }
+    }
+
+    public function adminSortProduct(Request $request)
+    {
+        if (\Illuminate\Support\Facades\Session::has('user')) {
+            if ($request->admin_sort_product == 'default') {
+                $products = Product::orderBy('id', 'desc')->get();
+            }
+            if ($request->admin_sort_product == 'name') {
+                $products = Product::orderBy('product_name', 'asc')->paginate(12);
+                $products->appends(['admin_sort_product' => $request->admin_sort_product]);
+                return view('admin.allproducts', compact('products'));
+            }
+            if ($request->admin_sort_product == 'price-hightolow') {
+                $products = Product::orderBy('price', 'desc')->paginate(12);
+                $products->appends(['admin_sort_product' => $request->admin_sort_product]);
+                return view('admin.allproducts', compact('products'));
+
+            }
+            if ($request->admin_sort_product == 'price-lowtohigh') {
+                $products = Product::orderBy('price', 'asc')->paginate(12);
+                $products->appends(['admin_sort_product' => $request->admin_sort_product]);
+                return view('admin.allproducts', compact('products'));
+            }
+        }
+        return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
+    }
     public function addProduct()
     {
         $categories = Category::latest()->get();
@@ -56,13 +111,13 @@ class ProductController extends Controller
 
     }
     public function storeProduct(Request $request)
-    {        
+    {
         $request->validate([
             'product_name' => 'required|unique:products',
             'price' => 'required',
             'quantity' => 'required',
             'product_short_des' => 'required',
-            'product_long_des' => 'required',           
+            'product_long_des' => 'required',
             'product_subcategory_id' => 'required',
         ]);
         $image = $request->file('product_img');
@@ -71,7 +126,7 @@ class ProductController extends Controller
         $img_url = 'upload/' . $img_name;
         $subcategory_id = $request->product_subcategory_id;
         $current_subcategoryid = Subcategory::findOrFail($subcategory_id);
-        $category_name = Category::where('id', $current_subcategoryid->category_id)->value('category_name');        
+        $category_name = Category::where('id', $current_subcategoryid->category_id)->value('category_name');
         $subcategory_name = Subcategory::where('id', $subcategory_id)->value('subcategory_name');
 
         Product::insert([

@@ -81,6 +81,8 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('/admin-login', 'adminLogin')->name('adminlogin');
     Route::post('/admin-login-post', 'adminLoginPost')->name('adminloginpost');
     Route::post('/admin-logout-post', 'adminLogout')->name('adminlogout');
+    Route::get('/admin-profile', 'myProfile')->name('myprofile');
+
     // Liên hệ
     Route::get('/admin-contact', 'adminContact')->name('admincontact');
 });
@@ -136,6 +138,11 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('/admin/edit-product/{id}', 'editProduct')->name('editproduct');
     Route::post('/admin/update-product', 'updateProduct')->name('updateproduct');
     Route::get('/admin/delete-product/{id}', 'deleteProduct')->name('deleteproduct');
+
+    // sap xep san pham admin
+    Route::get('/admin/sort-product', 'adminSortProduct')->name('adminsortproduct');
+    Route::get('/admin/search', 'adminSearch')->name('adminsearch');
+   
 
 });
 Route::controller(OrderController::class)->group(function () {

@@ -251,7 +251,7 @@ class ClientController extends Controller
         $productCount = Product::count();
         $saleoff_data = [1635, 1637, 1639];
         $saleoffProducts = Product::whereIn('id', $saleoff_data)->get();
-        if ($request->sort_by == 'dafault') {
+        if ($request->sort_by == 'default') {
             $listProducts = Product::orderBy('id', 'desc')->get();
             return response()->json(['success' => true, 'listProducts' => $listProducts]);
         }

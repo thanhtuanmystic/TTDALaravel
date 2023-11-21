@@ -52,4 +52,7 @@ class DashboardController extends Controller
         return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
 
     }
+    public function myProfile(){
+        return view('admin.adminprofile');
+    }
 }
