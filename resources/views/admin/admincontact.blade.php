@@ -26,8 +26,8 @@
                         @foreach ($contact_data as $data)
                         <td>{{$data->id}}</td>
                         <td>{{$data->name}}</td>
-                        <td>{{$data->phone}}</td>
                         <td>{{$data->email}}</td>
+                        <td>{{$data->phone}}</td>
                         <td style="max-width: 500px">{{$data->message}}</td>                        
                         @endforeach
                     </tr>
