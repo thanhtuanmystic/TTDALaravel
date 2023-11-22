@@ -17,10 +17,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dream Clothing</title>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ asset('home/css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('home/css/font-awesome.min.css') }}" type="text/css">
@@ -35,6 +34,7 @@
     .camera_icon {
         color: black;
     }
+
     .camera_icon:hover {
         color: black;
         opacity: 0.8;
@@ -42,12 +42,6 @@
 </style>
 
 <body>
-    <!-- Page Preloder -->
-    {{-- <div id="preloder">
-        <div class="loader"></div>
-    </div> --}}
-
-    <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
@@ -106,9 +100,7 @@
             </ul>
         </div>
     </div>
-    <!-- Humberger End -->
-
-    <!-- Header Section Begin -->
+  
     <header class="header">
         <div class="header__top">
             <div class="container">
@@ -162,9 +154,11 @@
                                     href="{{ route('home') }}">Trang chủ</a></li>
                             <li class="{{ $currentRoute === 'showallproducts' ? 'active' : '' }}"><a
                                     href="{{ route('showallproducts') }}">Sản phẩm</a></li>
-                            <li class="{{ $currentRoute === '' ? 'active' : '' }}"><a href="{{route('category', [11, 'nam'])}}">Thời trang
+                            <li class="{{ $currentRoute === '' ? 'active' : '' }}"><a
+                                    href="{{ route('category', [11, 'nam']) }}">Thời trang
                                     nam</a></li>
-                            <li class="{{ $currentRoute === '' ? 'active' : '' }}"><a href="{{route('category', [12, 'nu'])}}">Thời trang
+                            <li class="{{ $currentRoute === '' ? 'active' : '' }}"><a
+                                    href="{{ route('category', [12, 'nu']) }}">Thời trang
                                     nữ</a></li>
                             <li class="{{ $currentRoute === 'contact' ? 'active' : '' }}"><a
                                     href="{{ route('contact') }}">Liên hệ</a></li>
@@ -179,9 +173,7 @@
             </div>
         </div>
     </header>
-    <!-- Header Section End -->
-
-    <!-- Hero Section Begin -->
+ 
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
@@ -204,9 +196,10 @@
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="{{ route('searchproduct') }}" method="GET">
-                                <input required name="searchInput" type="text" id="searchInput" 
+                                <input required name="searchInput" type="text" id="searchInput"
                                     placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
-                                    <a class="camera_icon" href="{{route('searchbyimage')}}"><i class="fa fa-camera"></i> </a>
+                                <a class="camera_icon" href="{{ route('searchbyimage') }}"><i
+                                        class="fa fa-camera"></i> </a>
                                 <button type="submit" class="site-btn">Tìm kiếm</button>
                             </form>
                         </div>
@@ -224,28 +217,27 @@
             </div>
         </div>
     </section>
-    <!-- banner bg main end -->
-    {{-- common part --}}
+ 
     @yield('banner-home')
 
     <div class="container">
         @yield('main-content')
     </div>
-    {{-- end of common part --}}
-    <!-- footer section start -->
+  
     <footer class="footer spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="{{route('home')}}"><img src="{{ asset('home/img/dreamclothing_logo.png') }}"
+                            <a href="{{ route('home') }}"><img src="{{ asset('home/img/dreamclothing_logo.png') }}"
                                     alt=""></a>
                         </div>
                         <ul>
-                            <li>Địa chỉ: Thị trấn Lập Thạch, huyện Lập Thạch, tỉnh Vĩnh Phúc</li>
-                            <li>SĐT: 0977686868</li>
-                            <li>Email: dreamclothing@gmail.com</li>
+                            <li><i class="fa fa-map-marker"></i> Thị trấn Lập Thạch, huyện Lập Thạch, tỉnh Vĩnh Phúc
+                            </li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i> 0977686868</li>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i> dreamclothing@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -281,12 +273,11 @@
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            <p>
                                 Copyright &copy;
                                 <script>
                                     document.write(new Date().getFullYear());
-                                </script> All rights reserved </a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </script> All rights reserved </a>                            
                             </p>
                         </div>
                         <div class="footer__copyright__payment"><img src="{{ asset('home/img/payment-item.png') }}"
@@ -296,9 +287,7 @@
             </div>
         </div>
     </footer>
-    <!-- Footer Section End -->
-
-    <!-- Js Plugins -->
+   
     <script src="{{ asset('home/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('home/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('home/js/jquery.nice-select.min.js') }}"></script>

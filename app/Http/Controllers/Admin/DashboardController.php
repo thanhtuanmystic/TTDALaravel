@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Order;
+use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
 
@@ -12,11 +14,30 @@ class DashboardController extends Controller
     public function index()
     {
         if (\Illuminate\Support\Facades\Session::has('user')) {
+            // Lấy danh sách tất cả người dùng
+            $users = User::all();
+
+            foreach ($users as $user) {
+                // Đếm số lượng đơn hàng của mỗi người dùng
+                $orderCount = Order::where('userid', $user->id)->count();
+                // Lưu thông tin vào mảng
+                $userData = [
+                    'userid' => $user->id,
+                    'name' => $user->name,
+                    'count' => $orderCount,
+                ];
+                $countUserOrder[] = $userData;
+            }
+            usort($countUserOrder, function ($a, $b) {
+                // Sắp xếp theo giá trị count giảm dần
+                return $b['count'] <=> $a['count'];
+            });
+            $allblogs = Blog::latest()->get();
             $order_count = Order::count();
             $total_vnpay = Order::where('payment_method', 'Thanh toan VNPAY')->sum('total_price');
             $total_banking = Order::where('payment_method', 'Banking')->sum('total_price');
             $total_cod = Order::where('payment_method', 'COD')->sum('total_price');
-            return view('admin.dashboard', compact('order_count','total_vnpay','total_banking','total_cod'));
+            return view('admin.dashboard', compact('order_count', 'total_vnpay', 'total_banking', 'total_cod', 'countUserOrder','allblogs'));
         } else {
             return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
         }
@@ -52,7 +73,8 @@ class DashboardController extends Controller
         return redirect()->route('adminlogin')->with('message', 'Bạn cần đăng nhập');
 
     }
-    public function myProfile(){
+    public function myProfile()
+    {
         return view('admin.adminprofile');
     }
 }
