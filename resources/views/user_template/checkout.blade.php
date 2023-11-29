@@ -35,6 +35,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <style>
+                                #province,
+                                #district,
+                                #ward {
+                                    width: 100%;
+                                    height: 46px;
+                                    border: 1px solid #ebebeb;
+                                    padding-left: 20px;
+                                    font-size: 16px;
+                                    border-radius: 4px;
+                                }
+                            </style>
                             <div class="checkout__input">
                                 <p>Tỉnh/ Thành Phố<span>*</span></p>
                                 <select name="city" id="province"></select>
